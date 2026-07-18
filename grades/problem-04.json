@@ -77,6 +77,18 @@
       "key_issues": [
         "Cut legality (interior ray meets opposite side) asserted rather than proved; standard fact, minor blemish"
       ]
+    },
+    {
+      "model": "gpt-5.6-sol-lightweight-xhigh",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "theta = 180/n for an integer n >= 2",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete proof of both directions, verified step by step. The cut model (1)-(2) is correct with the legality criterion 0 < x < A. Lemma 1 (angle m*theta => win in <= m-1 cuts) is a clean induction with the theta + (m-1)theta split. Sufficiency: the relabeling Claim (integer k with b < k < a+b, where the all-below-1 case correctly forces n = 2 via a+b = 2-c > 1, and 1 <= k <= n-1 is derived from positivity and k < n-c) yields the cut x = (k-b)theta planting the integral cut-point angles k*theta and (n-k)*theta in the two children, so Lemma 1 finishes against any retention. Necessity: 'safe' invariant with an exhaustive four-case analysis (cases 1-3 contradict parent safety via A, B, C respectively; case 4 forces 180 = (p+q)theta), equilateral safe start, so Shan-Yu survives forever. All positivity/legality checks present.",
+      "key_issues": [
+        "Realizability of the cut (ray from the vertex meets the opposite side) asserted in one line, as in the default run; standard fact, cosmetic only"
+      ]
     }
   ]
 }

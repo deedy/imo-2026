@@ -9,6 +9,7 @@ Seven runs across five models and two harness designs:
 | **Claude Fable 5** | AutoFyn | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 7.1 h | $32.39 |
 | **GPT-5.6 Sol** | AutoFyn | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 3.7 h | $5.96 |
 | **Claude Fable 5** | lightweight | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 1.8 h | $38.83 |
+| **GPT-5.6 Sol** | lightweight, xhigh effort | 7 | 4 | 7 | 7 | 7 | 7 | **39/42** | 3.3 h | ~$11.48 |
 | **Kimi K3** | lightweight | 7 | 7 | 5 | 7 | 7 | 3 | **36/42** | 12.7 h | ~$28.20 |
 | **GPT-5.6 Sol** | lightweight | 7 | 4 | 2 | 7 | 7 | 1 | **28/42** | 1.0 h | ~$4.04 |
 | Claude Opus 4.8 | AutoFyn (partial archive) | 7 | – | 3 | – | 7 | 7 | 24/28 | — | — |
@@ -20,6 +21,7 @@ Seven runs across five models and two harness designs:
 
 - **Three verified 42/42 runs.** Both AutoFyn runs, and Claude Fable 5 even in the bare single-context harness — where it was also fastest (1.8 h).
 - **The harness effect is model-dependent.** GPT-5.6 Sol: verified 42/42 inside AutoFyn's orchestrated verify-loop, but 28/42 in the lightweight loop — its 60-minute sweep produced confident write-ups whose crux steps fail under scrutiny (P6's central lemma is refuted by an explicit counterexample). Claude Fable 5 showed no such degradation.
+- **Reasoning effort substitutes for much of the harness.** Re-running GPT-5.6 Sol in the same lightweight loop at maximum (`xhigh`) reasoning effort lifted it 28→39/42: P3 and P6 became verified 7s (the false lemma gone, replaced by correct arguments) and the P2 failure became an honestly self-declared `partial` instead of an invalid proof — depth bought both rigor and calibration.
 - **Self-reports inflate.** Graders confirmed only 33 of 40 "solved" claims as complete proofs. All stated answers to the compute-and-prove problems agree across every run.
 - **Kimi K3's 36/42** came the hard way: 12.7 h including three failed rounds on P3 whose in-context reasoning was lost to time caps before checkpoint-discipline countermeasures were added to the harness.
 

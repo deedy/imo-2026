@@ -73,6 +73,16 @@
       "confidence": "high",
       "justification": "Complete and rigorous via an analytic route distinct from the orbit-interleaving proofs. After the functional equation and g >= 0, applying the chain at (f(u), v) with f(f(u)) = 2f(u) - u yields |g(u)-g(v)| <= (sqrt(f(u)) - sqrt(f(v)))^2 (verified). This forces f strictly increasing (the Delta <= 0 cases each contradict the estimate), hence g nondecreasing via f^n(u) > f^n(v) with n -> infty, then two-sided continuity of g (jump J satisfies J <= (sqrt(A+J)-sqrt(A))^2 < J), and finally a Riemann-sum telescoping over an equipartition with sum Delta_i^2 <= max Delta_i * (f(b)-f(a)) -> 0 by uniform continuity, so g is constant. Verification is standard QM-AM-GM. Only microscopic unstated details (e.g. f(t) - J >= t > 0 in the left-limit step), well within '7 with minor blemishes'.",
       "key_issues": []
+    },
+    {
+      "model": "gpt-5.6-sol-lightweight-xhigh",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "f(x) = x + c for every x > 0, c >= 0",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and rigorous, via the orbit-interleaving + connectedness route (distinct from this model's default-effort analytic route, and closer to gpt-5.6-sol's). x = f(y) collapses both outer expressions to f(y), giving f(f(y)) = 2f(y) - y, AP orbits, and d >= 0. Two positive displacements a > b are killed by floor-alignment: m_n = floor((u+na-v-b)/b) gives 0 <= p_n - q_n < b (verified), and the first inequality at (p_n, v + m_n b) yields a - b <= (p_n - q_n)^2 / (sqrt(2(p_n^2+q_n^2)) + p_n + q_n) < b^2/(denominator -> infinity) - the algebraic identity 2(p^2+q^2) - (p+q)^2 = (p-q)^2 checks. Mixed case {0, c}: both the zero-set and c-set are shown open via the first inequality on approaching sequences (limit 2L + c <= 2L, impossible), and connectedness of R_{>0} with B nonempty forces d = c everywhere. Sufficiency is exactly RMS-AM-GM on (x, y+c), and c >= 0 is automatic from d >= 0. Every step verified; no gaps.",
+      "key_issues": []
     }
   ]
 }

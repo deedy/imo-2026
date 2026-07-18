@@ -93,6 +93,18 @@
         "Refinement lemma part (ii): the strip-survival alternative ('either a whole d-strip remains or every column was cut') is asserted, not proved; a split flips parity on [0,min) and [max,a), contradicting the claim that cuts act 'only above their level'",
         "Both the lower and upper bounds depend entirely on this unproven lemma"
       ]
+    },
+    {
+      "model": "gpt-5.6-sol-lightweight-xhigh",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "c = 2^n/(2^{n+1}-1)",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and rigorous proof of both directions; the default run's unproven 'column sweep' lemma is entirely gone, replaced by the sound architecture. Section 1 proves the claiming value V = D via the minimax recurrence with the explicit cancellation identity (2), which I verified by hand for both parities and machine-tested against exact minimax on 200 random multisets. Section 2's exchange argument (min pairing cost = D, odd case via an appended 0) is correct, giving the key tool (4). Section 3's common-refinement cutting fact has exact cut bookkeeping ((E-s)+(E-r)+1 <= |A|+|B|-1 with E <= r+s-1, tail case included), which I re-derived and confirmed. Lower bound: powers-of-two intervals, adjacent-pair multigraph with <= n edges on n+1 vertices forces a tree component; the bipartition of (7) gives a nonzero signed sum of distinct powers of two, so D >= d - all steps check (loops handled via doubled degree, isolated vertex allowed). Upper bound: m <= n bisection case, subset-sum pigeonhole (gap <= d among 2^{n+1} sums), symmetric-difference reduction, and the refinement construction with total cuts exactly (|A|+|B|-1)+(n+1-|A|-|B|) = n. I re-implemented the XY strategy literally in exact rationals (400 random markings: always <= n cuts and D <= d) and grid-searched XY responses to the lower-bound construction for n = 1, 2 (min D = d exactly).",
+      "key_issues": [
+        "Marks at the endpoints 0/1 never discussed (zero-length pieces); harmless under the natural reading and shared by the other 7-scored solutions"
+      ]
     }
   ]
 }

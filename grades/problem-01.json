@@ -77,6 +77,16 @@
         "'lcm(m,n) = gcd(m,n) forces m = n' asserted with minimal justification (standard one-line fact).",
         "A LaTeX display block around the Omega computation is malformed (missing closing delimiter); cosmetic only."
       ]
+    },
+    {
+      "model": "gpt-5.6-sol-lightweight-xhigh",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "M = prod_p p^{gcd(v_p(x_1),...,v_p(x_2026))}",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and clean. Termination via the pair (P, K): P = board product is non-increasing (drops by factor d when d = gcd > 1), and once P stabilizes every move has d = 1 and K = #nonunits drops by exactly 1 (outputs are 1 and mn > 1), so no infinite play exists; well-foundedness is argued correctly. K >= 1 at termination is proved directly and non-circularly: every move outputs at least one entry > 1 (d if d > 1, else mn), so the terminal board has exactly one M > 1. The G_p invariant uses gcd(a, b-a) = gcd(a, b) with explicit conventions (gcd(0, r) = r, all-zero gcd = 0) covering the a = b case, and part (b) reads off M = prod p^{g_p} from the terminal board {M, 1, ..., 1} with the finiteness of the product addressed. I checked every step; no gaps.",
+      "key_issues": []
     }
   ]
 }

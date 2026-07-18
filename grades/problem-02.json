@@ -85,6 +85,20 @@
         "Ideal-membership form numerator = UE + VF is claimed but U, V are never exhibited",
         "Lemma statement itself is true (numerically verified on the full variety), so the gap is fixable in principle but the submitted proof of the crux step is invalid"
       ]
+    },
+    {
+      "model": "gpt-5.6-sol-lightweight-xhigh",
+      "present": true,
+      "claimed_status": "partial",
+      "answer_stated": null,
+      "score": 4,
+      "confidence": "high",
+      "justification": "Honest partial with everything present being correct. The geometric reduction is complete and sound: encodings (2)-(4) for K, L (with interiority consumed to justify ray directions and x < pi/2), the unused hypothesis packaged as Q = 0 in (5), and the determinant criterion reducing OM = ON to D = 0 (hand-verified, including the power-of-A form and the A,K,L noncollinearity use). The factorization lemma (6) is stated with the correct explicit positive factor, and the intermediate identities (10)-(11) reducing it to a four-coefficient comparison in the ray parameter r are correct (I re-derived both by hand and verified them symbolically). I also verified symbolically that the claimed final tangent identity (p+q)(p+s)D = p(p(1+q^2)r+q)Q_T is TRUE and that it converts exactly to (6). But the submission stops at 'The remaining coefficient comparison in (10)-(11) is to be inserted here': the computational crux is absent, and the cos y cos z = 0 continuity limb is only promised. As submitted this is a correct, precisely specified reduction with the central verification missing.",
+      "key_issues": [
+        "Central coefficient comparison (the proof of the factorization lemma) is explicitly not carried out; the write-up ends where the crux verification should begin",
+        "cos y cos z = 0 boundary case deferred to an unexecuted continuity argument",
+        "Unlike the default run, no invalid argument is offered: the stated lemma, factor, and intermediate identities (10)-(11) are all true (symbolically verified by grader)"
+      ]
     }
   ]
 }
