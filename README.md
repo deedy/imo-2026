@@ -2,7 +2,7 @@
 
 Frontier models solving all six problems of the [International Mathematical Olympiad 2026](problems/), fully autonomously, with complete per-turn audit trails and **independently verified grading**.
 
-Seven runs across five models and two harness designs:
+Eight runs across five models, two harness designs, and two reasoning-effort settings:
 
 | Run | Harness | P1 | P2 | P3 | P4 | P5 | P6 | **Graded** | Time | Cost |
 |---|---|--|--|--|--|--|--|--|--|--|
@@ -33,7 +33,7 @@ results/     one directory per run: per-problem current.md (the proof), approach
              lemmas/, code/ (the model's own verification scripts), scratch/, and
              logs.jsonl — a complete per-turn audit trail (every tool call, verbatim)
 grades/      per-problem grading verdicts (JSON): score, justification, named defects
-pdfs/        typeset solution PDFs (30) + the comparison report
+pdfs/        typeset solution PDFs (36) + the comparison report
 harness/     the lightweight tool-loop harnesses (Kimi K3 / GPT via OpenRouter /
              Claude Fable 5 via Anthropic SDK) — same prompt, tools, and caps
 ```
