@@ -1,0 +1,12 @@
+exec(open('code/symbolic.py').read().split("# circle")[0])
+P1=s.factor(s.together(f1).as_numer_denom()[0]); P2=s.factor(s.together(f2).as_numer_denom()[0])
+u,ub=s.symbols('u ub'); sol=s.solve([u*k+ub*bar(k)+k*bar(k),u*l+ub*bar(l)+l*bar(l)],[u,ub],simplify=False)
+qv=lambda w:s.cancel(w*bar(w)+sol[u]*w+sol[ub]*bar(w))
+G=s.factor(s.together(qv(1)-qv(n)).as_numer_denom()[0])
+# groebner in d,T perhaps
+Grob=s.groebner([P1,P2],d,T, order='lex')
+quo,rem=Grob.reduce(G)
+print('basis len',len(Grob.polys),'rem',s.factor(rem))
+for i,(bp,qq) in enumerate(zip(Grob.polys,quo)):
+ print('B',i,s.factor(bp.as_expr()))
+ print('Q',i,s.factor(qq))

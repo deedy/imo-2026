@@ -1,0 +1,80 @@
+[
+ {
+  "problem_id": "imo-2026-01",
+  "statement": "There are $2026$ integers greater than $1$ written on a blackboard, not necessarily different. In a move, Confucius chooses two integers $m>1$ and $n>1$ from different places on the blackboard and replaces these two integers with $\\gcd(m,n)$ and $\\frac{\\mathrm{lcm}(m,n)}{\\gcd(m,n)}$. He continues to make moves while it is possible to do so. (a) Prove that, regardless of the choices of Confucius, after finitely many moves, exactly one integer $M$ on the blackboard is greater than $1$. (b) Prove that the value of $M$ does not depend on the choices of Confucius.",
+  "country": "International",
+  "source": "IMO",
+  "url": "https://artofproblemsolving.com/community/c6h3866213_confuciuss_gcdlcm_blackboard",
+  "year": 2026,
+  "domain": "number_theory",
+  "difficulty_rating": 5,
+  "difficulty_level": "medium",
+  "task": "proof_only",
+  "answer_type": "none"
+ },
+ {
+  "problem_id": "imo-2026-02",
+  "statement": "Let $ABC$ be a triangle and let points $M$ and $N$ be the midpoints of sides $AB$ and $AC$, respectively. Let points $K$ and $L$ be chosen inside triangles $BMC$ and $BNC$, respectively, such that $K$ lies inside the angle $LBA$, $L$ lies inside the angle $ACK$, and $\\angle KBA = \\angle ACL$, $\\angle LBK = \\angle LNC$, $\\angle LCK = \\angle BMK$. Let $O$ be the circumcentre of triangle $AKL$. Prove that $OM = ON$.",
+  "country": "International",
+  "source": "IMO",
+  "url": "https://artofproblemsolving.com/community/c6h3866200_circumcenter_proof",
+  "year": 2026,
+  "domain": "geometry",
+  "difficulty_rating": 8,
+  "difficulty_level": "hard",
+  "task": "proof_only",
+  "answer_type": "none"
+ },
+ {
+  "problem_id": "imo-2026-03",
+  "statement": "Let $n$ be a positive integer. Liu Bang and Xiang Yu have a stick of length $1$ and want to divide it between themselves. Liu Bang marks at most $n$ points on the stick, and then Xiang Yu marks at most $n$ points on the stick. The marked points are distinct. Then, the stick is cut at all marked points, creating a number of pieces. Afterwards, they take turns claiming any unclaimed piece of the stick, with Liu Bang going first. Each player's goal is to maximise the total length of their own pieces. For each $n$, determine the largest value $c$ such that Liu Bang may guarantee a total length of at least $c$, regardless of Xiang Yu's play.",
+  "country": "International",
+  "source": "IMO",
+  "url": "https://artofproblemsolving.com/community/c6h3866199_chu_han_war",
+  "year": 2026,
+  "domain": "combinatorics",
+  "difficulty_rating": 9,
+  "difficulty_level": "hard",
+  "task": "compute_and_prove",
+  "answer_type": "expression"
+ },
+ {
+  "problem_id": "imo-2026-04",
+  "statement": "Shan-Yu and Mulan are playing a game. Let $\\theta$ be an angle with $0^\\circ<\\theta<180^\\circ$ known to both players. Initially, Shan-Yu makes a paper triangle $\\mathcal{T}$ with measurements of his choice. Then, they repeatedly perform the following steps: If $\\mathcal{T}$ has at least one angle measuring exactly $\\theta$, then the game stops and Mulan wins. Otherwise, Mulan chooses a point $P$ on the perimeter of $\\mathcal{T}$, different from its three vertices. She then makes a straight cut from $P$ to the opposite vertex of $\\mathcal{T}$, splitting it into two triangles. Shan-Yu discards one of the two triangles. The remaining triangle becomes the new $\\mathcal{T}$. For which real values of $\\theta$ can Mulan guarantee her victory in finitely many steps, no matter how Shan-Yu plays?",
+  "country": "International",
+  "source": "IMO",
+  "url": "https://artofproblemsolving.com/community/c6h3866897_mulans_triangle_game",
+  "year": 2026,
+  "domain": "combinatorics",
+  "difficulty_rating": 7,
+  "difficulty_level": "medium",
+  "task": "compute_and_prove",
+  "answer_type": "characterization"
+ },
+ {
+  "problem_id": "imo-2026-05",
+  "statement": "Let $\\mathbb{R}_{>0}$ be the set of positive real numbers. Determine all functions $f :\\mathbb{R}_{>0}\\to \\mathbb{R}_{>0}$ such that $\\sqrt{\\frac{x^2 + f(y)^2}{2}}\\ge \\frac{f(x) + y}{2} \\ge \\sqrt{xf(y)}$ for every $x,y\\in\\mathbb{R}_{>0}$.",
+  "country": "International",
+  "source": "IMO",
+  "url": "https://artofproblemsolving.com/community/c6h3866898_imo_2026_p5",
+  "year": 2026,
+  "domain": "algebra",
+  "difficulty_rating": 8,
+  "difficulty_level": "hard",
+  "task": "compute_and_prove",
+  "answer_type": "characterization"
+ },
+ {
+  "problem_id": "imo-2026-06",
+  "statement": "Let $a_1, a_2, a_3, \\ldots$ be an infinite sequence of positive integers greater than $1$. Suppose that for all positive integers $n$, the number $a_{n+1}$ is the smallest positive integer greater than $a_n$ such that $\\gcd(a_{n+1}, a_i)>1$ for every $i=1,2,\\ldots,n$. Prove that there exist positive integers $T$ and $L$ such that $a_{n+T}=a_n+L$ for every positive integer $n$. (Note that $\\gcd(x,y)$ denotes the greatest common divisor of positive integers $x$ and $y$.)",
+  "country": "International",
+  "source": "IMO",
+  "url": "https://artofproblemsolving.com/community/c6h3866890_gcdan1_ai1",
+  "year": 2026,
+  "domain": "number_theory",
+  "difficulty_rating": 9,
+  "difficulty_level": "hard",
+  "task": "proof_only",
+  "answer_type": "none"
+ }
+]

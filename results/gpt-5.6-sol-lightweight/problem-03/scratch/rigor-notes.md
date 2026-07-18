@@ -1,0 +1,3 @@
+Rigor check: the picking phase should not be justified by an overstrong claim that taking the largest is dominant. Use two matching rank bounds instead. Liu's strategy of taking a largest piece ensures his k-th pick is at least x_{2k-1}; Xiang's analogous strategy ensures his k-th pick is at least x_{2k}. Hence the zero-sum value is exactly the odd-rank sum.
+
+The central refinement lemma is the only substantial geometric ingredient. Its column/sweep proof is kept separately in lemmas/refinement.md; final master proof explicitly states both halves and the parity-layer identity on which the sweep rests.

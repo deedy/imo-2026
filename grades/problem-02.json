@@ -1,0 +1,90 @@
+{
+  "problem": "imo-2026-02",
+  "entries": [
+    {
+      "model": "claude-fable-5",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete, unusually rigorous trigonometric-certificate proof. It reduces OM=ON to OB^2-OC^2=(c^2-b^2)/2, encodes all five hypotheses as two side relations l_K=l_L=0 via the law of sines (with interiority/additivity consumed explicitly in Part 0), proves A,K,L noncollinear from the hypotheses, and closes with the explicit identity 2sinA*G = alpha*l_K + beta*l_L, verified line by line via displayed Fourier tables. I independently verified the bracket identity and the certificate identity symbolically (exact zero) and confirmed l_K=l_L=G=0 and OM=ON on five independently solved configurations.",
+      "key_issues": []
+    },
+    {
+      "model": "claude-opus-4-5",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 4,
+      "confidence": "high",
+      "justification": "Correct strategy and all key claims are in fact true: I symbolically verified the decoupling C2=mu|c|^2*C2_q, C3=nu|b|^2*C3_q (shared leading coefficient F and even the undefined shared middle coefficient G), the certificate F*T=|c|^2(S+mu*H2)C2_q-|b|^2(S+nu*H3)C3_q (exact zero), the T=0 iff OM=ON reduction, and the F!=0 nondegeneracy argument. However, as submitted the proof of the central certificate identity is outsourced ('SymPy confirms', no expansion shown), the middle coefficient G is never derived, and the directed-angle encodings C1-C3 are never justified from the unsigned-angle + interiority hypotheses (no orientation fixing). By IMO standards the crux verification is missing from the write-up.",
+      "key_issues": [
+        "Certificate identity (Step 7), the heart of the proof, asserted via 'symbolic computation (SymPy) confirms' with no displayed derivation",
+        "Middle coefficient G of C2_q/C3_q never defined or computed",
+        "Orientation/sign correspondence between unsigned angle hypotheses and the mod-pi encodings C1, C2, C3 never established (interiority/additivity hypotheses 'K inside angle LBA', 'L inside angle ACK' never explicitly used for this)",
+        "current.md defines D=2Im(conj(k)l) in Step 2 but the target T in Step 3 is only correct with D=Im(conj(k)l) (factor-2 inconsistency; approach file has it right); the arg-equality form of C1 as first stated is wrong (only the product-in-R+ form is correct)"
+      ]
+    },
+    {
+      "model": "claude-opus-4-8",
+      "present": false,
+      "claimed_status": null,
+      "answer_stated": null,
+      "score": 0,
+      "confidence": "high",
+      "justification": "No submission directory exists for this model.",
+      "key_issues": ["directory absent"]
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete oblique-coordinate proof: oriented-ray reconstruction of K, L (with interiority bounds justified from the forced ray orders), elimination to the quadratics Q_t=Q_s=0, reduction of OM=ON to the determinant criterion F=0, and the fully audited certificate 2pF = -(2bcr+2s(bq-cp))Q_t - (-2bcr+2t(bp-cq))Q_s. I hand-checked the Q_t/Q_s derivations, the projection identity (9), the circle-coefficient criterion, and identity (20); I symbolically verified the coefficient table (17) and certificate (18) exactly, and confirmed all claims numerically on five configurations. Nondegeneracy (p>0) is handled; A,K,L noncollinearity is taken from the problem statement (acceptable).",
+      "key_issues": [
+        "Minor: the cited lemma file's intermediate ray equation at N uses a mis-stated direction e(alpha+x+y) for the ray NL, though the resulting formula (3) for L is correct"
+      ]
+    },
+    {
+      "model": "kimi-k3",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete power-of-a-point proof: OM=ON iff pow(B)-pow(C)=(c^2-b^2)/2; the hypotheses force the quadratics ConsP=ConsQ=0 in p=BK, q=CL (elimination hand-checked, including the cos-gamma=0 edge case, and I verified the cross-multiplied form equals -ConsP exactly); identities (4)-(5) then pin pow(B), pow(C) to closed forms whose difference is (c^2-b^2)/2. I symbolically verified identities (4) and (5) exactly and confirmed all constraints and the closed-form powers numerically on five configurations. Minor blemish: seven routine coefficient matches in Step 5 are asserted to 'agree immediately' rather than displayed (only the nontrivial pq-coefficient E=0 is worked out, correctly), with a code check cited as backup; this is standard routine expansion and does not affect correctness.",
+      "key_issues": [
+        "Step 5 defers the seven easy monomial coefficient comparisons ('agree immediately'); acceptable but terse",
+        "Configuration facts (0<phi<B, additivity ranges) stated briskly, though correctly"
+      ]
+    },
+    {
+      "model": "claude-fable-5-lightweight",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 7,
+      "confidence": "high",
+      "justification": "A complete synthetic solution. With X = ray CL cap AB and Y = ray BK cap AC, the three angle hypotheses (via carefully proven directed-angle translations) yield three concyclicities: (B,X,Y,C), X on (CMK), Y on (BNL), with the tangency degenerations X=M and Y=N handled by a proven tangent-chord lemma. The affine function pow(.,omega)-pow(.,omega_K)-pow(.,omega_L)+pow(.,omega_1) vanishes at A, K, L hence identically; evaluating at B and C with cx=by gives OM=ON via the median formula. All supporting lemmas (inscribed-angle criterion, tangent-chord, crossbar/position facts, sign conventions) are proven from first principles; I verified every concyclicity, power formula, and the final computation numerically on five configurations. Noncollinearity of A,K,L is taken from the problem's 'triangle AKL' and explicitly flagged (acceptable).",
+      "key_issues": []
+    },
+    {
+      "model": "gpt-5.6-sol-lightweight",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 4,
+      "confidence": "high",
+      "justification": "The geometric reduction is correct and verified: coordinates (1)-(2) for K, L, the ray-direction translations, and the reality constraints (8)-(9) all hold on numerically solved configurations, and the invoked equal-power lemma is true (I confirmed H=0 on 260 sampled points of the constraint variety across all branches). But the lemma's proof - the mathematical heart of the submission - is defective: carrying out its prescribed substitution (rewrite p=2n-(2n-p), q=2+(q-2), apply (6)-(7)) leaves an E,F-free remainder that is NOT identically zero (verified symbolically and numerically at non-variety points), the claimed 'four pairs' cancellation cannot be matched to the actual terms (e.g. the listed pair (pq*, -qp*) sums to Delta, which is nonzero by the noncollinearity hypothesis), and no multipliers U, V with numerator = UE+VF are exhibited. The crux identity is therefore asserted, not proven.",
+      "key_issues": [
+        "Core cancellation claim in the equal-power lemma fails under its own prescribed substitution: the terms 'not containing E or F' do not cancel identically (nonzero remainder verified symbolically and numerically)",
+        "The 'four conjugate pairs' bookkeeping is unreproducible; one listed pair sums to Delta != 0",
+        "Ideal-membership form numerator = UE + VF is claimed but U, V are never exhibited",
+        "Lemma statement itself is true (numerically verified on the full variety), so the gap is fixable in principle but the submitted proof of the crux step is invalid"
+      ]
+    }
+  ]
+}
