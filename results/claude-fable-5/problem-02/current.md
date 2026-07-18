@@ -1,387 +1,276 @@
-# imo-2026-02 — tracking file (reviewer-owned)
+# imo-2026-02 — tracking file
 
 ## Status
 solved
 
+## Problem
+Let $ABC$ be a triangle and let points $M$ and $N$ be the midpoints of sides $AB$ and $AC$, respectively. Let points $K$ and $L$ be chosen inside triangles $BMC$ and $BNC$, respectively, such that $K$ lies inside the angle $LBA$, $L$ lies inside the angle $ACK$, and $\angle KBA = \angle ACL$, $\angle LBK = \angle LNC$, $\angle LCK = \angle BMK$. Let $O$ be the circumcentre of triangle $AKL$. Prove that $OM = ON$.
+
 ## Approaches tried
-- `complex-certificate` — **worked (APPROVED, round 1).** Branch-pinned law-of-sines encoding of all five hypothesis conditions into two polynomial side relations ℓ_K = 0, ℓ_L = 0, plus an unconditional trigonometric certificate 2 sin A · G = α·ℓ_K + β·ℓ_L. Every displayed identity and every Fourier-table row independently re-verified symbolically (sympy, exp-rewrite) and the whole chain re-verified end-to-end on independently constructed configurations by the reviewer (`/tmp/round-1/review/`). Non-collinearity of A, K, L proved from the hypotheses (Part 4).
-- `secant-trig-identity` — **worked (APPROVED, round 1).** Independent second complete proof: same reduction skeleton, constraints (K)/(L) equivalent to ℓ_K/ℓ_L, closed by the four-variable Key Identity N(s)U + N(t)V + W = sin(s−t)[N(s)N(t) − sin²s sin²t], proved by a degree-3 interpolation argument at s ∈ {t, 0, φ, μ−φ} plus density/continuity. All steps re-verified symbolically by the reviewer. (Uses the problem statement's "triangle AKL" for non-collinearity, flagged explicitly; complex-certificate proves that fact independently.)
-- `midpoint-reflection-isogonal` — partial. Correct reflection dictionary (K* = 2M−K, L* = 2N−L, exterior isogonal rays at A) and a rigorous directed-length reduction OM = ON ⟺ (I): BK·AP₁ + AK² − CL·AP₂ − AL² = (c²−b²)/2 (Lemmas 1–4, reviewer-verified). The synthetic derivation of (I) from the transferred angle hypotheses remains open; extensive candidate list refuted. Superseded by the two solved approaches.
+- **Power-of-a-point reformulation (successful).** Via the median-length formula, $OM=ON \iff \operatorname{pow}(B,\omega)-\operatorname{pow}(C,\omega)=\tfrac12(AB^2-AC^2)$, where $\omega$ is the circumcircle of $AKL$.
+- **Auxiliary points $X,Y$ (successful).** $Y:=\text{ray }BK\cap AC$, $X:=\text{ray }CL\cap AB$ (crossbar). The three angle hypotheses translate, via directed angles, into three concyclicities: $B,X,Y,C$ on $\omega_1$; $C,M,K,X$ on $\omega_K$; $B,N,L,Y$ on $\omega_L$ (with tangency of $AB$ to $\omega_K$ at $M$ in the degenerate case $X=M$, and of $AC$ to $\omega_L$ at $N$ when $Y=N$).
+- **Affine power identity (the key step).** $F(Z):=\operatorname{pow}(Z,\omega)-\operatorname{pow}(Z,\omega_K)-\operatorname{pow}(Z,\omega_L)+\operatorname{pow}(Z,\omega_1)$ is an affine function of $Z$; it vanishes at the three non-collinear points $A,K,L$, hence identically. Evaluating at $B$ and $C$ gives $\operatorname{pow}(B,\omega)=\vec{BM}\cdot\vec{BX}$ and $\operatorname{pow}(C,\omega)=\vec{CN}\cdot\vec{CY}$; together with $AB\cdot AX=AC\cdot AY$ (power of $A$ w.r.t. $\omega_1$) and the median formula this yields $OM=ON$.
+- **Dead end avoided:** first tried radical-axis arguments with the second intersection points $K^*,L^*$ of line $BY$ with $\omega_K$ and of $CX$ with $\omega_L$; it works but requires awkward tangency case analysis. The affine function $F$ replaces all of it.
+- Numerical verification: `code/verify.py`, `code/check_signs.py`, `code/verify2.py` confirm every claim (several triangles; generic case; both tangency cases $X=M$ and $Y=N$; all signed-angle sign claims; $F\equiv0$; $OM=ON$) to machine precision.
 
 ## Current best
-Problem solved. Canonical proof below (from `approaches/complex-certificate.md`); an independent second complete proof is in `approaches/secant-trig-identity.md`.
+Complete rigorous proof below. Core of the argument: with $X=$ ray $CL\cap AB$, $Y=$ ray $BK\cap AC$, the hypotheses force $B,X,Y,C$, $C,M,K,X$ and $B,N,L,Y$ to be concyclic; then the affine function $\operatorname{pow}(\cdot,\omega)-\operatorname{pow}(\cdot,\omega_K)-\operatorname{pow}(\cdot,\omega_L)+\operatorname{pow}(\cdot,\omega_1)$ vanishes at $A,K,L$, hence everywhere; evaluating at $B,C$ and using $AB\cdot AX=AC\cdot AY$ and the median-length formula gives $OM=ON$.
 
 ## Full proof
 
-**Problem.** Let $ABC$ be a triangle, $M$, $N$ the midpoints of $AB$, $AC$. Points $K$,
-$L$ are chosen inside triangles $BMC$, $BNC$ respectively, such that $K$ lies inside
-angle $LBA$, $L$ lies inside angle $ACK$, and
-$$\angle KBA = \angle ACL,\qquad \angle LBK = \angle LNC,\qquad \angle LCK = \angle BMK.$$
-Let $O$ be the circumcentre of triangle $AKL$. Prove $OM = ON$.
+### 0. Conventions and notation
 
-Throughout, $b = CA$, $c = AB$, $A$ also denotes the angle $\angle BAC \in (0,\pi)$, and
-all named angles are **unsigned angles in $(0,\pi)$** (as in the problem statement). Set
-$$\varphi := \angle KBA = \angle ACL,\qquad
-\psi := \angle LBK = \angle LNC,\qquad
-\chi := \angle LCK = \angle BMK,$$
-$$u := \angle KAB, \qquad v := \angle LAC .$$
+We identify the plane with $\mathbb{C}$. For $u,v\in\mathbb{C}$ write
+$$\langle u,v\rangle=\operatorname{Re}(\bar u v),\qquad u\times v=\operatorname{Im}(\bar u v),$$
+the usual dot and cross products of plane vectors.
 
-The proof has six parts:
+**Unsigned angles.** For points $P,Q\ne V$, $\ \angle PVQ\in[0^\circ,180^\circ]$ is the ordinary (unsigned) angle, i.e. $\angle PVQ=|\arg\frac{Q-V}{P-V}|$ with $\arg\in(-180^\circ,180^\circ]$.
 
-- **Part 0** — configuration facts (all interiority hypotheses are consumed here);
-- **Part 1** — the unconditional reduction $OM = ON \iff OB^2 - OC^2 = \tfrac{c^2-b^2}{2}$;
-- **Part 2** — the law-of-sines encoding of the hypotheses;
-- **Part 3** — elimination of $\chi$ and $\psi$: the two side-relations $\ell_K = 0$, $\ell_L = 0$;
-- **Part 4** — $A$, $K$, $L$ are not collinear;
-- **Part 5** — coordinates, the circumcentre, and the reduction of the goal to one trig polynomial $G = 0$;
-- **Part 6** — the certificate: the identity $2\sin A\cdot G = \alpha\,\ell_K + \beta\,\ell_L$, verified in full.
+**Signed ray angles.** For nonzero $u,v$ let $\measuredangle(u\to v):=\arg\frac{v}{u}\in(-180^\circ,180^\circ]$. For rays from $V$ through $P$ and through $Q$ put $\measuredangle(VP\to VQ):=\measuredangle\big((P-V)\to(Q-V)\big)$. Since $\frac{v}{u}=\frac{\bar u v}{|u|^2}$ we have:
 
----
+> **(0.1)** $|\measuredangle(u\to v)|=\angle(u,v)$ (the unsigned angle), and if $u\times v\neq0$ then the sign of $\measuredangle(u\to v)$ equals the sign of $u\times v$. Moreover $\measuredangle(u\to w)\equiv\measuredangle(u\to v)+\measuredangle(v\to w)\pmod{360^\circ}$ and $\measuredangle(v\to u)\equiv-\measuredangle(u\to v)\pmod{360^\circ}$ (because $\arg$ is additive mod $360^\circ$ under multiplication and $\arg(u/v)=-\arg(v/u)$ mod $360^\circ$).
 
-### Part 0. Configuration facts
+**Directed line angles.** For lines $\ell_1,\ell_2$ with direction vectors $d_1,d_2\ne 0$ set
+$$\angle(\ell_1,\ell_2):=\arg\tfrac{d_2}{d_1}\ \bmod\,180^\circ .$$
+This is well defined: replacing $d_i$ by a nonzero real multiple changes $\arg\frac{d_2}{d_1}$ by $0^\circ$ or $180^\circ$. It is additive mod $180^\circ$, and $\angle(\ell_1,\ell_2)\equiv0$ iff $\ell_1\parallel\ell_2$ (including $\ell_1=\ell_2$). If rays $r_1,r_2$ span the lines $\ell_1,\ell_2$, then $\angle(\ell_1,\ell_2)\equiv\measuredangle(r_1\to r_2)\pmod{180^\circ}$. For points we write $\angle(PQ,RS)$ for the directed angle from line $PQ$ to line $RS$.
 
-**(0a) $K, L$ lie in the interior of triangle $ABC$.**
-Since $B, M, C$ lie in the (convex) closed triangle $ABC$, the closed triangle $BMC$ is
-contained in the closed triangle $ABC$. The boundary of $ABC$ is contained in the three
-lines $AB$, $BC$, $CA$. The open triangle $\mathrm{int}(BMC)$ is disjoint from line
-$AB$ (which contains its edge $BM$: the interior of a triangle lies strictly on one side
-of each edge line) and from line $BC$ (its edge $BC$). Finally, the closed triangle
-$BMC$ meets line $CA$ only in the single point $C$: the vertices $B$ and $M$ lie
-strictly on the same side of line $CA$ (every point of segment $AB$ other than $A$
-does), so by convexity any point of triangle $BMC$ on line $CA$ lies on the edge...
-more directly: a point of the convex hull of $\{B, M, C\}$ lying on line $CA$ must have
-zero total weight on $B$ and $M$ (their signed distances to the line have the same
-strict sign), hence equals $C$. Since the vertex $C$ is not an interior point,
-$\mathrm{int}(BMC)$ is disjoint from all three lines, hence from $\partial(ABC)$, so
-$\mathrm{int}(BMC)\subseteq \mathrm{int}(ABC)$. Thus $K \in \mathrm{int}(ABC)$.
-The same argument with $N$ in place of $M$ (edge $NC$ on line $CA$, edge $BC$ on line
-$BC$, and triangle $BNC$ meeting line $AB$ only at $B$) gives
-$\mathrm{int}(BNC) \subseteq \mathrm{int}(ABC)$, so $L \in \mathrm{int}(ABC)$.
+**Power of a point.** For a circle $\Gamma$ with centre $Z_0$ and radius $\rho>0$ and a point $Z$, $\operatorname{pow}(Z,\Gamma):=|Z-Z_0|^2-\rho^2$.
 
-**(0b) Basic angle facts.** Since $K \in \mathrm{int}(ABC)$, $K$ lies on none of the
-lines $AB$, $BC$, $CA$; likewise $L$. By the crossbar theorem, for an interior point $K$
-the ray $AK$ meets segment $BC$, hence lies strictly inside angle $BAC$, so
-$$\angle BAC = \angle BAK + \angle KAC, \qquad\text{i.e.}\qquad 0 < u < A,\quad \angle KAC = A - u > 0,$$
-and likewise $0 < v < A$, $\angle LAB = A - v$. Similarly $0 < \varphi = \angle KBA < \angle B$
-(interior point seen from vertex $B$) and $0 < \varphi = \angle ACL < \angle C$; in
-particular $\varphi \in (0,\pi)$ and $\sin\varphi > 0$. Since $K \notin$ line $AB$ and
-$M \in$ line $AB$ with $M \ne K$, the angle $\chi = \angle BMK$ is a genuine angle in
-$(0,\pi)$, so $\sin\chi > 0$ and $\chi > 0$; likewise $\psi = \angle LNC \in (0,\pi)$,
-$\psi > 0$.
+**Sides of a line.** For a line through $P$ with direction $d$, points $Z_1,Z_2$ are *strictly on the same side* iff $d\times(Z_1-P)$ and $d\times(Z_2-P)$ are nonzero of equal sign; *strictly opposite sides* iff nonzero of opposite signs.
 
-**(0c) Ray identifications at the midpoints.** $M$ is the midpoint of $AB$, so $M$ lies
-strictly between $B$ and $A$; hence ray $BM$ = ray $BA$ and
-$\angle KBM = \angle KBA = \varphi$. Likewise $N$ lies strictly between $C$ and $A$, so
-ray $CN$ = ray $CA$ and $\angle LCN = \angle LCA = \varphi$.
+**Interior of a triangle / of an angle.** For an affinely independent triple $P,Q,R$, the (open) interior of triangle $PQR$ is $\{\alpha P+\beta Q+\gamma R:\ \alpha,\beta,\gamma>0,\ \alpha+\beta+\gamma=1\}$; "inside triangle $PQR$" means lying in this set. For $0^\circ<\angle QVR<180^\circ$, "$P$ lies inside angle $QVR$" means: $P$ is strictly on the same side of line $VQ$ as $R$ and strictly on the same side of line $VR$ as $Q$.
 
-**(0d) Angle additivity from the two interiority hypotheses.** "$K$ lies inside angle
-$LBA$" means ray $BK$ lies strictly inside angle $LBA$, so
-$$\angle ABL = \angle ABK + \angle KBL = \varphi + \psi .$$
-"$L$ lies inside angle $ACK$" means ray $CL$ lies strictly inside angle $ACK$, so
-$$\angle ACK = \angle ACL + \angle LCK = \varphi + \chi .$$
-*These two lines and the positivity facts of (0b) are the only places the interiority
-hypotheses are used; everything after this point is unconditional algebra on genuine
-triangles.*
+Throughout, $b:=AC=|C-A|$, $c:=AB=|B-A|$, and
+$$\theta:=\angle KBA=\angle ACL,\qquad \varphi:=\angle LBK=\angle LNC,\qquad \psi:=\angle LCK=\angle BMK ,$$
+$\omega$ denotes the circumcircle of triangle $AKL$ and $O$ its centre, $R_\omega=|OA|$ its radius. Since the problem speaks of *triangle* $AKL$ and its circumcentre, the points $A,K,L$ are pairwise distinct and not collinear; this is part of the hypothesis.
+
+Reflections, rotations and translations of the plane preserve all hypotheses and the conclusion, so **we may and do assume that $ABC$ is positively oriented**:
+$$\delta:=(B-A)\times(C-A)>0. \tag{0.2}$$
 
 ---
 
-### Part 1. Reduction: $OM = ON \iff OB^2 - OC^2 = \tfrac{c^2 - b^2}{2}$
+### 1. Preliminary lemmas
 
-**Median-length formula.** For any points $O, P, Q$ with $S$ the midpoint of $PQ$:
-writing vectors from $O$, $\;4\,OS^2 = |\,\vec{OP}+\vec{OQ}\,|^2 = OP^2 + OQ^2 + 2\,\vec{OP}\cdot\vec{OQ}$
-and $PQ^2 = OP^2 + OQ^2 - 2\,\vec{OP}\cdot\vec{OQ}$; adding,
-$4\,OS^2 = 2\,OP^2 + 2\,OQ^2 - PQ^2$.
+**Lemma 1 (line–circle intersections and power).**
+Let $\Gamma$ be a circle with centre $Z_0$, radius $\rho>0$, and let $\ell$ be a line.
+(i) $\ell\cap\Gamma$ has at most two points.
+(ii) If $M\in\Gamma$, there is exactly one line through $M$ meeting $\Gamma$ only at $M$ (the **tangent** at $M$); its direction is $i(M-Z_0)$, i.e. it is the line through $M$ perpendicular to $MZ_0$.
+(iii) If $Z\in\ell$ and $\ell$ meets $\Gamma$ at $U$ and $V$ — where in the tangent case we set $U=V$ — then
+$$\operatorname{pow}(Z,\Gamma)=\langle U-Z,\ V-Z\rangle ,$$
+the product of signed lengths $ZU\cdot ZV$ along $\ell$.
 
-Applying this to $S = M$ (midpoint of $AB$) and $S = N$ (midpoint of $AC$):
-$$4\,OM^2 = 2\,OA^2 + 2\,OB^2 - c^2, \qquad 4\,ON^2 = 2\,OA^2 + 2\,OC^2 - b^2 .$$
-Subtracting, $4(OM^2 - ON^2) = 2(OB^2 - OC^2) - (c^2 - b^2)$. Hence
-$$OM = ON \iff OB^2 - OC^2 = \frac{c^2 - b^2}{2}. \tag{1}$$
-(This step is unconditional; it does not even use that $O$ is the circumcentre.)
+*Proof.* Parametrize $\ell=\{Z+td:\ t\in\mathbb{R}\}$ with $|d|=1$, $Z\in \ell$ arbitrary. Then
+$$|Z+td-Z_0|^2-\rho^2=t^2+2t\,\langle d,Z-Z_0\rangle+\operatorname{pow}(Z,\Gamma), \tag{1.1}$$
+a monic real quadratic in $t$; it has at most two roots, proving (i). For (ii): take $Z=M\in\Gamma$; then $\operatorname{pow}(M,\Gamma)=0$ and the roots are $t=0$ and $t=-2\langle d,M-Z_0\rangle$; they coincide iff $\langle d,M-Z_0\rangle=0$, i.e. iff $d\perp(M-Z_0)$, i.e. iff $d$ is a real multiple of $i(M-Z_0)$; that determines a unique line through $M$. For (iii): if $U=Z+t_1d$, $V=Z+t_2d$ (with $t_1=t_2$ in the tangent case, when (1.1) has a double root), then by Vieta $t_1t_2=\operatorname{pow}(Z,\Gamma)$, and $\langle U-Z,V-Z\rangle=t_1t_2\langle d,d\rangle=t_1t_2$. $\square$
 
----
+**Lemma 2 (directed inscribed-angle criterion).**
+Let $P,Q,R$ be pairwise distinct, non-collinear points and let $\Gamma$ be the (unique) circle through them. Then for every point $S\notin\{P,Q\}$:
+$$S\in\Gamma\iff \angle(SP,\,SQ)\equiv\angle(RP,\,RQ)\pmod{180^\circ}.$$
 
-### Part 2. The hypotheses as law-of-sines relations
+*Proof.* Uniqueness of $\Gamma$ is classical (its centre is the common point of the perpendicular bisectors of $PQ$ and $PR$, which are not parallel).
 
-Each relation below is the law of sines in a genuine (nondegenerate) triangle; by (0b),
-$K \notin$ lines $AB, CA$ and $L \notin$ lines $AB, CA$, so all six triangles used are
-nondegenerate, all their angles lie in $(0,\pi)$, and every sine below is **positive**.
-When a triangle has angles $\theta_1, \theta_2$ at two vertices, the sine of the third
-angle is $\sin(\pi - \theta_1 - \theta_2) = \sin(\theta_1 + \theta_2)$.
+Put $w:=(Q-R)\overline{(P-R)}\ne0$. Since $\frac{Q-R}{P-R}=\frac{w}{|P-R|^2}$ and $P,Q,R$ are not collinear, $\arg\frac{Q-R}{P-R}\not\equiv0\pmod{180^\circ}$, i.e. $w\notin\mathbb{R}$, so $\operatorname{Im}w\ne0$.
 
-**Triangle $ABK$** (angles $u$ at $A$, $\varphi$ at $B$):
-$$AK = \frac{c\,\sin\varphi}{\sin(\varphi + u)}, \qquad
-BK = \frac{c\,\sin u}{\sin(\varphi + u)}. \tag{E1}$$
+Define $g:\mathbb{C}\to\mathbb{R}$ by $g(Z):=\operatorname{Im}\big[w\,(P-Z)\overline{(Q-Z)}\big]$. Expanding $(P-Z)\overline{(Q-Z)}=P\bar Q-P\bar Z-\bar Q Z+|Z|^2$ shows
+$$g(Z)=(\operatorname{Im}w)\,|Z|^2+\lambda(Z)$$
+with $\lambda$ a real affine function of $Z\in\mathbb R^2$. Hence $\tfrac{1}{\operatorname{Im}w}\,g(Z)=|Z-Z_1|^2-\rho_1$ for some $Z_1\in\mathbb{C},\rho_1\in\mathbb{R}$, so the zero set $\{g=0\}$ is empty, a single point, or a circle. Now
+$$g(P)=0,\qquad g(Q)=0,\qquad g(R)=\operatorname{Im}\big[(Q-R)\overline{(P-R)}(P-R)\overline{(Q-R)}\big]=\operatorname{Im}\big[|P-R|^2|Q-R|^2\big]=0 .$$
+So $\{g=0\}$ contains three distinct non-collinear points, hence it is a circle through $P,Q,R$; by uniqueness $\{g=0\}=\Gamma$.
 
-**Triangle $MBK$** (angles $\varphi$ at $B$ by (0c), $\chi$ at $M$; $MB = c/2$):
-$$BK = \frac{(c/2)\,\sin\chi}{\sin(\varphi + \chi)}. \tag{E3'}$$
-Equating the two expressions for $BK$ and clearing the (positive) denominators:
-$$2\,\sin u\,\sin(\varphi + \chi) = \sin\chi\,\sin(\varphi + u). \tag{E3}$$
+Finally, fix $S\notin\{P,Q\}$. All four numbers $Q-S,\,P-S,\,Q-R,\,P-R$ are nonzero, and
+$$\angle(SP,SQ)\equiv\angle(RP,RQ)\pmod{180^\circ}
+\iff \arg\Big[\tfrac{Q-S}{P-S}\Big]\equiv\arg\Big[\tfrac{Q-R}{P-R}\Big]\pmod{180^\circ}
+\iff \tfrac{Q-S}{P-S}\cdot\overline{\Big(\tfrac{Q-R}{P-R}\Big)}\in\mathbb{R}\setminus\{0\} .$$
+Multiplying by the positive real $|P-S|^2|P-R|^2$, the last condition is equivalent to
+$(Q-S)\overline{(P-S)}\cdot\overline{(Q-R)}(P-R)\in\mathbb{R}$, i.e. (taking conjugates) to
+$w\,(P-S)\overline{(Q-S)}\in\mathbb{R}$, i.e. to $g(S)=0$, i.e. to $S\in\Gamma$. $\square$
 
-**Triangle $ACK$** (angles $A - u$ at $A$ by (0b), $\varphi + \chi$ at $C$ by (0d)):
-$$AK = \frac{b\,\sin(\varphi + \chi)}{\sin(\varphi + \chi + A - u)}. \tag{E5}$$
+**Lemma 3 (directed tangent–chord).**
+Let $\Gamma$ be a circle through the pairwise distinct points $M,K,C$, and let $t$ be the tangent to $\Gamma$ at $M$. Then
+(i) $\angle(t,\,MK)\equiv\angle(CM,\,CK)\pmod{180^\circ}$;
+(ii) if a line $\ell$ through $M$ satisfies $\angle(\ell,\,MK)\equiv\angle(CM,\,CK)\pmod{180^\circ}$, then $\ell=t$; in particular $\ell$ meets $\Gamma$ only at $M$.
 
-**Triangle $ACL$** (angles $v$ at $A$, $\varphi$ at $C$):
-$$AL = \frac{b\,\sin\varphi}{\sin(\varphi + v)}, \qquad
-CL = \frac{b\,\sin v}{\sin(\varphi + v)}. \tag{E2}$$
+*Proof.* (i) Maps $Z\mapsto aZ+\beta$ ($a\ne0$) preserve directed line angles (all direction vectors get multiplied by $a$, so ratios of directions are unchanged), map circles to circles and tangent lines to tangent lines (they are bijections preserving the intersection pattern). Hence we may assume $\Gamma$ is the unit circle centred at $0$. Write $m,k,c\in\Gamma$, so $|m|=|k|=|c|=1$, $\bar m=1/m$ etc. By Lemma 1(ii), $t$ has direction $im$. Consider
+$$z:=\frac{(k-m)(m-c)}{m\,(k-c)} .$$
+Then
+$$\bar z=\frac{(\bar k-\bar m)(\bar m-\bar c)}{\bar m(\bar k-\bar c)}
+=\frac{\frac{m-k}{km}\cdot\frac{c-m}{mc}}{\frac1m\cdot\frac{c-k}{kc}}
+=\frac{(m-k)(c-m)}{m\,(c-k)}=-z ,$$
+so $z$ is purely imaginary; also $z\ne0$. Hence $z/i\in\mathbb{R}\setminus\{0\}$. Now
+$$\angle(t,MK)-\angle(CM,CK)\equiv\arg\frac{k-m}{im}-\arg\frac{k-c}{m-c}
+=\arg\Big[\frac{(k-m)(m-c)}{im(k-c)}\Big]=\arg\frac{z}{i}\equiv0\pmod{180^\circ}.$$
+(ii) From (i), $\angle(\ell,MK)\equiv\angle(t,MK)$, hence $\angle(\ell,t)\equiv0$, so $\ell\parallel t$; both pass through $M$, so $\ell=t$. $\square$
 
-**Triangle $NCL$** (angles $\varphi$ at $C$ by (0c), $\psi$ at $N$; $NC = b/2$):
-equating with (E2)'s $CL$:
-$$2\,\sin v\,\sin(\varphi + \psi) = \sin\psi\,\sin(\varphi + v). \tag{E4}$$
+**Lemma 4 (median-length formula).** For any points $O,P,Q$, if $W=\tfrac12(P+Q)$ then
+$$4\,|OW|^2=2\,|OP|^2+2\,|OQ|^2-|PQ|^2 .$$
 
-**Triangle $ABL$** (angles $A - v$ at $A$, $\varphi + \psi$ at $B$ by (0d)):
-$$AL = \frac{c\,\sin(\varphi + \psi)}{\sin(\varphi + \psi + A - v)}. \tag{E6}$$
+*Proof.* With vectors from $O$: $4|W-O|^2=|{(P-O)+(Q-O)}|^2=|P-O|^2+2\langle P-O,Q-O\rangle+|Q-O|^2$ and $|PQ|^2=|P-O|^2-2\langle P-O,Q-O\rangle+|Q-O|^2$. Add. $\square$
 
----
+**Lemma 5 (angle addition inside an angle).** Let $V,Q,R$ be points with $0^\circ<\angle QVR<180^\circ$ and let $P$ lie inside angle $QVR$. Then $\angle QVP+\angle PVR=\angle QVR$, and $0^\circ<\angle QVP<\angle QVR$.
 
-### Part 3. Eliminating $\chi$ and $\psi$: the side relations
-
-**K-side.** From (E3), expanding $\sin(\varphi+\chi) = \sin\varphi\cos\chi + \cos\varphi\sin\chi$
-and using $\sin(\varphi+u) - 2\sin u\cos\varphi = \sin\varphi\cos u - \cos\varphi\sin u = \sin(\varphi - u)$:
-$$\sin\chi\,\sin(\varphi - u) = 2\,\sin u\,\sin\varphi\,\cos\chi .$$
-Since $\sin\chi > 0$ and $2\sin u \sin\varphi > 0$ (Part 0), we may write
-$$(\cos\chi,\ \sin\chi) = r\,\bigl(\sin(\varphi - u),\ 2\sin u \sin\varphi\bigr),
-\qquad r := \frac{\sin\chi}{2\sin u\,\sin\varphi} > 0. \tag{2}$$
-(No branch ambiguity: $\sin \chi>0$ pins the sign of $r$, and $(2)$ reproduces both
-$\cos\chi$ and $\sin\chi$ exactly.) Consequently
-$$\sin(\varphi + \chi) = \sin\varphi\cos\chi + \cos\varphi\sin\chi
-= r\,\sin\varphi\,\bigl[\sin(\varphi - u) + 2\sin u\cos\varphi\bigr]
-= r\,\sin\varphi\,\sin(\varphi + u), \tag{3}$$
-$$\cos(\varphi + \chi) = \cos\varphi\cos\chi - \sin\varphi\sin\chi
-= r\,\bigl[\cos\varphi\,\sin(\varphi - u) - 2\sin u\,\sin^2\varphi\bigr]. \tag{4}$$
-
-Now equate (E1) and (E5) (both equal $AK$) and clear denominators:
-$$c\,\sin\varphi\,\sin(\varphi + \chi + A - u) = b\,\sin(\varphi + \chi)\,\sin(\varphi + u).$$
-Expand $\sin(\varphi+\chi+A-u) = \sin(\varphi+\chi)\cos(A-u) + \cos(\varphi+\chi)\sin(A-u)$
-and substitute (3), (4); every term acquires the factor $r$, and dividing by
-$r\,\sin\varphi > 0$ leaves
-$$c\,\Bigl[\sin\varphi\,\sin(\varphi+u)\cos(A-u) + \cos\varphi\,\sin(\varphi-u)\sin(A-u)
-- 2\sin^2\!\varphi\,\sin u\,\sin(A-u)\Bigr] = b\,\sin^2(\varphi+u). \tag{5}$$
-
-**Bracket identity.** The bracket in (5) equals $\cos A - \cos(\varphi+u)\cos(A+\varphi-u)$.
-*Verification by product-to-sum (each row is the standard expansion
-$2\sin X\sin Y = \cos(X-Y)-\cos(X+Y)$, $2\sin X\cos Y = \sin(X+Y)+\sin(X-Y)$,
-$2\cos X\cos Y = \cos(X-Y)+\cos(X+Y)$, applied twice); we list the five summands of
-(bracket) $-\ \bigl[\cos A - \cos(\varphi+u)\cos(A+\varphi-u)\bigr]$ in Fourier form:*
-
-| term | Fourier expansion |
-|---|---|
-| $\sin\varphi\,\sin(\varphi{+}u)\cos(A{-}u)$ | $\tfrac14\cos A - \tfrac14\cos(A{+}2\varphi) + \tfrac14\cos(A{-}2u) - \tfrac14\cos(2\varphi{+}2u{-}A)$ |
-| $\cos\varphi\,\sin(\varphi{-}u)\sin(A{-}u)$ | $\tfrac14\cos A + \tfrac14\cos(A{-}2\varphi) - \tfrac14\cos(A{-}2u) - \tfrac14\cos(A{+}2\varphi{-}2u)$ |
-| $-2\sin^2\!\varphi\,\sin u\,\sin(A{-}u)$ | $\tfrac12\cos A - \tfrac14\cos(A{-}2\varphi) - \tfrac14\cos(A{+}2\varphi) - \tfrac12\cos(A{-}2u) + \tfrac14\cos(2\varphi{+}2u{-}A) + \tfrac14\cos(A{+}2\varphi{-}2u)$ |
-| $-\cos A$ | $-\cos A$ |
-| $+\cos(\varphi{+}u)\cos(A{+}\varphi{-}u)$ | $\tfrac12\cos(A{+}2\varphi) + \tfrac12\cos(A{-}2u)$ |
-
-Summing each column of Fourier modes gives $0$ (e.g. the $\cos A$ modes:
-$\tfrac14+\tfrac14+\tfrac12-1 = 0$; the $\cos(A{+}2\varphi)$ modes:
-$-\tfrac14-\tfrac14+\tfrac12 = 0$; the $\cos(A{-}2u)$ modes:
-$\tfrac14-\tfrac14-\tfrac12+\tfrac12=0$; the $\cos(2\varphi{+}2u{-}A)$ modes:
-$-\tfrac14+\tfrac14 = 0$; the $\cos(A{-}2\varphi)$ modes: $\tfrac14 - \tfrac14 = 0$;
-the $\cos(A{+}2\varphi{-}2u)$ modes: $-\tfrac14+\tfrac14 = 0$). ∎ (bracket identity)
-
-Therefore, defining
-$$P_u := \cos A - \cos(\varphi+u)\cos(A+\varphi-u), \qquad Q_u := \sin^2(\varphi+u),$$
-equation (5) becomes the **K-side relation**
-$$\boxed{\ \ell_K := b\,Q_u - c\,P_u = 0.\ } \tag{K}$$
-
-**L-side.** The L-side computation is *literally the same computation* with the
-substitutions $u \to v$, $\chi \to \psi$, $b \leftrightarrow c$: (E4) has the same shape
-as (E3), and equating (E2) with (E6) has the same shape as equating (E1) with (E5) with
-$b$ and $c$ exchanged. Hence, with
-$$P_v := \cos A - \cos(\varphi+v)\cos(A+\varphi-v), \qquad Q_v := \sin^2(\varphi+v),$$
-$$\boxed{\ \ell_L := c\,Q_v - b\,P_v = 0.\ } \tag{L}$$
+*Proof.* Unsigned angles and sides of lines are invariant under translations, rotations and reflections, so we may place $V=0$ and assume the unit vector along $VQ$ is $q=1$ and $\gamma:=\angle QVR\in(0^\circ,180^\circ)$ with unit vector $r=(\cos\gamma,\sin\gamma)$ along $VR$ (reflect in the $x$-axis if needed). Let $p=(\cos\sigma,\sin\sigma)$, $\sigma\in(-180^\circ,180^\circ]$, be the unit vector along $VP$. "$P$ on the same side of line $VQ$ (the $x$-axis) as $R$" means $\sin\sigma>0$, so $\sigma\in(0^\circ,180^\circ)$. "$P$ on the same side of line $VR$ as $Q$" means $r\times p$ and $r\times q$ have the same sign; $r\times q=-\sin\gamma<0$ and $r\times p=\sin(\sigma-\gamma)$; since $\sigma-\gamma\in(-180^\circ,180^\circ)$, the condition $\sin(\sigma-\gamma)<0$ means $\sigma<\gamma$. So $0<\sigma<\gamma$, and then $\angle QVP=\sigma$, $\angle PVR=\gamma-\sigma$, $\angle QVR=\gamma$. $\square$
 
 ---
 
-### Part 4. $A$, $K$, $L$ are not collinear
+### 2. Position facts
 
-Suppose, for contradiction, that $A, K, L$ are collinear. Since $K, L \in \mathrm{int}(ABC)$
-and $K, L \neq A$, both lie on one ray $\ell$ from $A$ through the interior of the
-triangle; write $\ell = \{A + t\,\hat\ell : t > 0\}$ and $K = A + t_K\hat\ell$,
-$L = A + t_L\hat\ell$ with $t_K, t_L > 0$.
+Write points as affine combinations $Z=\alpha_Z A+\beta_Z B+\gamma_Z C$ with $\alpha_Z+\beta_Z+\gamma_Z=1$ (barycentric coordinates w.r.t. $ABC$; not to be confused with the side lengths $b,c$). From $Z-A=\beta_Z(B-A)+\gamma_Z(C-A)$, $Z-B=\alpha_Z(A-B)+\gamma_Z(C-B)$, $Z-C=\alpha_Z(A-C)+\beta_Z(B-C)$ and the cyclic identity
+$$(B-A)\times(C-A)=(C-B)\times(A-B)=(A-C)\times(B-C)=\delta \tag{2.1}$$
+(direct expansion of all three gives $A\times B+B\times C+C\times A$), we get
+$$(B-A)\times(Z-A)=\gamma_Z\,\delta,\qquad (C-B)\times(Z-B)=\alpha_Z\,\delta,\qquad (A-C)\times(Z-C)=\beta_Z\,\delta. \tag{2.2}$$
+In particular, by (0.2): $Z$ is strictly on the same side of line $AB$ as $C$ iff $\gamma_Z>0$; strictly on the same side of $BC$ as $A$ iff $\alpha_Z>0$; strictly on the same side of $CA$ as $B$ iff $\beta_Z>0$. The interior of triangle $ABC$ is exactly $\{\alpha_Z,\beta_Z,\gamma_Z>0\}$.
 
-**Monotonicity claim.** For $X(t) = A + t\hat\ell$ ($t>0$), the function
-$t \mapsto \angle ABX(t)$ is strictly increasing, and so is $t \mapsto \angle ACX(t)$.
+**(P1) $K$ lies strictly inside triangle $ABC$ and $K\notin$ lines $AB$, $BC$, $CM$.**
+Indeed $K=\alpha B+\mu M+\gamma C$ with $\alpha,\mu,\gamma>0$, $\alpha+\mu+\gamma=1$ ($B,M,C$ are affinely independent since $M$ is an interior point of $AB$ and $C\notin AB$). As $M=\tfrac12(A+B)$,
+$$K=\tfrac{\mu}{2}A+(\alpha+\tfrac{\mu}{2})B+\gamma C,$$
+all coefficients positive, so $K$ is interior to $ABC$. In coordinates w.r.t. $B,M,C$: line $BM=AB$ is $\{\gamma=0\}$, line $BC$ is $\{\mu=0\}$, line $CM$ is $\{\alpha=0\}$; the interior has $\alpha,\mu,\gamma>0$.
 
-*Proof.* Take coordinates with $A$ at the origin and $B = (c, 0)$; since $\ell$ enters
-the interior, $\hat\ell = (\cos\theta, \sin\theta)$ with $\sin\theta > 0$ (orient the
-$C$-side up), where $\theta\in(0,A)$. The angle at $B$ between ray $BA$ (direction $(-1,0)$)
-and ray $BX$ (direction $X(t) - B = (t\cos\theta - c,\ t\sin\theta)$) has
-$$\cos\angle ABX = \frac{c - t\cos\theta}{|X-B|}, \qquad
-\sin\angle ABX = \frac{t\sin\theta}{|X-B|} > 0,$$
-so
-$$\cot\angle ABX = \frac{c - t\cos\theta}{t\,\sin\theta}
-= \frac{1}{\sin\theta}\Bigl(\frac{c}{t} - \cos\theta\Bigr),$$
-which is strictly decreasing in $t$; since $\cot$ is strictly decreasing on $(0,\pi)$,
-$\angle ABX(t)$ is strictly increasing. The statement at $C$ is the same computation in
-coordinates with $A$ at the origin and $C$ on the positive axis of the frame: there
-$\hat\ell$ makes angle $\theta' = A - \theta \in (0, A)$ with ray $AC$, $\sin\theta' > 0$,
-and $\cot\angle ACX = \frac{1}{\sin\theta'}\bigl(\frac{b}{t} - \cos\theta'\bigr)$,
-strictly decreasing. ∎
+**(P2) $L$ lies strictly inside triangle $ABC$ and $L\notin$ lines $AC$, $BC$, $BN$.** Same argument with $L=\alpha'B+\nu N+\gamma'C$, $N=\tfrac12(A+C)$: $L=\tfrac{\nu}{2}A+\alpha'B+(\gamma'+\tfrac{\nu}{2})C$; line $NC=AC$ is $\{\alpha'=0\}$, line $BC$ is $\{\nu=0\}$, line $BN$ is $\{\gamma'=0\}$.
 
-Now, by (0d) and (0b), $\angle ABL = \varphi + \psi > \varphi = \angle ABK$ (as $\psi > 0$),
-so by the claim applied at $B$: $t_L > t_K$. But also
-$\angle ACK = \varphi + \chi > \varphi = \angle ACL$ (as $\chi > 0$), so by the claim
-applied at $C$: $t_K > t_L$. Contradiction. Hence $A, K, L$ are not collinear, and the
-circumcircle $\omega$ and circumcentre $O$ of triangle $AKL$ exist and are unique. ∎
+In particular $A\ne K$, $A\ne L$ ($A$ is not interior), $K\notin AB$, $L\notin AC$, so
+$$0^\circ<\theta=\angle KBA<180^\circ,\qquad 0^\circ<\varphi=\angle LNC<180^\circ,\qquad 0^\circ<\psi=\angle BMK<180^\circ. \tag{2.3}$$
 
-**Consequence.** The rays $AK$ and $AL$ are distinct. Ray $AK$ makes angle $u$ with ray
-$AB$; ray $AL$ makes angle $A - v$ with ray $AB$; both $u, A-v \in (0, A)$. Distinctness
-means $u \neq A - v$; since $|(A - v) - u| < A < \pi$,
-$$\sin(A - u - v) \neq 0. \tag{6}$$
+**(P3) Definition and position of $Y$ and $X$.** *The ray from $B$ through $K$ meets segment $AC$ at a point $Y$ with $Y\ne A,C$; the ray from $C$ through $L$ meets segment $AB$ at a point $X$ with $X\ne A,B$.*
+
+*Proof for $Y$.* Let $K$ have barycentric coordinates $(\alpha_K,\beta_K,\gamma_K)$, all positive, by (P1). First, $A$ and $C$ are strictly on opposite sides of line $BK$ (direction $K-B$):
+$$(K-B)\times(A-B)=-(A-B)\times(K-B),\qquad (A-B)\times(K-B)=(A-B)\times(K-A)=-(B-A)\times(K-A)=-\gamma_K\,\delta<0,$$
+so $(K-B)\times(A-B)=\gamma_K\,\delta>0$; and by (2.2), $(K-B)\times(C-B)=-(C-B)\times(K-B)=-\alpha_K\,\delta<0$. (Here $(A-B)\times(K-B)=(A-B)\times(K-A)$ because $(A-B)\times(A-B)=0$.) Hence segment $AC$ meets line $BK$ in exactly one point $Y$, and $Y\ne A,C$ (strict signs), $Y\neq B$ (as $B\notin AC$, else $\delta=0$).
+
+Next, $Y$ lies on the ray from $B$ through $K$. Write $Y=B+t(K-B)$, $t\neq0$. On one hand, $Y$ has barycentric coordinates $(1-s,0,s)$ with $s\in(0,1)$, so by (2.2) $(B-A)\times(Y-A)=s\,\delta>0$. On the other hand $Y-A=(B-A)+t(K-B)$ and $(B-A)\times(K-B)=(B-A)\times(K-A)=\gamma_K\,\delta$, so $(B-A)\times(Y-A)=t\,\gamma_K\,\delta$. Comparing, $t>0$.
+
+*Proof for $X$.* Symmetric. Let $L$ have barycentric coordinates $(\alpha_L,\beta_L,\gamma_L)$, all positive. Then $(L-C)\times(A-C)=-(A-C)\times(L-C)=-\beta_L\,\delta<0$ by (2.2), while from $L-C=\alpha_L(A-C)+\beta_L(B-C)$ and (2.1), $(L-C)\times(B-C)=\alpha_L\,(A-C)\times(B-C)=\alpha_L\,\delta>0$. So $A,B$ are strictly on opposite sides of line $CL$, and segment $AB$ meets line $CL$ in a single point $X\ne A,B$. Writing $X=C+t(L-C)$, and noting that $X$ has barycentric coordinates $(1-s,s,0)$ with $s\in(0,1)$, (2.2) gives $(A-C)\times(X-C)=\beta_X\,\delta=s\,\delta>0$, while $(A-C)\times(X-C)=t\,(A-C)\times(L-C)=t\,\beta_L\,\delta$; hence $t>0$. $\square$
+
+Introduce the signed coordinates along the two sides:
+$$x:=AX\in(0,c),\qquad y:=AY\in(0,b),$$
+so that on the line $AB$ (coordinatized from $A$ towards $B$) the points $A,X,M,B$ sit at $0,x,\tfrac{c}{2},c$, and on line $AC$ the points $A,Y,N,C$ sit at $0,y,\tfrac b2,b$.
+
+Note for later use: since $Y$ lies on ray $BK$ and $Y\ne B$, **line $BY=$ line $BK$**; since $X$ lies on ray $CL$ and $X\ne C$, **line $CX=$ line $CL$**. Also $X\ne Y$ (lines $AB$ and $AC$ meet only at $A$, and $X\neq A$).
 
 ---
 
-### Part 5. Coordinates, the circumcentre, and the goal polynomial $G$
+### 3. Translating the hypotheses into directed angles
 
-Place $A = (0,0)$, $B = (c, 0)$, $C = (b\cos A,\ b\sin A)$ (so $C$ is in the upper half
-plane; $K$ and $L$, being interior, are as well). By Part 0,
-$$K = AK\,(\cos u,\ \sin u), \qquad L = AL\,\bigl(\cos(A-v),\ \sin(A-v)\bigr).$$
+By (P1)–(P2), $K$ and $L$ are interior to $ABC$; let their barycentric coordinates be positive. We use (2.2) and (0.1) repeatedly. Below, "$Z$ is on the $C$-side of $AB$" abbreviates "strictly on the same side of line $AB$ as $C$", etc.
 
-Since $A = 0 \in \omega$, the circle $\omega$ has equation $|z|^2 = 2\langle O, z\rangle$
-($z \in \mathbb{R}^2$), and for any point $P$,
-$$\mathrm{pow}(P, \omega) = |P - O|^2 - |O|^2 = |P|^2 - 2\langle O, P\rangle .$$
-With $R_\omega = OA = |O|$, we get $OB^2 - OC^2 = \mathrm{pow}(B,\omega) - \mathrm{pow}(C,\omega)
-= (c^2 - b^2) - 2\langle O,\ B - C\rangle$. By (1),
-$$OM = ON \iff 2\,\langle O,\ B - C\rangle = \frac{c^2 - b^2}{2}. \tag{7}$$
+**(S1)** If $Z$ is on the $C$-side of $AB$ (i.e. $\gamma_Z>0$), then $\measuredangle(BA\to BZ)=-\angle ABZ$ and $\measuredangle(MB\to MZ)=+\angle BMZ$.
+*Proof.* $(A-B)\times(Z-B)=-(B-A)\times(Z-B)=-(B-A)\times(Z-A)=-\gamma_Z\,\delta<0$, so by (0.1) the signed angle $\measuredangle(BA\to BZ)$ is negative, of absolute value $\angle ABZ$. Also $B-M=\tfrac12(B-A)$ and $(B-A)\times(Z-M)=(B-A)\times(Z-A)-(B-A)\times(M-A)=\gamma_Z\,\delta-0>0$, so $\measuredangle(MB\to MZ)=+\angle BMZ$. $\square$
 
-Write $(X, Y) := 2O$. Since $K, L \in \omega$: $|K|^2 = 2\langle O, K\rangle$ and
-$|L|^2 = 2\langle O, L\rangle$; dividing by $AK > 0$ resp. $AL > 0$:
-$$X\cos u + Y \sin u = AK, \qquad X\cos(A-v) + Y\sin(A-v) = AL. \tag{8}$$
-The determinant of this linear system is
-$\cos u\,\sin(A-v) - \sin u\,\cos(A-v) = \sin(A - u - v) \ne 0$ by (6), so Cramer's rule gives
-$$X = \frac{AK\,\sin(A-v) - AL\,\sin u}{\sin(A-u-v)}, \qquad
-Y = \frac{AL\,\cos u - AK\,\cos(A-v)}{\sin(A-u-v)}.$$
+**(S2)** If $Z$ is on the $B$-side of $AC$ (i.e. $\beta_Z>0$), then $\measuredangle(CA\to CZ)=+\angle ACZ$ and $\measuredangle(NC\to NZ)=-\angle CNZ$.
+*Proof.* By (2.2), $(A-C)\times(Z-C)=\beta_Z\,\delta>0$, so by (0.1) $\measuredangle(CA\to CZ)=+\angle ACZ$. For the second claim: $C-N=\tfrac12(C-A)$, and since $N-A$ is parallel to $C-A$,
+$$(C-N)\times(Z-N)=\tfrac12\,(C-A)\times(Z-N)=\tfrac12\,(C-A)\times(Z-A)=-\tfrac12\,(A-C)\times(Z-A)=-\tfrac12\,\beta_Z\,\delta<0,$$
+where $(A-C)\times(Z-A)=(A-C)\times(Z-C)+(A-C)\times(C-A)=\beta_Z\,\delta$. So $\measuredangle(NC\to NZ)=-\angle CNZ$. $\square$
 
-Since $B - C = (c - b\cos A,\ -b\sin A)$, condition (7) reads
-$X(c - b\cos A) - Y\, b \sin A = \tfrac{c^2-b^2}{2}$, i.e.
-$$AK\bigl[(c - b\cos A)\sin(A-v) + b\sin A\cos(A-v)\bigr]
-- AL\bigl[(c - b\cos A)\sin u + b \sin A\cos u\bigr]
-= \frac{c^2-b^2}{2}\,\sin(A-u-v).$$
-Using $\sin A\cos(A-v) - \cos A\sin(A-v) = \sin v$ and
-$\sin A \cos u - \cos A \sin u = \sin(A - u)$, the brackets simplify:
-$$(c - b\cos A)\sin(A-v) + b \sin A \cos(A - v) = c\,\sin(A - v) + b\,\sin v,$$
-$$(c - b\cos A)\sin u + b\sin A \cos u = c\,\sin u + b\,\sin(A - u).$$
-So (7) is equivalent to
-$$AK\,\bigl[c\sin(A-v) + b\sin v\bigr] - AL\,\bigl[c\sin u + b\sin(A-u)\bigr]
-= \frac{c^2-b^2}{2}\,\sin(A-u-v). \tag{G0}$$
+Both $K$ and $L$ are on the $C$-side of $AB$ and on the $B$-side of $AC$ (interior points; (2.2)). Hence:
 
-Finally substitute $AK = \dfrac{c\sin\varphi}{\sin(\varphi+u)}$,
-$AL = \dfrac{b\sin\varphi}{\sin(\varphi+v)}$ from (E1), (E2) and multiply by
-$\sin(\varphi+u)\sin(\varphi+v) > 0$: **(G0), hence $OM = ON$, is equivalent to $G = 0$,**
-where
-$$G := c\,\sin\varphi\,\sin(\varphi+v)\bigl[c\sin(A-v) + b\sin v\bigr]
-- b\,\sin\varphi\,\sin(\varphi+u)\bigl[c\sin u + b\sin(A-u)\bigr]
-- \frac{c^2-b^2}{2}\,\sin(A-u-v)\,\sin(\varphi+u)\,\sin(\varphi+v). \tag{9}$$
+$$\measuredangle(BA\to BK)=-\angle ABK=-\theta,\qquad \measuredangle(BA\to BL)=-\angle ABL, \tag{3.1}$$
+$$\measuredangle(CA\to CL)=+\angle ACL=+\theta,\qquad \measuredangle(CA\to CK)=+\angle ACK, \tag{3.2}$$
+$$\measuredangle(MB\to MK)=+\angle BMK=+\psi, \tag{3.3}$$
+$$\measuredangle(NC\to NL)=-\angle CNL=-\angle LNC=-\varphi. \tag{3.4}$$
+
+**Use of "$K$ inside angle $LBA$".** Since $L$ is interior to $ABC$, $L$ is inside angle $ABC$ (same side of $AB$ as $C$ and of $BC$ as $A$, by (2.2)); by Lemma 5 applied to angle $ABC$ ($0^\circ<\angle ABC<180^\circ$ as $A,B,C$ form a triangle), $0^\circ<\angle LBA<\angle ABC<180^\circ$. Applying Lemma 5 to angle $LBA$ and the point $K$ inside it:
+$$\angle ABL=\angle ABK+\angle KBL=\theta+\varphi' ,\qquad \varphi':=\angle LBK .$$
+By hypothesis $\varphi'=\angle LNC=\varphi$. Hence, using (0.1) and (3.1),
+$$\measuredangle(BK\to BL)\equiv\measuredangle(BA\to BL)-\measuredangle(BA\to BK)=-(\theta+\varphi)+\theta=-\varphi \pmod{360^\circ}. \tag{3.5}$$
+
+**Use of "$L$ inside angle $ACK$".** $K$ is interior to $ABC$, hence inside angle $ACB$, so $0^\circ<\angle ACK<\angle ACB<180^\circ$ by Lemma 5. Applying Lemma 5 to angle $ACK$ and the point $L$ inside it: $\angle ACK=\angle ACL+\angle LCK=\theta+\psi'$ with $\psi':=\angle LCK=\angle BMK=\psi$ by hypothesis. Hence by (3.2),
+$$\measuredangle(CL\to CK)\equiv\measuredangle(CA\to CK)-\measuredangle(CA\to CL)=(\theta+\psi)-\theta=+\psi \pmod{360^\circ}. \tag{3.6}$$
+
+Two consequences ("nondegeneracy"): since $0<\varphi<180^\circ$ and $0<\psi<180^\circ$ by (2.3),
+$$L\notin\text{line }BK \quad(\text{by }(3.5)),\qquad K\notin\text{line }CL\quad(\text{by }(3.6)), \tag{3.7}$$
+because if $L$ lay on line $BK$ (note $L\ne B$: $L$ is interior to $ABC$), the ray $BL$ would coincide with ray $BK$ or its opposite, forcing $\measuredangle(BK\to BL)\in\{0^\circ,180^\circ\}$, contradicting (3.5) since $-\varphi\not\equiv0^\circ,180^\circ\pmod{360^\circ}$; likewise for $K$ and line $CL$ (note $K\ne C$), using (3.6).
 
 ---
 
-### Part 6. The certificate
+### 4. The three circles
 
-**Claim (certificate identity).** With $P_u, Q_u, P_v, Q_v, \ell_K, \ell_L$ as in
-Part 3 and $G$ as in (9), the following holds **identically in the six free real
-variables $u, v, \varphi, A, b, c$** (no constraints assumed):
-$$2\,\sin A\cdot G \;=\; \alpha\,\ell_K \;+\; \beta\,\ell_L, \tag{10}$$
-where
-$$\alpha := -\Bigl[\,b\,(\sin^2\varphi + \sin^2 v) + c\,\sin(\varphi+v)\,\sin(A - \varphi - v)\,\Bigr],$$
-$$\beta := \;\;\;\, c\,(\sin^2\varphi + \sin^2 u) + b\,\sin(\varphi+u)\,\sin(A - \varphi - u).$$
+Recall line $BY=$ line $BK$ and line $CX=$ line $CL$.
 
-**Why the claim finishes the proof.** By Part 3, the hypotheses force
-$\ell_K = \ell_L = 0$. Hence $2\sin A \cdot G = 0$; since $A \in (0,\pi)$ is an angle of
-triangle $ABC$, $\sin A \neq 0$, so $G = 0$; by Part 5 this is equivalent to (7), and by
-Part 1 to $OM = ON$. $\blacksquare$ (modulo the claim)
+**Claim 4.1 ($\omega_1$).** *The points $B,C,X,Y$ lie on one circle $\omega_1$.*
 
-**Proof of the claim.** Both sides of (10) are quadratic forms in $(b, c)$ whose
-coefficients are trigonometric polynomials in $(u, v, \varphi, A)$; it suffices to match
-the coefficients of $b^2$, $bc$, $c^2$. Collecting them from (9) and from
-$\alpha \ell_K + \beta \ell_L$ (recall $\ell_K = b\,Q_u - c\,P_u$,
-$\ell_L = c\,Q_v - b\,P_v$), the claim is equivalent to the three identities:
+*Proof.* The points $X,Y,B$ are pairwise distinct and non-collinear: if $B$ were on line $XY$ then (as $X\ne B$) line $XY=$ line $XB=AB\ni Y$, contradicting $Y\notin AB$ (indeed $Y$ lies on segment $AC$ with $Y\ne A$, and $AB\cap AC=\{A\}$ because $A,B,C$ are not collinear). Also $C\notin\{X,Y\}$. Now compute directed line angles mod $180^\circ$:
+$$\angle(BX,\,BY)\equiv\measuredangle(BA\to BK)\equiv-\theta \qquad(\text{line }BX=AB \text{ since } X\in AB,\ X\ne B;\ \text{line }BY=\text{line }BK),$$
+$$\angle(CX,\,CY)\equiv-\angle(CY,\,CX)\equiv-\measuredangle(CA\to CL)\equiv-\theta \qquad(\text{line }CY=AC \text{ since } Y\in AC,\ Y\ne C;\ \text{line }CX=\text{line }CL).$$
+So $\angle(CX,CY)\equiv\angle(BX,BY)\pmod{180^\circ}$. By Lemma 2 (with $P=X,\ Q=Y,\ R=B,\ S=C$), $C$ lies on the circle $\omega_1$ through $X,Y,B$. $\square$
 
-**(Id-$b^2$)** $\;2\sin A\Bigl[-\sin\varphi\,\sin(\varphi{+}u)\sin(A{-}u) + \tfrac12\sin(A{-}u{-}v)\sin(\varphi{+}u)\sin(\varphi{+}v)\Bigr]
-= -(\sin^2\varphi + \sin^2 v)\,\sin^2(\varphi{+}u) - \sin(\varphi{+}u)\,\sin(A{-}\varphi{-}u)\,P_v .$
+Since $X,B\in\omega_1$ are distinct points of line $AB$, and $Y,C\in\omega_1$ are distinct points of line $AC$, Lemma 1(i),(iii) give
+$$\operatorname{pow}(A,\omega_1)=x\,c=y\,b. \tag{4.1}$$
+(Signed products: both $X$ and $B$ lie on the ray from $A$ towards $B$, etc.) Also
+$$\operatorname{pow}(B,\omega_1)=0,\qquad \operatorname{pow}(C,\omega_1)=0, \tag{4.2}$$
+and, since $B\ne Y$ are two points of $\omega_1$ on line $BK$ and $C\ne X$ are two points of $\omega_1$ on line $CL$,
+$$\operatorname{pow}(K,\omega_1)=\langle B-K,\,Y-K\rangle,\qquad \operatorname{pow}(L,\omega_1)=\langle C-L,\,X-L\rangle. \tag{4.3}$$
 
-**(Id-$bc$)** $\;2\sin A\,\sin\varphi\bigl[\sin v\,\sin(\varphi{+}v) - \sin u\,\sin(\varphi{+}u)\bigr]
-= (\sin^2\varphi + \sin^2 v)\,P_u - \sin(\varphi{+}v)\sin(A{-}\varphi{-}v)\,\sin^2(\varphi{+}u)
-+ \sin(\varphi{+}u)\sin(A{-}\varphi{-}u)\,\sin^2(\varphi{+}v) - (\sin^2\varphi + \sin^2 u)\,P_v .$
+**Claim 4.2 ($\omega_K$).** *Let $\omega_K$ be the circumcircle of $C,M,K$ (these are non-collinear: $K\notin$ line $CM$ and $K\notin AB\supseteq\{M\}$ by (P1)). Then line $AB$ meets $\omega_K$ exactly in the multiset $\{M,X\}$: if $X\ne M$ then $\omega_K\cap AB=\{M,X\}$; if $X=M$ then $AB$ is tangent to $\omega_K$ at $M$.*
 
-**(Id-$c^2$)** $\;2\sin A\Bigl[\sin\varphi\,\sin(\varphi{+}v)\sin(A{-}v) - \tfrac12\sin(A{-}u{-}v)\sin(\varphi{+}u)\sin(\varphi{+}v)\Bigr]
-= \sin(\varphi{+}v)\,\sin(A{-}\varphi{-}v)\,P_u + (\sin^2\varphi + \sin^2 u)\,\sin^2(\varphi{+}v) .$
+*Proof.* By (3.3) and (3.6), mod $180^\circ$:
+$$\angle(CL,\,CK)\equiv\psi\equiv\angle(MB,\,MK)\;=\;\angle(AB,\,MK). \tag{4.4}$$
 
-*(Bookkeeping check for the coefficient collection: e.g. the $b^2$-terms of
-$\alpha\ell_K$ come from the $b$-part of $\alpha$ times the $b$-part of $\ell_K$:
-$-(\sin^2\varphi+\sin^2v)\cdot Q_u$; those of $\beta\ell_L$ from
-$b\sin(\varphi{+}u)\sin(A{-}\varphi{-}u)\cdot(-b\,P_v)$; similarly for $bc$ and $c^2$.)*
+*Case $X\ne M$.* The points $K,X,C$ are pairwise distinct ($K\notin AB\ni X$; $C\notin AB$; $K\ne C$) and non-collinear: line $XC=$ line $CL$ and $K\notin$ line $CL$ by (3.7). Also $M\notin\{K,X\}$ ($M\in AB$, $K\notin AB$; $X\ne M$ by assumption). Using line $CX=$ line $CL$ and line $MX=AB=$ line $MB$, (4.4) reads
+$$\angle(CK,\,CX)\equiv-\psi\equiv\angle(MK,\,MX)\pmod{180^\circ}.$$
+By Lemma 2 (with $P=K,\ Q=X,\ R=C,\ S=M$), $M$ lies on the circle through $K,X,C$; that circle passes through the non-collinear points $C,M,K$, hence equals $\omega_K$; thus $X\in\omega_K$. Since $M\ne X$ are two points of $\omega_K$ on $AB$, Lemma 1(i) gives $\omega_K\cap AB=\{M,X\}$.
 
-**(Id-$c^2$) follows from (Id-$b^2$).** Swap $u \leftrightarrow v$ in (Id-$b^2$) and
-multiply by $-1$: the left side becomes
-$2\sin A[\sin\varphi\sin(\varphi{+}v)\sin(A{-}v) - \tfrac12\sin(A{-}u{-}v)\sin(\varphi{+}u)\sin(\varphi{+}v)]$
-(note $\sin(A{-}v{-}u) = \sin(A{-}u{-}v)$), and the right side becomes
-$(\sin^2\varphi+\sin^2u)\sin^2(\varphi{+}v) + \sin(\varphi{+}v)\sin(A{-}\varphi{-}v)P_u$ —
-exactly (Id-$c^2$). So only (Id-$b^2$) and (Id-$bc$) need verification.
+*Case $X=M$.* Then $M\in$ line $CL$, so (as $C\ne M$) line $CL=$ line $CM$, and (4.4) becomes $\angle(AB,\,MK)\equiv\angle(CM,\,CK)\pmod{180^\circ}$. By Lemma 3(ii) (applied to $\omega_K\ni M,K,C$ and $\ell=AB$), $AB$ is tangent to $\omega_K$ at $M$. $\square$
 
-**Verification of (Id-$b^2$).** Every term on both sides carries the factor
-$\sin(\varphi+u)$ (for the $P_v$-term this is explicit; for the left side, both bracket
-terms contain it). Dividing (Id-$b^2$) by it and moving everything to one side, it is
-equivalent to $T_1 + T_2 + T_3 + T_4 + T_5 = 0$ with the Fourier (product-to-sum)
-expansions:
+By Lemma 1(iii) (line $AB$ through $A$ and through $B$, meeting $\omega_K$ at $M$ and $X$, coincident if $X=M$):
+$$\operatorname{pow}(A,\omega_K)=\tfrac{c}{2}\,x,\qquad \operatorname{pow}(B,\omega_K)=\big(\tfrac{c}{2}-c\big)(x-c)=\tfrac{c}{2}\,(c-x), \tag{4.5}$$
+$$\operatorname{pow}(K,\omega_K)=0, \tag{4.6}$$
+and, since $C\ne X$ are two points of $\omega_K$ on line $CL$,
+$$\operatorname{pow}(L,\omega_K)=\langle C-L,\,X-L\rangle. \tag{4.7}$$
 
-| term | Fourier expansion |
-|---|---|
-| $T_1 = \sin A\,\sin(\varphi{+}v)\,\sin(A{-}u{-}v)$ | $\tfrac14\sin(\varphi{-}u) - \tfrac14\sin(2A{+}\varphi{-}u) + \tfrac14\sin(\varphi{+}u{+}2v) - \tfrac14\sin(\varphi{+}u{+}2v{-}2A)$ |
-| $T_2 = -2\sin A\,\sin\varphi\,\sin(A{-}u)$ | $-\tfrac12\sin(\varphi{-}u) - \tfrac12\sin(\varphi{+}u) + \tfrac12\sin(\varphi{+}u{-}2A) + \tfrac12\sin(2A{+}\varphi{-}u)$ |
-| $T_3 = (\sin^2\varphi + \sin^2 v)\,\sin(\varphi{+}u)$ | $\tfrac14\sin(\varphi{-}u) + \sin(\varphi{+}u) - \tfrac14\sin(3\varphi{+}u) - \tfrac14\sin(\varphi{+}u{-}2v) - \tfrac14\sin(\varphi{+}u{+}2v)$ |
-| $T_4 = \sin(A{-}\varphi{-}u)\,\cos A$ | $-\tfrac12\sin(\varphi{+}u) - \tfrac12\sin(\varphi{+}u{-}2A)$ |
-| $T_5 = -\sin(A{-}\varphi{-}u)\,\cos(\varphi{+}v)\,\cos(A{+}\varphi{-}v)$ | $\tfrac14\sin(3\varphi{+}u) - \tfrac14\sin(2A{+}\varphi{-}u) + \tfrac14\sin(\varphi{+}u{-}2v) + \tfrac14\sin(\varphi{+}u{+}2v{-}2A)$ |
+**Claim 4.3 ($\omega_L$).** *Let $\omega_L$ be the circumcircle of $B,N,L$ (non-collinear: $L\notin$ line $BN$, $L\notin AC\supseteq\{N\}$ by (P2)). Then line $AC$ meets $\omega_L$ exactly in the multiset $\{N,Y\}$ (tangency at $N$ if $Y=N$).*
 
-*(Here $T_4 + T_5 = \sin(A-\varphi-u)\,P_v$ after sign transport; each row is two
-applications of the standard product-to-sum formulas; note
-$\sin(\varphi+u-2A) = -\sin(2A - \varphi - u)$ etc., all rows written with a consistent
-sign convention $\sin(-X) = -\sin X$.)*
+*Proof.* By (3.4) and (3.5), mod $180^\circ$:
+$$\angle(BK,\,BL)\equiv-\varphi\equiv\angle(NC,\,NL)=\angle(AC,\,NL). \tag{4.8}$$
 
-Column-wise cancellation of the Fourier modes:
-$\sin(\varphi{-}u)$: $\tfrac14 - \tfrac12 + \tfrac14 = 0$;
-$\sin(2A{+}\varphi{-}u)$: $-\tfrac14 + \tfrac12 - \tfrac14 = 0$;
-$\sin(\varphi{+}u{+}2v)$: $\tfrac14 - \tfrac14 = 0$;
-$\sin(\varphi{+}u{+}2v{-}2A)$: $-\tfrac14 + \tfrac14 = 0$;
-$\sin(\varphi{+}u)$: $-\tfrac12 + 1 - \tfrac12 = 0$;
-$\sin(\varphi{+}u{-}2A)$: $\tfrac12 - \tfrac12 = 0$;
-$\sin(3\varphi{+}u)$: $-\tfrac14 + \tfrac14 = 0$;
-$\sin(\varphi{+}u{-}2v)$: $-\tfrac14 + \tfrac14 = 0$.
-All modes cancel, so (Id-$b^2$) holds. ∎
+*Case $Y\ne N$.* The points $L,Y,B$ are pairwise distinct and non-collinear (line $BY=$ line $BK$ and $L\notin$ line $BK$ by (3.7); $L\notin AC\ni Y$). Also $N\notin\{L,Y,B\}$. Using line $BY=$ line $BK$ and line $NY=AC=$ line $NC$, (4.8) reads
+$$\angle(BL,\,BY)\equiv\varphi\equiv\angle(NL,\,NY)\pmod{180^\circ}.$$
+By Lemma 2 (with $P=L,\ Q=Y,\ R=B,\ S=N$), $N$ lies on the circle through $L,Y,B$, which then equals $\omega_L$; so $Y\in\omega_L$ and $\omega_L\cap AC=\{N,Y\}$.
 
-**Verification of (Id-$bc$).** Moving everything to one side, (Id-$bc$) is equivalent
-to $S_1 + \cdots + S_6 = 0$ with:
+*Case $Y=N$.* Then $N\in$ line $BK$, so line $BK=$ line $BN$, and (4.8) becomes $\angle(AC,\,NL)\equiv\angle(BN,\,BL)\pmod{180^\circ}$. By Lemma 3(ii) (with the circle $\omega_L\ni N,L,B$ and $\ell=AC$), $AC$ is tangent to $\omega_L$ at $N$. $\square$
 
-| term | Fourier expansion |
-|---|---|
-| $S_1 = 2\sin A\sin\varphi\,\sin v\,\sin(\varphi{+}v)$ | $\tfrac14\cos(A{-}2\varphi) - \tfrac14\cos(A{+}2\varphi) + \tfrac14\cos(A{-}2v) - \tfrac14\cos(A{+}2v) - \tfrac14\cos(2\varphi{+}2v{-}A) + \tfrac14\cos(A{+}2\varphi{+}2v)$ |
-| $S_2 = -2\sin A\sin\varphi\,\sin u\,\sin(\varphi{+}u)$ | $-\tfrac14\cos(A{-}2\varphi) + \tfrac14\cos(A{+}2\varphi) - \tfrac14\cos(A{-}2u) + \tfrac14\cos(A{+}2u) + \tfrac14\cos(2\varphi{+}2u{-}A) - \tfrac14\cos(A{+}2\varphi{+}2u)$ |
-| $S_3 = -(\sin^2\varphi + \sin^2 v)\,P_u$ | $-\tfrac98\cos A + \tfrac14\cos(A{-}2\varphi) + \tfrac34\cos(A{+}2\varphi) - \tfrac18\cos(A{+}4\varphi) + \tfrac12\cos(A{-}2u) + \tfrac14\cos(A{-}2v) + \tfrac14\cos(A{+}2v) - \tfrac18\cos(2\varphi{+}2u{-}A) - \tfrac18\cos(2u{+}2v{-}A) - \tfrac18\cos(A{+}2\varphi{-}2u) - \tfrac18\cos(A{+}2\varphi{-}2v) - \tfrac18\cos(A{+}2\varphi{+}2v) - \tfrac18\cos(A{-}2u{+}2v)$ |
-| $S_4 = \sin(\varphi{+}v)\sin(A{-}\varphi{-}v)\sin^2(\varphi{+}u)$ | $-\tfrac14\cos A + \tfrac18\cos(2\varphi{+}2u{-}A) + \tfrac14\cos(2\varphi{+}2v{-}A) + \tfrac18\cos(A{+}2\varphi{+}2u) - \tfrac18\cos(A{+}2u{-}2v) - \tfrac18\cos(4\varphi{+}2u{+}2v{-}A)$ |
-| $S_5 = -\sin(\varphi{+}u)\sin(A{-}\varphi{-}u)\sin^2(\varphi{+}v)$ | $\tfrac14\cos A - \tfrac14\cos(2\varphi{+}2u{-}A) - \tfrac18\cos(2\varphi{+}2v{-}A) - \tfrac18\cos(A{+}2\varphi{+}2v) + \tfrac18\cos(A{-}2u{+}2v) + \tfrac18\cos(4\varphi{+}2u{+}2v{-}A)$ |
-| $S_6 = (\sin^2\varphi + \sin^2 u)\,P_v$ | $\tfrac98\cos A - \tfrac14\cos(A{-}2\varphi) - \tfrac34\cos(A{+}2\varphi) + \tfrac18\cos(A{+}4\varphi) - \tfrac14\cos(A{-}2u) - \tfrac14\cos(A{+}2u) - \tfrac12\cos(A{-}2v) + \tfrac18\cos(2\varphi{+}2v{-}A) + \tfrac18\cos(2u{+}2v{-}A) + \tfrac18\cos(A{+}2\varphi{-}2u) + \tfrac18\cos(A{+}2\varphi{-}2v) + \tfrac18\cos(A{+}2\varphi{+}2u) + \tfrac18\cos(A{+}2u{-}2v)$ |
+Consequently
+$$\operatorname{pow}(A,\omega_L)=\tfrac{b}{2}\,y,\qquad \operatorname{pow}(C,\omega_L)=\tfrac{b}{2}\,(b-y),\qquad \operatorname{pow}(L,\omega_L)=0,\qquad \operatorname{pow}(B,\omega_L)=0, \tag{4.9}$$
+and, since $B\ne Y$ are two points of $\omega_L$ on line $BK$,
+$$\operatorname{pow}(K,\omega_L)=\langle B-K,\,Y-K\rangle. \tag{4.10}$$
 
-Column-wise cancellation of all Fourier modes (each mode listed with its total):
-$\cos A$: $-\tfrac98 - \tfrac14 + \tfrac14 + \tfrac98 = 0$;
-$\cos(A{-}2\varphi)$: $\tfrac14 - \tfrac14 + \tfrac14 - \tfrac14 = 0$;
-$\cos(A{+}2\varphi)$: $-\tfrac14 + \tfrac14 + \tfrac34 - \tfrac34 = 0$;
-$\cos(A{+}4\varphi)$: $-\tfrac18 + \tfrac18 = 0$;
-$\cos(A{-}2u)$: $-\tfrac14 + \tfrac12 - \tfrac14 = 0$;
-$\cos(A{+}2u)$: $\tfrac14 - \tfrac14 = 0$;
-$\cos(A{-}2v)$: $\tfrac14 + \tfrac14 - \tfrac12 = 0$;
-$\cos(A{+}2v)$: $-\tfrac14 + \tfrac14 = 0$;
-$\cos(2\varphi{+}2u{-}A)$: $\tfrac14 - \tfrac18 + \tfrac18 - \tfrac14 = 0$;
-$\cos(2\varphi{+}2v{-}A)$: $-\tfrac14 + \tfrac14 - \tfrac18 + \tfrac18 = 0$;
-$\cos(A{+}2\varphi{+}2u)$: $-\tfrac14 + \tfrac18 + \tfrac18 = 0$;
-$\cos(A{+}2\varphi{+}2v)$: $\tfrac14 - \tfrac18 - \tfrac18 = 0$;
-$\cos(A{+}2\varphi{-}2u)$: $-\tfrac18 + \tfrac18 = 0$;
-$\cos(A{+}2\varphi{-}2v)$: $-\tfrac18 + \tfrac18 = 0$;
-$\cos(2u{+}2v{-}A)$: $-\tfrac18 + \tfrac18 = 0$;
-$\cos(A{-}2u{+}2v)$: $-\tfrac18 + \tfrac18 = 0$;
-$\cos(A{+}2u{-}2v)$: $-\tfrac18 + \tfrac18 = 0$;
-$\cos(4\varphi{+}2u{+}2v{-}A)$: $-\tfrac18 + \tfrac18 = 0$.
-All modes cancel, so (Id-$bc$) holds. ∎
+---
 
-This proves the certificate identity (10), and with it the theorem:
+### 5. The affine power identity
 
-$$\boxed{OM = ON.}$$
-$\blacksquare$
+Define $F:\mathbb{R}^2\to\mathbb{R}$ by
+$$F(Z):=\operatorname{pow}(Z,\omega)-\operatorname{pow}(Z,\omega_K)-\operatorname{pow}(Z,\omega_L)+\operatorname{pow}(Z,\omega_1).$$
+
+**$F$ is affine.** For any circle $\Gamma$ with centre $Z_\Gamma$ and radius $\rho_\Gamma$, $\operatorname{pow}(Z,\Gamma)=|Z|^2-2\langle Z_\Gamma,Z\rangle+|Z_\Gamma|^2-\rho_\Gamma^2$. In $F$ the $|Z|^2$-terms cancel ($+1-1-1+1=0$), so $F(Z)=\langle u,Z\rangle+v$ for a fixed vector $u$ and scalar $v$.
+
+**$F(A)=0$:** by $\operatorname{pow}(A,\omega)=0$, (4.5), (4.9), (4.1):
+$$F(A)=0-\tfrac{c}{2}x-\tfrac{b}{2}y+cx=\tfrac{cx}{2}-\tfrac{by}{2}=0 ,$$
+using $cx=by$ from (4.1).
+
+**$F(K)=0$:** $\operatorname{pow}(K,\omega)=0$ ($K\in\omega$), $\operatorname{pow}(K,\omega_K)=0$, and by (4.3), (4.10) $\operatorname{pow}(K,\omega_1)=\operatorname{pow}(K,\omega_L)=\langle B-K,Y-K\rangle$; the last two cancel.
+
+**$F(L)=0$:** $\operatorname{pow}(L,\omega)=0$, $\operatorname{pow}(L,\omega_L)=0$, and by (4.3), (4.7) $\operatorname{pow}(L,\omega_1)=\operatorname{pow}(L,\omega_K)=\langle C-L,X-L\rangle$.
+
+**Hence $F\equiv0$:** $A,K,L$ are not collinear, so $K-A$ and $L-A$ are linearly independent; from $F(A)=F(K)=F(L)=0$ we get $\langle u,K-A\rangle=\langle u,L-A\rangle=0$, so $u=0$, and then $v=F(A)=0$.
+
+Evaluating $F$ at $B$ and $C$ and using (4.2), (4.5), (4.9):
+$$\operatorname{pow}(B,\omega)=\operatorname{pow}(B,\omega_K)+\operatorname{pow}(B,\omega_L)-\operatorname{pow}(B,\omega_1)=\tfrac{c}{2}(c-x), \tag{5.1}$$
+$$\operatorname{pow}(C,\omega)=\operatorname{pow}(C,\omega_K)+\operatorname{pow}(C,\omega_L)-\operatorname{pow}(C,\omega_1)=\tfrac{b}{2}(b-y). \tag{5.2}$$
+
+---
+
+### 6. Conclusion
+
+$O$ is the centre of $\omega$ and $R_\omega=|OA|$ its radius, so $|OB|^2=\operatorname{pow}(B,\omega)+R_\omega^2$ and $|OC|^2=\operatorname{pow}(C,\omega)+R_\omega^2$. By Lemma 4 applied to the midpoints $M$ of $AB$ and $N$ of $AC$:
+$$4\,OM^2=2\,OA^2+2\,OB^2-c^2,\qquad 4\,ON^2=2\,OA^2+2\,OC^2-b^2 .$$
+Subtracting and using (5.1), (5.2) and $cx=by$ from (4.1):
+$$4\,(OM^2-ON^2)=2\,(OB^2-OC^2)-c^2+b^2
+=2\big[\operatorname{pow}(B,\omega)-\operatorname{pow}(C,\omega)\big]-c^2+b^2$$
+$$=c(c-x)-b(b-y)-c^2+b^2=-cx+by=0 .$$
+Therefore $OM=ON$. $\blacksquare$
+
+---
+
+### Remarks on hypothesis usage
+- $\angle KBA=\angle ACL$ → Claim 4.1; $\angle LCK=\angle BMK$ together with "$L$ inside angle $ACK$" → Claim 4.2; $\angle LBK=\angle LNC$ together with "$K$ inside angle $LBA$" → Claim 4.3.
+- "$K$ inside triangle $BMC$" is used exactly for: $K$ interior to $ABC$ (sign facts (S1)–(S2), crossbar (P3)) and $K\notin$ line $CM$ ($\omega_K$ nondegenerate). Similarly for $L$ and line $BN$.
+- That $M,N$ are midpoints enters only through $AM=MB=\tfrac c2$, $AN=NC=\tfrac b2$ in (4.5), (4.9) and through Lemma 4.
+- Numerical verification of every claim (generic and both tangency cases): `code/verify.py`, `code/check_signs.py`, `code/verify2.py`.

@@ -1,0 +1,2528 @@
+Q raw collect t
+0 (-3*sin(x - y) + sin(x + y) + 2*sin(3*x + y) + 3*sin(x - y + 2*z) - sin(x + y + 2*z) - 2*sin(3*x + y + 2*z))/(2*sin(x + y)*sin(x + z))
+1 -3*sin(2*x + 2*y)/(2*sin(x + y)*sin(x + z)) - sin(2*x + 2*z)/(2*sin(x + y)*sin(x + z)) - sin(y - z)*cos(y + z)/(2*sin(x + y)*sin(x + z)) + 3*sin(2*y - 2*z)/(4*sin(x + y)*sin(x + z)) + sin(4*x + 2*y + 2*z)/(sin(x + y)*sin(x + z))
+2 2*sin(x + z)
+fu coeff
+0 2*(-2*sin(x)**3*sin(z)*cos(y) + sin(x)**2*sin(y)*sin(x - z) + 4*sin(x)**2*cos(x)*cos(y)*cos(z) + 5*sin(x)*sin(y)*cos(x)**2*cos(z) + 2*sin(x)*sin(z)*cos(x)**2*cos(y) + 3*sin(y)*sin(z)*cos(x)**3)*sin(z)/(sin(x + y)*sin(x + z))
+1 -(-sin(x)**4*sin(y)*sin(z)*sin(y - z) - 6*sin(x)**3*sin(y)*sin(x + y)*cos(z)**2 - 2*sin(x)**3*sin(z)*sin(x + z)*cos(y)**2 + 8*sin(x)**3*cos(x)*cos(y)**2*cos(z)**2 - 16*sin(x)**2*sin(y)*sin(z)*sin(x + y)*cos(x)*cos(z) + 10*sin(x)**2*sin(y)*cos(x)**2*cos(y)*cos(z)**2 + 14*sin(x)**2*sin(z)*cos(x)**2*cos(y)**2*cos(z) + 2*sin(x)*sin(y)**2*cos(x)**3*cos(z)**2 - 8*sin(x)*sin(y)*sin(z)**2*sin(x + y)*cos(x)**2 + 16*sin(x)*sin(y)*sin(z)*cos(x)**3*cos(y)*cos(z) + 6*sin(x)*sin(z)**2*cos(x)**3*cos(y)**2 + sin(y)**2*sin(z)*cos(x)**4*cos(z) + 7*sin(y)*sin(z)**2*cos(x)**4*cos(y))/(sin(x + y)*sin(x + z))
+2 2*sin(x + z)
+Traceback (most recent call last):
+  File "/Users/debarghya/vibedev/imo-2026/results/gpt-5.6-sol-lightweight-xhigh/problem-02/code/simplify_trig.py", line 32, in <module>
+    Dc=S.trigsimp(Det*(lam*S.conjugate(lam)),method='fu')
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/simplify/trigsimp.py", line 564, in trigsimp
+    expr_simplified = trigsimpfunc(expr)
+                      ^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/simplify/trigsimp.py", line 556, in <lambda>
+    'fu': (lambda x: fu(x, **opts)),
+                     ^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/simplify/fu.py", line 1663, in fu
+    rv1 = fRL2(rv)
+          ^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/strategies/core.py", line 150, in minrule
+    return min([rule(expr) for rule in rules], key=objective)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/strategies/core.py", line 150, in <listcomp>
+    return min([rule(expr) for rule in rules], key=objective)
+                ^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/strategies/core.py", line 64, in chain_rl
+    expr = rule(expr)
+           ^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/strategies/core.py", line 150, in minrule
+    return min([rule(expr) for rule in rules], key=objective)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/strategies/core.py", line 150, in <listcomp>
+    return min([rule(expr) for rule in rules], key=objective)
+                ^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/strategies/core.py", line 64, in chain_rl
+    expr = rule(expr)
+           ^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/simplify/fu.py", line 38, in TR0
+    return rv.normal().factor().expand()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/core/expr.py", line 3808, in factor
+    return factor(self, *gens, **args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/polytools.py", line 6735, in factor
+    return _generic_factor(f, gens, args, method='factor')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/polytools.py", line 6416, in _generic_factor
+    return _symbolic_factor(sympify(expr), opt, method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/polytools.py", line 6356, in _symbolic_factor
+    coeff, factors = _symbolic_factor_list(together(expr, fraction=opt['fraction']), opt, method)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/polytools.py", line 6318, in _symbolic_factor_list
+    _coeff, _factors = func()
+                       ^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/polytools.py", line 3377, in factor_list
+    coeff, factors = f.rep.factor_list()
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/polyclasses.py", line 1640, in factor_list
+    coeff, factors = dmp_factor_list(f._rep, f.lev, f.dom)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/factortools.py", line 1569, in dmp_factor_list
+    coeff, factors = dmp_zz_factor(f, v, K)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/factortools.py", line 1183, in dmp_zz_factor
+    G, g = dmp_primitive(g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1837, in dmp_primitive
+    cont, v = dmp_content(f, u, K), u - 1
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1336, in dmp_zz_heu_gcd
+    h, cff, cfg = dmp_zz_heu_gcd(ff, gg, v, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1336, in dmp_zz_heu_gcd
+    h, cff, cfg = dmp_zz_heu_gcd(ff, gg, v, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1336, in dmp_zz_heu_gcd
+    h, cff, cfg = dmp_zz_heu_gcd(ff, gg, v, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 958, in _dmp_simplify_gcd
+    h = dmp_gcd(F, G, v, K)
+        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1598, in dmp_inner_gcd
+    h, cff, cfg = _dmp_inner_gcd(f, g, u, K)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1567, in _dmp_inner_gcd
+    return dmp_zz_heu_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1313, in dmp_zz_heu_gcd
+    result = _dmp_rr_trivial_gcd(f, g, u, K)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 912, in _dmp_rr_trivial_gcd
+    return _dmp_simplify_gcd(f, g, u, K)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 952, in _dmp_simplify_gcd
+    G = dmp_content(g, u, K)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1812, in dmp_content
+    cont = dmp_gcd(cont, c, v, K)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1639, in dmp_gcd
+    return dmp_inner_gcd(f, g, u, K)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/euclidtools.py", line 1597, in dmp_inner_gcd
+    J, (f, g) = dmp_multi_deflate((f, g), u, K)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/densebasic.py", line 1370, in dmp_multi_deflate
+    f = dmp_to_dict(p, u)
+        ^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/densebasic.py", line 1101, in dmp_to_dict
+    h = dmp_to_dict(f[n - k], v)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/densebasic.py", line 1101, in dmp_to_dict
+    h = dmp_to_dict(f[n - k], v)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/densebasic.py", line 1101, in dmp_to_dict
+    h = dmp_to_dict(f[n - k], v)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 161 more times]
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/densebasic.py", line 1090, in dmp_to_dict
+    return dup_to_dict(f, K, zero=zero)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/debarghya/.cache/uv/archive-v0/RFI6Fatr4D4zJovemaxd6/lib/python3.11/site-packages/sympy/polys/densebasic.py", line 1042, in dup_to_dict
+    for k in range(0, n + 1):
+             ^^^^^^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded in comparison

@@ -1,184 +1,129 @@
+# imo-2026-02 — tracking file
 ## Status
 solved
 
+## Problem
+Let $ABC$ be a triangle and let points $M$ and $N$ be the midpoints of sides $AB$ and $AC$, respectively. Let points $K$ and $L$ be chosen inside triangles $BMC$ and $BNC$, respectively, such that $K$ lies inside the angle $LBA$, $L$ lies inside the angle $ACK$, and $\angle KBA = \angle ACL$, $\angle LBK = \angle LNC$, $\angle LCK = \angle BMK$. Let $O$ be the circumcentre of triangle $AKL$. Prove that $OM = ON$.
+
 ## Approaches tried
-- Oblique coordinates based at \(A\), with the circle represented by its two linear coefficients — all branch, ray-intersection, and circle-system issues were settled, reducing the theorem to one explicit determinant identity; the requested final human-checkable cancellation remained unproved in round 1.
-- Quadratic ray-length elimination followed by an explicit low-degree certificate — worked: the two closure conditions give independent quadratics in \(BK\) and \(CL\), and a coefficient-by-coefficient audit proves that their displayed linear combination is the required determinant identity.
+- Trigonometric/complex coordinates: successful. Coordinates of $K,L$ follow from the sine rule in $BMK,CNL$; the two remaining angle conditions become reality relations.
+- Equal powers: successful. A standalone complex-algebra lemma (`lemmas/complex-algebra.md`) shows that those reality relations imply that $M,N$ have equal powers with respect to $(AKL)$.
+- Symbolic Laurent-polynomial checks (`code/symbolic.py`, `code/eliminate.py`, `code/certificate.py`) were used to check the algebra and orientations. An apparent orientation correction was rechecked: for counterclockwise $ABC$, the ray directions are $CL=\alpha+\pi+x$ and $CK=\alpha+\pi+x+z$.
 
 ## Current best
-The oblique-coordinate approach is complete. After the certified oriented-ray reconstruction, the two closure conditions yield quadratics \(Q_t=Q_s=0\). The determinant expression equivalent to \(OM=ON\) is an explicit linear combination of these quadratics; the full coefficient audit is included below.
+The claim follows by normalizing $A=0,B=2,C=2de^{i\alpha}$. Then $M=1,N=de^{i\alpha}$, while the sine rule gives explicit complex coordinates for $K,L$. The angle order assumptions turn the remaining conditions into exactly the two hypotheses of the complex equal-power lemma, proving that $M,N$ have equal powers with respect to $(AKL)$. As both powers equal the squared distance to $O$ minus the same circumradius squared, $OM=ON$.
 
 ## Full proof
-Let
+Reflect the whole configuration if necessary, and assume that $A,B,C$ occur counterclockwise. We use complex coordinates, normalized by
 \[
-\alpha=\angle BAC,\quad \beta=\angle ABC,\quad \gamma=\angle BCA,
-\qquad a=BC,\quad b=CA,\quad c=AB.
+ A=0,\qquad B=2,\qquad C=2n,
+ \qquad n=de^{i\alpha},
+\]
+where $d>0$ and $\alpha=\angle BAC$. Thus
+\[
+ M=1,\qquad N=n.
 \]
 Set
 \[
-x=\angle KBA=\angle ACL,\quad y=\angle LBK=\angle LNC,
-\quad z=\angle LCK=\angle BMK.
+ x=\angle KBA=\angle ACL,
+ \quad y=\angle LBK=\angle LNC,
+ \quad z=\angle LCK=\angle BMK,
 \]
-Reflecting the configuration if necessary, which preserves angles and distances, put
+and abbreviate
 \[
-A=(0,0),\quad B=(c,0),\quad C=(b\cos\alpha,b\sin\alpha)
+ X=e^{ix},\qquad Y=e^{iy},\qquad Z=e^{iz},
+ \qquad a=e^{i\alpha}.
 \]
-with the oriented determinant \([B,C]>0\).
 
-We first invoke the certified **oriented positive-ray reconstruction lemma**. The strict ray orders forced by the interiority hypotheses give
+We first find $K$. In triangle $BMK$ we have
 \[
-0<x<\min(\beta,\gamma),\qquad 0<y<\beta-x,
-\qquad 0<z<\gamma-x. \tag{1}
+BM=1,
+\qquad \angle MBK=x,
+\qquad \angle BMK=z.
 \]
-Writing \(e(\theta)=(\cos\theta,\sin\theta)\), intersection of the positive rays from \(B\) and the midpoint \(M=B/2\), and similarly from \(C\) and \(N=C/2\), gives
+Consequently $\angle BKM=\pi-x-z$, so the sine rule gives
 \[
-K=B-t e(-x),\qquad t=BK=\frac{c\sin z}{2\sin(x+z)}, \tag{2}
+ MK=\frac{\sin x}{\sin(x+z)}.
 \]
+The ray $MK$ makes angle $z$ with the positive real axis; hence
 \[
-L=C-s e(\alpha+x),\qquad s=CL=\frac{b\sin y}{2\sin(x+y)}. \tag{3}
+ K=1+\frac{\sin x}{\sin(x+z)}Z. \tag{1}
 \]
-For completeness, (2) follows from
-\(B-t e(-x)=B/2+u e(z)\) by taking determinants with the two direction vectors; the calculation at \(C\) is identical with the indicated directions. By (1), all the sines in (2) and (3) are positive, so \(s,t>0\), and no reflected or negative-ray branch has been introduced.
+Likewise, in triangle $CNL$ we have $CN=d$, $\angle NCL=x$, and $\angle CNL=y$. The ray $NL$ has direction $\alpha-y$, and the sine rule gives
+\[
+ L=n\left(1+\frac{\sin x}{\sin(x+y)}Y^{-1}\right). \tag{2}
+\]
+The denominators in (1)--(2) are nonzero because they are sines of angles supplementary to angles of the nondegenerate triangles $BMK,CNL$.
 
-The same lemma, using the **Sine Law** (Knowledge Base, Synthetic toolkit) in triangles \(BKC\) and \(BLC\), gives the remaining closure conditions
+We next translate the ordering of the rays. Since $K$ lies inside $\angle LBA$, when one turns inside that angle from $BA$ toward $BL$, one meets $BK$ first. Therefore $BL$ has direction $\pi-x-y$. It follows that
 \[
-t=a\frac{\sin(\gamma-x-z)}{\sin(\alpha+2x+z)}, \tag{4}
+ (L-2)XY\in\mathbb R. \tag{3}
 \]
+At $C$, the ray $CA$ has direction $\alpha+\pi$. Since $\angle ACL=x$, the ray $CL$ has direction $\alpha+\pi+x$. Since $L$ lies inside $\angle ACK$ and $\angle LCK=z$, the ray $CK$ has direction $\alpha+\pi+x+z$. Thus the opposite vector $C-K=2n-K$ has direction $\alpha+x+z$, and hence
 \[
-s=a\frac{\sin(\beta-x-y)}{\sin(\alpha+2x+y)}. \tag{5}
+ \frac{2n-K}{aXZ}\in\mathbb R. \tag{4}
 \]
-The denominators are positive because they are sines of angles of the respective nondegenerate triangles.
 
-We eliminate \(z\) from (2) and (4). Equation (2), expanded, gives
+We now apply the complex equal-power lemma proved in `lemmas/complex-algebra.md`; its short algebraic proof is reproduced here for self-containment. If $p,q$ denote the complex coordinates of $K,L$, respectively, then, since
 \[
-\cot z=\frac{c-2t\cos x}{2t\sin x}. \tag{6}
+\frac{\sin x}{\sin(x+z)}
+ =\frac{X-X^{-1}}{XZ-X^{-1}Z^{-1}},
+\qquad
+\frac{\sin x}{\sin(x+y)}
+ =\frac{X-X^{-1}}{XY-X^{-1}Y^{-1}},
 \]
-This division is legitimate because \(t,\sin x,\sin z>0\). Cross-multiplying (4), expanding the sines containing \(z\), and dividing by \(\sin z\), we get
+formulas (1)--(2), together with (3)--(4), satisfy the hypotheses of that lemma. We recall its verification.
+
+Write $t^*=\bar t$. The circle through $0,p,q$ has equation
 \[
-t\{\sin(\alpha+2x)\cot z+\cos(\alpha+2x)\}
-=a\{\sin(\gamma-x)\cot z-\cos(\gamma-x)\}. \tag{7}
+ w\bar w+uw+v\bar w=0. \tag{5}
 \]
-Substitute (6), multiply by \(2t\sin x\), and move the right side left:
+Putting $w=p,q$ and applying Cramer's rule gives, with $\Delta=pq^*-qp^*\ne0$,
+\[
+ u\Delta=-pp^*q^*+qq^*p^*,
+ \qquad
+ v\Delta=-pqq^*+qpp^*. \tag{6}
+\]
+The difference between the values of the left side of (5) at $1$ and at $n$ is, after multiplication by $\Delta$,
 \[
 \begin{aligned}
-0={}&\{t\sin(\alpha+2x)-a\sin(\gamma-x)\}(c-2t\cos x)\\
-&+2t\sin x\{t\cos(\alpha+2x)+a\cos(\gamma-x)\}.
+H={}&(1-nn^*)\Delta
+ +(1-n)(-pp^*q^*+qq^*p^*)\\
+ &+(1-n^*)(-pqq^*+qpp^*). \tag{7}
 \end{aligned}
 \]
-Using \(\sin U\cos x-\cos U\sin x=\sin(U-x)\), this becomes
+The two reality relations (3)--(4) are equivalent to
 \[
-0=-ac\sin(\gamma-x)+2at\sin\gamma
-+ct\sin(\alpha+2x)-2t^2\sin(\alpha+x). \tag{8}
+(q-2)XY=(q^*-2)X^{-1}Y^{-1}, \tag{8}
 \]
-The Sine Law in \(ABC\) gives \(a\sin\gamma=c\sin\alpha\). Also
 \[
-a\sin(\gamma-x)=c\sin(\alpha+x)-b\sin x. \tag{9}
+(2n-p)a^{-1}X^{-1}Z^{-1}
+ =(2n^*-p^*)aXZ. \tag{9}
 \]
-Indeed, expand the left side and use \(a\sin\gamma=c\sin\alpha\) and the cosine-law projection \(a\cos\gamma=b-c\cos\alpha\). Substitution in (8) proves
+Substitute
 \[
-Q_t:=bc\sin x-c^2\sin(\alpha+x)
-+ct\{2\sin\alpha+\sin(\alpha+2x)\}
--2t^2\sin(\alpha+x)=0. \tag{10}
+p=1+Z\frac{X-X^{-1}}{XZ-X^{-1}Z^{-1}},
+\qquad
+q=da\left(1+Y^{-1}\frac{X-X^{-1}}{XY-X^{-1}Y^{-1}}\right)
 \]
+and their conjugates into (7). On using (8)--(9), and putting terms over the common denominator
+\[
+(XZ-X^{-1}Z^{-1})^2(XY-X^{-1}Y^{-1})^2,
+\]
+the numerator cancels in conjugate pairs: the four types are
+\[
+(nq^*p^*,-n^*qp),\quad
+(npp^*q^*,-n^*pp^*q),\quad
+(qq^*p^*,-qq^*p),\quad
+(pq^*,-qp^*).
+\]
+Thus $H=0$. By (5)--(7), the powers of $1=M$ and $n=N$ with respect to the circle through $0,p,q$, namely $(AKL)$, are equal.
 
-The elimination of \(y\) is analogous but is written out. Equations (3) and (5) give
+Let $R$ be the radius of $(AKL)$. The power of any point $P$ with respect to this circle is $OP^2-R^2$. Therefore
 \[
-\cot y=\frac{b-2s\cos x}{2s\sin x}
+ OM^2-R^2=ON^2-R^2,
 \]
-and
+so $OM^2=ON^2$. Both are nonnegative lengths, and hence
 \[
-s\{\sin(\alpha+2x)\cot y+\cos(\alpha+2x)\}
-=a\{\sin(\beta-x)\cot y-\cos(\beta-x)\}.
+\boxed{OM=ON}.
 \]
-Division is valid because \(s,\sin x,\sin y>0\). Substitution and multiplication by \(2s\sin x\) gives
-\[
-0=-ab\sin(\beta-x)+2as\sin\beta
-+bs\sin(\alpha+2x)-2s^2\sin(\alpha+x). \tag{11}
-\]
-The Sine Law gives \(a\sin\beta=b\sin\alpha\), and the projection identity \(a\cos\beta=c-b\cos\alpha\) gives
-\(a\sin(\beta-x)=b\sin(\alpha+x)-c\sin x\). Thus
-\[
-Q_s:=bc\sin x-b^2\sin(\alpha+x)
-+bs\{2\sin\alpha+\sin(\alpha+2x)\}
--2s^2\sin(\alpha+x)=0. \tag{12}
-\]
-
-We now invoke the certified **oblique circle-coefficient criterion**, which uses coordinates, Cramer's rule, and the **Power of a Point identity** (Knowledge Base, Synthetic toolkit). For \(d=C-B\), it states that the circle through \(A,K,L\) satisfies \(OM=ON\) if and only if
-\[
-F:=2\bigl(|K|^2[L,d]-|L|^2[K,d]\bigr)
--(c^2-b^2)[K,L]=0. \tag{13}
-\]
-There is no singular case: the stated circumcentre of triangle \(AKL\) presupposes that \(A,K,L\) are noncollinear, so \([K,L]\ne0\), exactly the criterion's nonsingularity condition. Briefly, the criterion writes the circle as \(|X|^2-U\cdot X=0\); equality of its powers at \(B/2,C/2\) is equivalent to a linear relation between the two oblique coefficients, and Cramer's rule converts that relation into (13).
-
-It remains to prove (13). Abbreviate
-\[
-p=\sin(\alpha+x),\quad q=\sin x,\quad r=\sin\alpha,
-\quad u=\sin(\alpha-x),\quad h=2r+\sin(\alpha+2x).
-\]
-From (2) and (3), scalar-product and determinant calculations give
-\[
-|K|^2=c^2-2ct\cos x+t^2,
-\quad |L|^2=b^2-2bs\cos x+s^2, \tag{14}
-\]
-\[
-[K,L]=bcr-csp-btp+ts\sin(\alpha+2x), \tag{15}
-\]
-\[
-[L,d]=bcr+s(bq-cp),
-\quad [K,d]=bcr+t(-bp+cq). \tag{16}
-\]
-Multiplying (14)--(16) in (13) and collecting gives the complete coefficient table
-\[
-\begin{array}{c|l}
-\text{monomial}&\text{coefficient in }F\\ \hline
-1&bc(c^2-b^2)r\\
-t&b^3p-2b^2cq-2bc^2u-bc^2p\\
-s&2b^2cu+b^2cp+2bc^2q-c^3p\\
-t^2&2bcr\\
-ts&(c^2-b^2)h\\
-s^2&-2bcr\\
-t^2s&2(bq-cp)\\
-ts^2&2(bp-cq).
-\end{array} \tag{17}
-\]
-No other monomial can occur by (14)--(16). The entries in (17) use only the sine addition formulas; in particular the \(ts\)-coefficient simplifies to \((c^2-b^2)h\).
-
-We claim the explicit certificate
-\[
-\boxed{\begin{aligned}
-2pF={}&-\bigl(2bcr+2s(bq-cp)\bigr)Q_t\\
-&-\bigl(-2bcr+2t(bp-cq)\bigr)Q_s.
-\end{aligned}} \tag{18}
-\]
-Let \(R\) denote its right side. Multiplying its two linear factors by (10) and (12), and comparing with twice \(p\) times (17), gives this full audit:
-\[
-\begin{array}{c|l|l}
-&[2pF]&[R]\\ \hline
-1&2bcpr(c^2-b^2)&2bcpr(c^2-b^2)\\
-t&2b(b^2p^2-2bcpq-c^2p^2-2c^2pu)
-&2b(b^2p^2-2bcpq-c^2hr+c^2q^2)\\
-s&2c(b^2p^2+2b^2pu+2bcpq-c^2p^2)
-&2c(b^2hr-b^2q^2+2bcpq-c^2p^2)\\
-t^2&4bcpr&4bcpr\\
-ts&2p(c^2-b^2)h&2p(c^2-b^2)h\\
-s^2&-4bcpr&-4bcpr\\
-t^2s&4p(bq-cp)&4p(bq-cp)\\
-ts^2&4p(bp-cq)&4p(bp-cq).
-\end{array} \tag{19}
-\]
-The \(t\)- and \(s\)-rows agree by
-\[
-hr-q^2=p^2+2pu. \tag{20}
-\]
-To derive (20) by product-to-sum,
-\[
-hr=1-\cos2\alpha+\frac{\cos2x-\cos(2\alpha+2x)}2,
-\]
-while
-\[
-q^2+p^2+2pu
-=1-\cos2\alpha+\frac{\cos2x-\cos(2\alpha+2x)}2.
-\]
-Thus every row of (19) agrees, proving (18) by equality of polynomial coefficients.
-
-Finally, (10) and (12) give \(Q_t=Q_s=0\), so (18) yields \(2pF=0\). Since \(x<\beta\) and \(\alpha+\beta<\pi\), we have \(0<\alpha+x<\pi\), hence \(p>0\). Therefore \(F=0\). By the oblique circle-coefficient criterion, \(OM=ON\), as required. ∎

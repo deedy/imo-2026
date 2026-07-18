@@ -1,224 +1,140 @@
+# imo-2026-03 — tracking file
+
 ## Status
 solved
 
+## Problem
+Let $n$ be a positive integer. Liu Bang and Xiang Yu have a stick of length $1$ and want to divide it between themselves. Liu Bang marks at most $n$ points on the stick, and then Xiang Yu marks at most $n$ points on the stick. The marked points are distinct. Then, the stick is cut at all marked points, creating a number of pieces. Afterwards, they take turns claiming any unclaimed piece of the stick, with Liu Bang going first. Each player's goal is to maximise the total length of their own pieces. For each $n$, determine the largest value $c$ such that Liu Bang may guarantee a total length of at least $c$, regardless of Xiang Yu's play.
+
 ## Approaches tried
-- pairing-exchange-normal-form — worked (round 1). Lower bound: LB plays the geometric config (pieces 2^0..2^n in units of 1/(2^{n+1}-1)); a graph sign-assignment argument on pair/singleton partitions forces A(M) >= 1 unit. Upper bound: XY pairs nearly-equal subset sums (pigeonhole over 2^{n+1} subsets) and realizes the gap as a single leftover via the Folding Lemma with <= n marks. Reviewer verified all lemmas by hand and both bounds numerically (min-oddsum search n<=3 exact; strategy simulation n<=5 including prior counterexamples). APPROVED.
-- geometric-cascade-induction — not built this round (Merge Lemma needed repair).
-- parity-alternating-sum — not built this round.
-- (superseded within pairing slug) naive greedy pairing upper bound — refuted by explicit counterexamples at n=3,4; sigma-only induction for the Leftover Lemma cannot close.
+- **Reduction of the picking phase** to the classical alternating-selection game: value to the first player = sum of odd-ranked pieces (sorted descending); equivalently $V=(1+D)/2$ where $D$ is the alternating sum of the sorted piece lengths. Proved (Lemma 2 below) and verified by minimax search (`code/verify_lemmaA.py`).
+- **Brute force on integer grids** (`code/brute.c`): computed max–min $D$ over all Liu Bang configurations and all Xiang Yu refinements for $n=1$ ($N=12$), $n=2$ ($N=42$), $n=3$ ($N=30,45$), $n=4$ ($N=62$), and single-configuration check for $n=5$ ($N=126$). All match $D^*=1/(2^{n+1}-1)$, i.e. $c=2^n/(2^{n+1}-1)$, with the geometric configuration $(2^n,\dots,2,1)\cdot u$ among the optimizers.
+- **Dead ends (recorded honestly):** (a) a "parity-measure" integral formula $D=\mu\{t:\#\{\text{parts}>t\}\text{ odd}\}$ — correct but did not directly yield the lower bound; (b) attempts to prove the upper bound by induction on the operation-recursion (halve largest / cut off a copy of the second largest) with the potential $s/(2^m-1)$ — fails in the "flat top" case without strengthening; (c) an "integrality of the optimal response" reduction — vertices of the arrangement need not be integral. See `approaches/`.
+- **Successful ideas:** lower bound by a *tree-pairing / signed subset-sum* argument (Lemma 4); upper bound by *subset-sum pigeonhole + cross-pairing cuts* (Lemma 5). Both verified numerically (`code/verify_lemmaC.py`, `code/verify_lemmaD.py`, exact rational arithmetic for the constructed strategy).
 
 ## Current best
-Complete proof of c(n) = 2^n/(2^{n+1}-1), both bounds. Solved.
+**Answer:** 
+$$c \;=\; \frac{2^n}{2^{n+1}-1}.$$
+Liu Bang's optimal marking cuts the stick into pieces of lengths $2^n u, 2^{n-1}u,\dots,2u,u$ where $u=\frac1{2^{n+1}-1}$; he then always claims a longest unclaimed piece. Complete proof below.
 
 ## Full proof
 
-**Problem.** Liu Bang (LB) marks at most n points on a stick of length 1; then Xiang Yu (XY) marks at most n further points, all marked points distinct. The stick is cut at all marked points. The players alternately claim unclaimed pieces, LB first, each maximizing the total length of his own pieces. Determine the largest c = c(n) that LB can guarantee.
+Throughout, fix $n\ge 1$ and set
+$$u=\frac{1}{2^{n+1}-1},\qquad c=\frac{2^{n}}{2^{n+1}-1}=\frac{1+u}{2}.$$
 
-**Answer.** c(n) = 2^n/(2^{n+1} − 1).
+### 0. Setup and notation
 
-Throughout, write D = 2^{n+1} − 1.
+Liu Bang (L) marks a set $P_L$ of at most $n$ points in the open interval $(0,1)$; then Xiang Yu (Y) marks a set $P_Y$ of at most $n$ further points of $(0,1)$, disjoint from $P_L$. The stick is cut at $P_L\cup P_Y$; the resulting pieces are the maximal subintervals, a finite multiset of positive lengths summing to $1$. Then the players alternately claim pieces, L first.
 
-### 0. Setup, conventions, notation
+For a finite multiset $A$ of nonnegative reals let $a_1\ge a_2\ge\cdots\ge a_M$ be its elements in non-increasing order (this **sequence of values** is uniquely determined by $A$). Define
+$$O(A)=\sum_{i\text{ odd}}a_i,\qquad E(A)=\sum_{i\text{ even}}a_i,\qquad D(A)=\sum_{i=1}^{M}(-1)^{i-1}a_i=O(A)-E(A).$$
+Since $O(A)+E(A)=\Sigma(A)$ (the total), if $\Sigma(A)=1$ then
+$$O(A)=\frac{1+D(A)}{2}. \tag{0.1}$$
+Grouping consecutive terms gives
+$$D(A)=\sum_{i=1}^{\lfloor M/2\rfloor}(a_{2i-1}-a_{2i})\;+\;\begin{cases}a_M,&M\text{ odd}\\0,&M\text{ even,}\end{cases} \tag{0.2}$$
+so $0\le D(A)$, and trivially $D(A)\le \Sigma(A)$.
 
-A *multiset* M = {a_1, a_2, …, a_N} of nonnegative reals is always listed in decreasing order a_1 ≥ a_2 ≥ … ≥ a_N. Define
+### 1. Lemma 1 (equal pairs cancel)
+*For any finite multiset $X$ and any $y\ge 0$:* $D\bigl(X\uplus\{y,y\}\bigr)=D(X)$.
 
-- σ(M) = a_1 + a_2 + … + a_N (the total),
-- oddsum(M) = a_1 + a_3 + a_5 + … (the sum over odd ranks),
-- A(M) = a_1 − a_2 + a_3 − a_4 + … (the alternating sum).
+**Proof.** Let $x_1\ge\cdots\ge x_r$ be the sorted values of $X$ and let $p$ be the number of $x_i\ge y$. Then the sorted value sequence of $X\uplus\{y,y\}$ is $x_1,\dots,x_p,\,y,\,y,\,x_{p+1},\dots,x_r$. Its alternating sum is
+$$\sum_{i\le p}(-1)^{i-1}x_i+(-1)^{p}y+(-1)^{p+1}y+\sum_{i>p}(-1)^{(i+2)-1}x_i=D(X). \qquad\blacksquare$$
 
-These depend only on the multiset (ties in the sorting do not change the value sequence). Clearly
+By induction, adjoining any number of equal pairs to a multiset does not change $D$; in particular a multiset consisting only of equal pairs and a sub-multiset $L$ has $D=D(L)\le\Sigma(L)$.
 
-  oddsum(M) = (σ(M) + A(M)) / 2.  (∗)
+### 2. Lemma 2 (value of the picking phase)
+*Let $A$ be the multiset of piece lengths, $\Sigma(A)=1$. In the alternating claiming phase:*
+1. *The first player has a strategy guaranteeing himself a total $\ge O(A)$, against every play of the opponent.*
+2. *The second player has a strategy guaranteeing herself a total $\ge E(A)$, against every play of the opponent.*
 
-Adjoining elements equal to 0 to M changes none of σ, oddsum, A: zeros occupy the lowest ranks and contribute 0.
+*Consequently, under (0.1), the first player can guarantee exactly $\tfrac{1+D(A)}2$ from the picking phase and no more.*
 
-**Convention on endpoint marks.** A mark at 0 or 1 either produces no piece or a piece of length 0; by the previous paragraph, pieces of length 0 affect nothing in the claiming phase (they have value 0 and sit at the bottom of the sorted order), so we may and do ignore them: all pieces considered have positive length, and each marked point in the open interval (0,1) increases the number of (positive-length) pieces by exactly 1, while marks at 0 or 1 do not increase it.
+**Proof.** Write $A:\ a_1\ge\cdots\ge a_M$. We first record two inequalities. For $2\le j\le M$, removing $a_1$ and $a_j$ from $A$ leaves the sorted sequence $a_2,\dots,a_{j-1},a_{j+1},\dots,a_M$, in which $a_i$ has rank $i-1$ for $i<j$ and rank $i-2$ for $i>j$; hence
+$$O(A\setminus\{a_1,a_j\})=\sum_{\substack{2\le i\le j-1\\ i\ \mathrm{even}}}a_i+\sum_{\substack{i>j\\ i\ \mathrm{odd}}}a_i .$$
+Comparing with $O(A)-a_1=\sum_{3\le i\le j,\ i\ \mathrm{odd}}a_i+\sum_{i>j,\ i\ \mathrm{odd}}a_i$ and pairing terms,
+$$O(A\setminus\{a_1,a_j\})-\bigl(O(A)-a_1\bigr)=
+\begin{cases}(a_2-a_3)+\cdots+(a_{j-2}-a_{j-1}),& j\text{ even}\\[2pt]
+(a_2-a_3)+\cdots+(a_{j-1}-a_j),& j\text{ odd}\end{cases}\;\ge 0. \tag{2.1}$$
+Similarly, removing one element $a_j$ leaves $a_i$ at rank $i$ for $i<j$ and rank $i-1$ for $i>j$, so $O(A\setminus\{a_j\})=\sum_{i<j,\ i\ \mathrm{odd}}a_i+\sum_{i>j,\ i\ \mathrm{even}}a_i$, and
+$$O(A\setminus\{a_j\})-E(A)=\begin{cases}(a_1-a_2)+\cdots+(a_{j-2}-a_{j-1}),& j\text{ odd}\\[2pt]
+(a_1-a_2)+\cdots+(a_{j-1}-a_j),& j\text{ even}\end{cases}\;\ge 0. \tag{2.2}$$
 
-### 1. The claiming phase: Lemma 0
+*Proof of 1.* Strategy: always claim a currently longest unclaimed piece. We show by strong induction on $|B|$: if it is your turn and the unclaimed multiset is $B$, this strategy nets you at least $O(B)$ from $B$. For $|B|\le 1$ this is clear. Otherwise you take $b_1$ (a largest element). If nothing remains, you got $b_1=O(B)$. Otherwise the opponent takes some $b_j$ ($j\ge2$), and by induction you gain at least $O(B\setminus\{b_1,b_j\})\ge O(B)-b_1$ by (2.1) from the rest. Total $\ge O(B)$.
 
-**Lemma 0 (value of the alternating-claiming game).** Let M be a finite multiset of nonnegative reals (the piece lengths). In the game where two players alternately claim elements of M, the mover claiming first, and each player's payoff is the sum of his claimed elements, the first mover can guarantee himself at least oddsum(M), and the second player can guarantee that the first mover gets at most oddsum(M).
+*Proof of 2.* Strategy: after the opponent's first claim $a_j$, it is your turn on $A\setminus\{a_j\}$; play the greedy strategy of part 1 to get at least $O(A\setminus\{a_j\})\ge E(A)$ by (2.2).
 
-*Proof.* Define V(∅) = 0 and, recursively for nonempty M,
+Finally, part 1 gives the first player $\ge O(A)$; part 2 gives the second player $\ge E(A)$, i.e. caps the first player at $1-E(A)=O(A)$. $\blacksquare$
 
-  V(M) = max_{x ∈ M} [ x + σ(M∖x) − V(M∖x) ].
+Thus, once the cutting is done and produces the multiset $A$, the quantity Liu Bang can guarantee from that position is exactly $\tfrac{1+D(A)}{2}$, and Xiang Yu can prevent more. So the whole game reduces to:
 
-We prove by induction on |M| the two guarantees:
+> **Reduced game.** L chooses a multiset $q_1,\dots,q_m$ ($m\le n+1$) of positive reals summing to $1$ (the pieces cut by his marks). Y then refines it: she distributes $K\le n$ cuts among the pieces, splitting a piece of length $q$ receiving $k$ cuts into $k+1$ positive parts summing to $q$. If $A$ is the final multiset of parts, L's guaranteed amount is $\frac{1+D(A)}{2}$: he wants $D(A)$ large, she wants it small.
 
-(i) the first mover has a strategy guaranteeing himself ≥ V(M);
-(ii) the second player has a strategy guaranteeing that the first mover gets ≤ V(M).
+(Y's marks are automatically distinct from L's, because each of her marks is interior to one of L's pieces; conversely any refinement of the pieces is realizable by valid marks.)
 
-Base |M| = 0: trivial. Induction step: For (i), the mover claims an x attaining the maximum; in the remaining game on M∖x the opponent moves first, and by (ii) for M∖x (roles swapped) the original mover, now second, can hold the opponent to ≤ V(M∖x); since every element of M∖x is claimed by someone, the original mover then collects ≥ σ(M∖x) − V(M∖x), for a total ≥ x + σ(M∖x) − V(M∖x) = V(M). For (ii): whatever x the first mover claims, by (i) applied to M∖x the second player (who moves first there) can guarantee himself ≥ V(M∖x), hence the first mover gets ≤ x + σ(M∖x) − V(M∖x) ≤ V(M). This proves (i) and (ii).
+### 3. The signed subset-sum property of the geometric configuration
 
-It remains to show V(M) = oddsum(M). Induction on |M|; base clear. Let M = {a_1 ≥ … ≥ a_N}. By the induction hypothesis V(M∖x) = oddsum(M∖x), so the payoff of claiming x is
+Let L's configuration be the **geometric configuration**
+$$q_j=2^j u\quad (j=0,1,\dots,n),\qquad \sum_j q_j=(2^{n+1}-1)u=1 .$$
+Its key property: for every nonempty $J\subseteq\{0,\dots,n\}$ and signs $s_j\in\{\pm1\}$,
+$$\Bigl|\sum_{j\in J}s_j\,2^j u\Bigr|\;\ge\;u. \tag{3.1}$$
+Indeed, with $j^*=\max J$, $\bigl|\sum_{j\in J}s_j2^j\bigr|\ge 2^{j^*}-\sum_{j<j^*}2^j=1$.
 
-  P(x) = x + σ(M∖x) − oddsum(M∖x) = x + evensum(M∖x),
+### 4. Lemma 4 (lower bound: Y cannot push $D$ below $u$)
+*Let $A$ be any refinement of the geometric configuration obtained by at most $n$ cuts. Then $D(A)\ge u$.*
 
-where evensum is the sum over even ranks. For x = a_i, deleting a_i shifts ranks j > i down by one, so
+**Proof.** Say Y used $K\le n$ cuts, so $A$ has $M=(n+1)+K\le 2n+1$ parts; each part lies inside a unique original piece. Fix a non-increasing enumeration $a_1\ge a_2\ge\cdots\ge a_M$ of the **parts as physical objects** (ties broken arbitrarily); $D(A)$ is its alternating sum. Form the pairs $P_i=\{a_{2i-1},a_{2i}\}$ for $1\le i\le\lfloor M/2\rfloor$, with slack $\varepsilon_i=a_{2i-1}-a_{2i}\ge0$; if $M$ is odd, $a_M$ is unpaired. By (0.2),
+$$D(A)=\sum_i\varepsilon_i+[M\text{ odd}]\,a_M. \tag{4.1}$$
 
-  evensum(M∖a_i) = Σ_{j < i, j even} a_j + Σ_{j > i, j odd} a_j.
+Build a multigraph $G$ with vertex set $V=\{0,1,\dots,n\}$ (the original pieces) and one edge per pair $P_i$, joining the two pieces containing the two parts of $P_i$ (a loop if they lie in the same piece). Then
+$$|E|=\Bigl\lfloor \tfrac M2\Bigr\rfloor\le n<n+1=|V| .$$
+Every connected multigraph on $v$ vertices has at least $v-1$ edges, with equality only if it is a **simple tree** (take a spanning tree, which uses $v-1$ loop-free, pairwise distinct edges; with only $v-1$ edges in total there is nothing else). If every component of $G$ contained a cycle or loop it would have at least as many edges as vertices, forcing $|E|\ge|V|$ — impossible. Hence some component $T=(V_T,E_T)$ is a simple tree (possibly a single vertex).
 
-For i = 1 this gives P(a_1) = a_1 + a_3 + a_5 + … = oddsum(M). For i ≥ 2:
+Being a tree, $T$ admits a proper $2$-colouring $s:V_T\to\{\pm1\}$ (endpoints of every edge get opposite signs). Consider
+$$\Xi:=\sum_{j\in V_T}s(j)\,q_j=\sum_{j\in V_T}s(j)\,2^ju .$$
+By (3.1), $|\Xi|\ge u$.
 
-  oddsum(M) − P(a_i) = Σ_{j odd, j ≤ i} a_j − a_i − Σ_{j even, j < i} a_j.
+Now expand $\Xi$ over parts: $q_j$ is the sum of the parts inside piece $j$. Consider any part $x$ inside a piece of $V_T$. Either $x$ is the unpaired $a_M$, or $x$ belongs to a pair $P_i$; the edge $P_i$ is incident to $V_T$, hence (as $T$ is a connected component) both endpoints of $P_i$ lie in $V_T$, and they are distinct pieces because $T$ has no loops. Consequently
+$$\Xi=\sum_{P_i\in E_T}\Bigl(s(\pi(a_{2i-1}))\,a_{2i-1}+s(\pi(a_{2i}))\,a_{2i}\Bigr)\;+\;[\,M\text{ odd},\ \pi(a_M)\in V_T\,]\;s(\pi(a_M))\,a_M,$$
+where $\pi(x)$ denotes the piece containing $x$. For each edge $P_i\in E_T$ the two signs are opposite, so the corresponding term has absolute value $|a_{2i-1}-a_{2i}|=\varepsilon_i$. Hence, using (4.1),
+$$u\le|\Xi|\le\sum_{P_i\in E_T}\varepsilon_i+[M\text{ odd}]\,a_M\le D(A). \qquad\blacksquare$$
 
-If i is odd, this equals (a_1 − a_2) + (a_3 − a_4) + … + (a_{i−2} − a_{i−1}) ≥ 0; if i is even, it equals (a_1 − a_2) + … + (a_{i−1} − a_i) ≥ 0, since the sequence is decreasing. Hence the maximum is attained at x = a_1 and V(M) = oddsum(M). ∎
+**Lower bound conclusion.** Liu Bang marks the $n$ interior points $\;2^nu,\;(2^n+2^{n-1})u,\;\dots,\;(2^{n+1}-2)u\;$, cutting the stick into the geometric pieces $2^nu,\dots,2u,u$. Whatever at most $n$ points Xiang Yu adds, the final multiset $A$ satisfies $D(A)\ge u$ by Lemma 4, and by Lemma 2(1) greedy claiming guarantees Liu Bang at least $\frac{1+D(A)}2\ge\frac{1+u}2=c$, **against every behaviour of Xiang Yu**.
 
-So after the cutting is done and produces the multiset M of piece lengths (σ(M) = 1), the claiming phase is worth exactly oddsum(M) = (1 + A(M))/2 to LB: he can guarantee this much and cannot be sure of more. The problem is therefore equivalent to:
+### 5. Lemma 5 (upper bound: Y can always force $D\le u$)
+*Whatever at most $n$ points L marks, Y can mark at most $n$ points so that the final multiset $A$ satisfies $D(A)\le u$.*
 
-  c(n) = max_{LB cuts} min_{XY cuts} oddsum(M) = (1 + max min A(M)) / 2.
+**Proof.** Let L's marks create pieces $q_1,\dots,q_m>0$, $m\le n+1$, $\sum q_i=1$.
 
-We prove: max min A(M) = 1/D, i.e. LB can force A(M) ≥ 1/D (Section 4), and XY can always force A(M) ≤ 1/D (Section 5). By (∗), this gives c(n) = (1 + 1/D)/2 = ((D+1)/D)/2 = 2^{n+1}/(2D) = 2^n/D, as claimed.
+**Case $m\le n$.** Y marks the midpoint of every piece ($m\le n$ interior points, pairwise distinct). The final multiset consists of the equal pairs $\{q_i/2,q_i/2\}$, so $D(A)=D(\varnothing)=0$ by Lemma 1.
 
-### 2. Elementary facts about alternating sums
+**Case $m=n+1$.** Consider the $2^m$ subset sums $\sigma(S)=\sum_{i\in S}q_i$, $S\subseteq\{1,\dots,m\}$. They lie in $[0,1]$, with $\sigma(\varnothing)=0$ and $\sigma(\{1,\dots,m\})=1$; sorting them, the $2^m-1$ consecutive gaps sum to $1$, so some gap is at most $\frac1{2^m-1}=u$: there are $S\ne S'$ with $0\le\sigma(S')-\sigma(S)\le u$. Put $A^\*=S'\setminus S$ and $B^\*=S\setminus S'$; these are disjoint, not both empty, and
+$$\Delta:=\sigma(A^\*)-\sigma(B^\*)=\sigma(S')-\sigma(S)\in[0,u].$$
+Since $\Delta\ge0$, $A^\*=\varnothing$ would force $B^\*=\varnothing$; hence $A^\*\neq\varnothing$.
 
-**Lemma 1.** Let b_1 ≥ b_2 ≥ … ≥ b_c ≥ 0 and U = b_1 − b_2 + b_3 − … + (−1)^{c+1} b_c. Then:
+*Sub-case $B^\*=\varnothing$* (so $\sigma(A^\*)=\Delta\le u$). Y halves each of the $m-|A^\*|\le m-1=n$ pieces not in $A^\*$ and marks nothing else. The final multiset is (equal pairs) $\uplus\{q_i:i\in A^\*\}$, so by Lemma 1, $D(A)=D(\{q_i\}_{i\in A^\*})\le\sigma(A^\*)=\Delta\le u$.
 
-(F1) 0 ≤ U ≤ b_1.
-(F2) If c is odd, then U ≥ b_c.
-(F3) If c is even and c ≥ 2, then U ≤ b_1 − b_c.
+*Sub-case $A^\*,B^\*\ne\varnothing$.* Write $A^\*=\{i_1,\dots,i_p\}$, $B^\*=\{j_1,\dots,j_q\}$, and set partial sums
+$$\alpha_0=0,\ \alpha_k=q_{i_1}+\cdots+q_{i_k}\ (1\le k\le p),\qquad \beta_0=0,\ \beta_k=q_{j_1}+\cdots+q_{j_k}\ (1\le k\le q),$$
+so $\alpha_p=\sigma(A^\*)$ and $\beta_q=\sigma(B^\*)=\alpha_p-\Delta$. Identify the pieces of $A^\*$, concatenated, with the interval $[0,\alpha_p)$ (piece $i_k\leftrightarrow[\alpha_{k-1},\alpha_k)$), and the pieces of $B^\*$ with $[0,\beta_q)$. Y marks:
+- the midpoint of each of the $m-p-q$ pieces outside $A^\*\cup B^\*$;
+- inside the $A^\*$-row: every point of $\{\beta_1,\dots,\beta_{q-1},\beta_q\}\cap(0,\alpha_p)$ that is **not** equal to some $\alpha_k$ — at most $q$ points, each interior to exactly one $A^\*$-piece;
+- inside the $B^\*$-row: every point of $\{\alpha_1,\dots,\alpha_{p-1}\}\cap(0,\beta_q)$ that is not equal to some $\beta_k$ — at most $p-1$ points.
 
-*Proof.* (F1): grouping from the left, U = (b_1 − b_2) + (b_3 − b_4) + … (plus a final +b_c if c is odd), a sum of nonnegative terms, so U ≥ 0. Also U = b_1 − (b_2 − b_3) − (b_4 − b_5) − … (with a final −b_c if c is even), i.e. b_1 minus nonnegative terms, so U ≤ b_1.
-(F2): for odd c, U = (b_1 − b_2) + … + (b_{c−2} − b_{c−1}) + b_c ≥ b_c.
-(F3): for even c, U = b_1 − (b_2 − b_3) − (b_4 − b_5) − … − (b_{c−2} − b_{c−1}) − b_c ≤ b_1 − b_c. ∎
+Total marks $\le (m-p-q)+q+(p-1)=m-1=n$. All are interior points of L's pieces (so distinct from L's marks), and pairwise distinct (distinct positions along the rows; positions in different pieces are different points of the stick).
 
-**Lemma 2 (peeling a singleton).** For any multiset M of nonnegative reals and any x ∈ M:
+Let $\Gamma:\ 0=\gamma_0<\gamma_1<\cdots<\gamma_r=\beta_q$ be the sorted distinct values of $(\{\alpha_k\}_{k=0}^{p}\cup\{\beta_k\}_{k=0}^{q})\cap[0,\beta_q]$. By construction, the cut grid of the $A^\*$-row restricted to $[0,\beta_q]$ is exactly $\Gamma$ (all $\beta_k\le\beta_q$ are either marked in the $A^\*$-row or coincide with an $\alpha_k$; note $\beta_q\le\alpha_p$), and the cut grid of the $B^\*$-row on $[0,\beta_q]$ is also exactly $\Gamma$. Hence:
+- for each $0\le t<r$, the interval $(\gamma_t,\gamma_{t+1})$ produces **one part of length $\gamma_{t+1}-\gamma_t$ on the $A^\*$-side and one on the $B^\*$-side** — an equal pair;
+- no $A^\*$-part straddles $\beta_q$ (the point $\beta_q$ belongs to the $A^\*$-grid, or equals $\alpha_p$); the remaining $A^\*$-parts fill $[\beta_q,\alpha_p)$, a leftover multiset $L$ with $\Sigma(L)=\Delta$ (empty if $\Delta=0$);
+- pieces outside $A^\*\cup B^\*$ produce equal pairs $\{q_i/2,q_i/2\}$.
 
-  A(M) ≤ A(M ∖ {x}) + x.
+The final multiset is therefore (equal pairs) $\uplus\,L$, and by Lemma 1,
+$$D(A)=D(L)\le\Sigma(L)=\Delta\le u. \qquad\blacksquare$$
 
-*Proof.* Say x = a_i in the sorted order of M = {a_1 ≥ … ≥ a_N}. Removing a_i leaves ranks j < i unchanged and shifts ranks j > i down by one (flipping their signs), so
+**Upper bound conclusion.** Whatever Liu Bang's marks, Xiang Yu marks as in Lemma 5 and then, in the claiming phase, plays the greedy second-player strategy of Lemma 2(2). She thereby secures at least $E(A)=\frac{1-D(A)}2\ge\frac{1-u}{2}$, so Liu Bang ends with at most $\frac{1+D(A)}{2}\le\frac{1+u}2=c$, **no matter how he picks**. (In the case $m \le n$ he even gets at most $1/2 < c$.)
 
-  Δ := A(M) − A(M∖{x}) = (−1)^{i+1} x + 2 Σ_{j>i} (−1)^{j+1} a_j = (−1)^{i+1} x + 2(−1)^i T,
+### 6. Conclusion
 
-where T = Σ_{s≥1} (−1)^{s+1} a_{i+s} is an alternating sum of the decreasing tail, so 0 ≤ T ≤ a_{i+1} by (F1). If i is odd: Δ = x − 2T ≤ x. If i is even: Δ = −x + 2T ≤ −x + 2a_{i+1} ≤ −x + 2a_i = x. ∎
+Liu Bang has a strategy (geometric marking + greedy claiming) guaranteeing at least $c$; Xiang Yu has, against every strategy of Liu Bang, a reply (Lemma 5 marking + greedy claiming) that caps him at $c$. Therefore the largest total length Liu Bang can guarantee is exactly
+$$\boxed{\,c=\dfrac{2^{n}}{2^{n+1}-1}\,}.$$
 
-**Lemma 3 (peeling a pair).** For any multiset M of nonnegative reals and any two elements x ≥ y of M:
-
-  A(M) ≤ A(M ∖ {x, y}) + (x − y).
-
-*Proof.* Choose ranks i < j with a_i = x, a_j = y (possible since x ≥ y; if x = y take any two occurrences). Removing both flips the signs exactly of the ranks strictly between i and j (ranks past j shift by two, keeping their signs), so with c = j − i − 1 and U = Σ_{s=1}^{c} (−1)^{s+1} a_{i+s} (an alternating sum of the decreasing block between them, to which Lemma 1 applies),
-
-  Δ := A(M) − A(M∖{x,y}) = (−1)^{i+1} x + (−1)^{j+1} y + 2(−1)^i U.
-
-Four parity cases (note c ≡ j − i − 1 mod 2):
-
-1. i odd, j even (c even): Δ = x − y − 2U ≤ x − y, since U ≥ 0 (F1).
-2. i odd, j odd (c odd): Δ = x + y − 2U ≤ x + y − 2a_{j−1} ≤ x + y − 2y = x − y, using (F2) (U ≥ a_{j−1} ≥ a_j = y). (Here c ≥ 1, so a_{j−1} is inside the block.)
-3. i even, j odd (c even): if c = 0, Δ = −x + y ≤ x − y since x ≥ y ≥ 0. If c ≥ 2, Δ = −x + y + 2U ≤ −x + y + 2(a_{i+1} − a_{j−1}) ≤ −x + y + 2(x − y) = x − y, using (F3) and a_{i+1} ≤ a_i = x, a_{j−1} ≥ a_j = y.
-4. i even, j even (c odd): Δ = −x − y + 2U ≤ −x − y + 2a_{i+1} ≤ −x − y + 2x = x − y, using (F1). ∎
-
-**Definition (pairing partitions and cost).** A *pairing partition* Π of a multiset M is a partition of M into blocks of size two ("pairs") and size one ("singletons"). Its *cost* is
-
-  cost(Π) = Σ_{pairs {a,b}} |a − b| + Σ_{singletons {c}} c.
-
-**Lemma 4 (Partition Lemma).** For every multiset M of nonnegative reals and every pairing partition Π of M,
-
-  A(M) ≤ cost(Π),
-
-with equality for the *adjacent pairing* Π₀ = {a_1,a_2}, {a_3,a_4}, … (final singleton {a_N} if N is odd):
-
-  A(M) = cost(Π₀).
-
-*Proof.* Inequality: peel off the blocks of Π one at a time, applying Lemma 3 for each pair and Lemma 2 for each singleton; after all blocks are removed we reach A(∅) = 0, and the accumulated bound is exactly cost(Π). (Lemmas 2 and 3 hold for arbitrary multisets, so the peeling order is irrelevant.) Equality for Π₀: cost(Π₀) = (a_1 − a_2) + (a_3 − a_4) + … (+ a_N if N odd) = A(M) by definition. ∎
-
-Lemma 4 is the exchange/pairing engine of this approach: the lower bound will bound cost(Π₀) = A(M) from below by bounding **every** pairing partition's cost; the upper bound will exhibit **one** cheap pairing partition.
-
-### 3. LB's configuration
-
-LB places his n marks at the points (2^1 − 1)/D, (2^2 − 1)/D, …, (2^n − 1)/D. These are n distinct points of (0,1). The resulting pieces have lengths
-
-  1/D, 2/D, 4/D, …, 2^n/D  (piece k spans [(2^k − 1)/D, (2^{k+1} − 1)/D], length 2^k/D, k = 0, …, n),
-
-which indeed total (2^{n+1} − 1)/D = 1. From now on we measure lengths in *units* of 1/D; LB's pieces are 2^0, 2^1, …, 2^n and the whole stick is D units.
-
-### 4. Lower bound: A(M) ≥ 1 unit for every XY response
-
-Call LB's n+1 pieces *sources*, indexed 0, …, n with sizes s_i = 2^i (units). XY places m ≤ n marks; by the endpoint convention (Section 0) we may assume all of them lie in (0,1)∖{LB's marks}, i.e. strictly inside sources. The final multiset M consists of N = (n + 1) + m ≤ 2n + 1 *fragments*, each contained in exactly one source; the fragments of source i have positive lengths summing to s_i. (If XY places marks at 0 or 1, N is only smaller, which only helps below.)
-
-**Theorem A (lower bound).** For every XY response, every pairing partition Π of M has cost(Π) ≥ 1 unit. Consequently A(M) = cost(Π₀) ≥ 1 unit = 1/D, and by Lemma 0 and (∗), LB is guaranteed at least (1 + 1/D)/2 = 2^n/D.
-
-*Proof.* Fix a pairing partition Π of M. Build a multigraph H:
-
-- vertices: the sources 0, 1, …, n;
-- edges: one edge {i, j} for each pair {a, b} of Π with a a fragment of source i and b a fragment of source j (a loop at i if i = j).
-
-The number of edges of H equals the number of pairs of Π, which is at most ⌊N/2⌋ ≤ ⌊(2n+1)/2⌋ = n.
-
-Call a connected component C of H *good* if there is a map δ: V(C) → {+1, −1} with δ_i ≠ δ_j for every edge {i, j} of C (in particular, C has no loops), i.e. C is bipartite as a multigraph; otherwise *bad*.
-
-**Claim: a bad component C has at least |V(C)| edges.** Indeed, C is connected, so it has at least |V(C)| − 1 edges that join distinct vertices (loops do not contribute to connectivity: if C had a loop and only |V(C)| − 2 non-loop edges, its vertices could not all be connected). If C has exactly |V(C)| − 1 edges, then none is a loop and, counted with multiplicity, they connect |V(C)| vertices, which forces the underlying graph to be a tree with no repeated edges (a multi-edge would leave ≤ |V(C)| − 2 distinct adjacencies, disconnecting C); a tree is properly 2-colorable, so C would be good. Hence a bad C has ≥ |V(C)| edges. ∎(Claim)
-
-If **every** component were bad, summing the claim over components would give
-
-  #edges(H) ≥ Σ_C |V(C)| = n + 1 > n ≥ #edges(H),
-
-a contradiction. So some component K is good; fix a valid δ: V(K) → {±1}.
-
-Assign to each fragment f whose source lies in V(K) the sign ε_f = δ_{source(f)}. Note that the blocks of Π split cleanly along components of H: a pair joins fragments whose sources are adjacent in H, hence in the same component; a singleton's source lies in one component. Let cost_C(Π) denote the cost contribution of the blocks whose fragments have sources in component C; then cost(Π) = Σ_C cost_C(Π) and every cost_C(Π) ≥ 0 (it is a sum of absolute differences and nonnegative singleton values).
-
-For the good component K:
-
-- for each pair {a, b} with sources in V(K): the sources are adjacent, so ε_a = −ε_b, hence ε_a a + ε_b b = ±(a − b) ≤ |a − b|;
-- for each singleton {c} with source in V(K): ε_c c ≤ c (as c ≥ 0).
-
-Summing over all blocks in K, and noting that the fragments with sources in V(K) are exactly all fragments of the sources in V(K) (each such fragment lies in some block of Π, and its block stays inside K as just observed), we get
-
-  cost_K(Π) ≥ Σ_{f: source(f) ∈ V(K)} ε_f f = Σ_{i ∈ V(K)} δ_i · (sum of fragments of source i) = Σ_{i ∈ V(K)} δ_i s_i =: W.
-
-Replacing δ by −δ (also valid) gives cost_K(Π) ≥ −W, so cost_K(Π) ≥ |W|.
-
-Finally, W = Σ_{i ∈ V(K)} δ_i 2^i is a ±1-signed sum of **distinct** powers of two over the nonempty set V(K). Let t = max V(K). Then
-
-  |W| ≥ 2^t − Σ_{i ∈ V(K), i < t} 2^i ≥ 2^t − (2^t − 1) = 1.
-
-Hence cost(Π) ≥ cost_K(Π) ≥ 1 unit. Applying this to the adjacent pairing Π₀ and using Lemma 4 (equality part), A(M) = cost(Π₀) ≥ 1 unit = 1/D. By (∗), oddsum(M) ≥ (1 + 1/D)/2 = 2^n/D, and by Lemma 0(i) LB can claim at least this much. ∎
-
-### 5. Upper bound: XY can force A(M) ≤ 1/D against every LB configuration
-
-Now LB's marks are arbitrary: they produce k pieces of positive length p_1 ≥ p_2 ≥ … ≥ p_k with Σ p_i = 1 and k ≤ n + 1 (each of LB's ≤ n marks in (0,1) adds at most one piece). We exhibit an XY response (≤ n marks, all distinct from each other and from LB's marks) after which the final multiset M admits a pairing partition of cost ≤ 1/D; then A(M) ≤ 1/D by Lemma 4, and by Lemma 0(ii) XY can hold LB to oddsum(M) ≤ (1 + 1/D)/2 = 2^n/D in the claiming phase.
-
-Two cutting primitives, each using at most one mark; all marks placed by XY will be strictly inside a *current* piece (a piece of the partition of [0,1] generated by all marks chosen so far), hence automatically distinct from all previously placed marks and from LB's marks — XY of course computes all positions in advance and places them simultaneously; the sequential description below merely defines those positions.
-
-- **Halve(p):** mark the midpoint of piece p, creating two pieces of length p/2 (an equal pair). Cost contribution 0. One mark.
-- **Fold(a, b)** for two current pieces with a > b: mark the point of piece a at distance b from its left endpoint, creating a piece of length b — which we pair with piece b, an exactly equal pair, cost contribution 0 — and a remainder piece of length a − b, which stays in play. One mark. If a = b, Fold(a,b) simply pairs the two pieces with **no mark at all**.
-
-**Lemma 5 (Folding Lemma).** Let A and B be disjoint sets of current pieces, all of positive length, with v := σ(A) − σ(B) ≥ 0. Then using at most |A| + |B| − 1 marks XY can cut so that all resulting fragments of the pieces of A ∪ B are matched into exactly equal pairs, except for at most one leftover fragment of length ≤ v.
-
-*Proof.* Run the following process on the working multisets (A, B), which maintains the invariant σ(A) − σ(B) = v:
-
-While A ≠ ∅ and B ≠ ∅: take any a ∈ A, b ∈ B and apply Fold(a, b) (to the larger of the two; if a = b no mark is used). If a > b, the pair (b, b) is banked at cost 0 and the remainder a − b replaces a in A: the new sums are (σ(A) − a + (a − b), σ(B) − b), difference unchanged. If b > a, symmetrically the remainder b − a replaces b in B; difference again unchanged. If a = b, both are removed; difference unchanged. Each iteration uses ≤ 1 mark and decreases |A| + |B| by at least 1.
-
-The loop ends with A = ∅ or B = ∅. If A = ∅ and B ≠ ∅ we would have σ(B) = −v ≤ 0, impossible for a nonempty set of positive lengths; so B = ∅ at termination, and the remaining set A′ satisfies σ(A′) = v.
-
-Now fold A′ down: while |A′| ≥ 2, take any two pieces a ≥ a′ of A′ and apply Fold(a, a′); each step banks an equal pair, uses ≤ 1 mark, decreases |A′| by ≥ 1, and does not increase σ(A′) (the sum drops by 2a′ ≥ 0). Termination leaves at most one piece, of length ≤ σ(A′) = v.
-
-Mark count: every iteration of either loop removes at least one piece from the working collection and uses at most one mark; we start with |A| + |B| pieces and end with ≥ 0, and the last surviving piece never needs a mark, so at most |A| + |B| − 1 marks are used in total. ∎
-
-**Theorem B (upper bound).** For every LB configuration, XY has a response with at most n marks after which A(M) ≤ 1/D. Hence LB cannot guarantee more than (1 + 1/D)/2 = 2^n/D.
-
-*Proof.* Case 1: k ≤ n. XY applies Halve to every piece: k ≤ n marks, and M consists of k exactly equal pairs. The pairing partition into those pairs has cost 0, so A(M) ≤ 0, i.e. A(M) = 0 (A ≥ 0 always, by (F1)); LB gets at most 1/2 < 2^n/D (indeed 2·2^n = 2^{n+1} > D). 
-
-Case 2: k = n + 1. Consider all 2^{n+1} subsets T ⊆ {1, …, n+1} and their sums σ_T = Σ_{i∈T} p_i ∈ [0, 1]. Sorting these 2^{n+1} numbers, the 2^{n+1} − 1 consecutive gaps span at most 1, so by the pigeonhole principle (knowledge_base.md, "Pigeonhole / extremal principle") two **distinct** subsets T ≠ T′ satisfy |σ_T − σ_{T′}| ≤ 1/(2^{n+1} − 1) = 1/D.
-
-Let A* = {p_i : i ∈ T ∖ T′} and B* = {p_i : i ∈ T′ ∖ T}; these use disjoint index sets, S := (T ∖ T′) ∪ (T′ ∖ T) ≠ ∅, and σ(A*) − σ(B*) = σ_T − σ_{T′}. Swapping if necessary, assume v := σ(A*) − σ(B*) ≥ 0; then 0 ≤ v ≤ 1/D.
-
-XY's marks: apply the Folding Lemma (Lemma 5) to (A*, B*): at most |S| − 1 marks, producing equal pairs plus at most one leftover fragment r ≤ v ≤ 1/D. Then apply Halve to each of the n + 1 − |S| pieces not in S: n + 1 − |S| marks. Total marks ≤ (|S| − 1) + (n + 1 − |S|) = n. ✓ (Fewer marks are used when some Fold meets equal lengths; "at most n" is legal.)
-
-The final multiset M consists of exactly equal pairs plus at most one leftover fragment of length r ≤ 1/D. Take the pairing partition Π: all those equal pairs (cost 0 each) and the singleton {r} (if present). Then by Lemma 4,
-
-  A(M) ≤ cost(Π) = r ≤ 1/D.
-
-By (∗) and Lemma 0(ii), XY holds LB to oddsum(M) = (1 + A(M))/2 ≤ (1 + 1/D)/2 = 2^n/D. ∎
-
-### 6. Conclusion and verification
-
-By Theorem A, LB's geometric configuration guarantees him at least 2^n/D against every XY response and every claiming play (Lemma 0(i)); by Theorem B, against every LB configuration XY can hold LB to at most 2^n/D (Lemma 0(ii)). Therefore the largest guaranteeable value is exactly
-
-  **c(n) = 2^n / (2^{n+1} − 1).**
-
-Verification.
-- Tightness at LB's configuration: XY can cut LB's piece 2^n (units) into fragments 2^{n−1}, 2^{n−2}, …, 2, 1, 1 using exactly n marks; the final multiset is {2^{n−1}, 2^{n−1}, …, 2, 2, 1, 1, 1}: n equal pairs plus one leftover unit, so A(M) = 1 unit exactly (Lemma 4 both directions: ≤ 1 by the pair/singleton partition, ≥ 1 by Theorem A) and LB gets exactly (1 + 1/D)/2 = 2^n/D. Both bounds are attained, confirming consistency.
-- n = 1: c(1) = 2/3. LB marks 1/3, pieces (1/3, 2/3); if XY halves the 2/3-piece, the pieces are (1/3, 1/3, 1/3) and LB takes two of three: 2/3. ✓ Formula: 2^1/(2^2 − 1) = 2/3. ✓
-- Sanity of the answer's form: the constant D = 2^{n+1} − 1 is exactly the pigeonhole count of nontrivial gaps among the 2^{n+1} subset sums (upper bound), and exactly the total 1 + 2 + … + 2^n of LB's geometric pieces, whose distinct-signed-sums property (|Σ δ_i 2^i| ≥ 1) drives the lower bound.
-- Numerical checks performed during construction (checks only, not proof steps): Lemma 0 against brute-force minimax on 300 random games; Lemmas 2–3 on 20 000 random peel instances; the Theorem B strategy on 5 010 configurations (including the outline-reviewer's counterexamples to the naive greedy, (0.4608, 0.2307, 0.1561, 0.1524) and (0.4388, 0.2228, 0.1296, 0.1271, 0.0817), and all geometric configs n ≤ 7), always with ≤ n marks and value ≤ 2^n/D; 200 000-trial randomized minimization of oddsum over XY responses at n = 2, 3 bottoming out at exactly 2^n.
-
-∎
+*(Numerically verified: $n=1:\,2/3$, $n=2:\,4/7$, $n=3:\,8/15$, $n=4:\,16/31$ by exhaustive grid search; $n=5:\,32/63$ for the geometric configuration; plus 40000-trial Monte Carlo for Lemma 4 and 4000 exact-arithmetic random tests of the Lemma 5 construction.)*

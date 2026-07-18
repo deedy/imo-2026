@@ -1,102 +1,53 @@
 {
-  "problem": "imo-2026-06",
-  "entries": [
-    {
-      "model": "claude-fable-5",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": null,
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and rigorous. The chain Clique -> Reduction (A = V_inf on [a1,inf)) -> valid-below-are-terms -> Companion lemma (x with P(x)=sigma(a), a1<=x<a, via the sharp bound x < p*a1 < pq <= a) -> SCPL by strong induction on j with minimal counterexample i -> membership determined mod M = prod(primes<=a1) -> window argument giving a_{n+T}=a_n+M from n=1 was verified step by step; every inequality and case (including t=0 vs t>=1 in the companion, and i>=2 in SCPL) checks out. The threshold z=a1 is correctly chosen and load-bearing, and the finish avoids any transient. This is a full solution to the hardest crux (SCPL) plus a clean stabilization-free conclusion.",
-      "key_issues": []
-    },
-    {
-      "model": "claude-opus-4-5",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": null,
-      "score": 2,
-      "confidence": "high",
-      "justification": "The scaffolding is correct (pairwise intersection, squeeze lemma a_{n+1}=min(V_stable above a_n), prime-power cases giving T=1, CRT finish given finiteness of H_stable), but the central Dichotomy Lemma -- the finiteness crux, equivalent in difficulty to SCPL -- is invalid: the step 'the finite set P(m) cannot cover infinitely many pairwise spread sets, contradiction' is false as a deduction (e.g. S_i={2,x_i} is an infinite antichain with infinite union that the single prime 2 hits). The Case (B) paragraph likewise asserts 'this is still a finite antichain' with no justification (Case B is trivially fixable via a_{n+1}=a_n+p, but the write-up does not do this). Since the entire difficulty of the problem sits in the unproven finiteness claim, this is substantial partial progress with the crux hand-waved, submitted as 'solved'.",
-      "key_issues": [
-        "Dichotomy Lemma proof invalid: a finite P(m) CAN hit infinitely many antichain sets (counterexample S_i={2,x_i}); the claimed contradiction does not follow",
-        "Case (B) 'reduces to Sub-case 2a' asserts H_stable finite with no proof (easy fix exists via a_{n+1}=a_n+p, but not given)",
-        "Finiteness of H_stable, the heart of the problem, is never established"
-      ]
-    },
-    {
-      "model": "claude-opus-4-8",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": null,
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and rigorous, modulo imported lemmas which I read and verified in full (lemmas/bounded-gaps-and-clique.md and lemmas/shared-small-prime.md): Tool 1/2, Sub-lemma E (elements of A above a1 are terms), Cor E.1 (a hitting set is itself a clause), and the finish package are all correctly proved. Lemma S4 (companion x with supp(x)=sigma(S_j), a1<=x<a_j) and the minimum-height violating-pair descent for Lemma S' (any two clauses share a prime <= a1) are correct; Prop 1' then forces minimal clauses into the finite ground set G, and the residue-class window argument gives a_{n+T}=a_n+L for every n>=1 with no transient. Only cosmetic blemishes (e.g. 'R and q are distinct primes' when R is a product of primes; the divisibility argument intended is evidently correct).",
-      "key_issues": [
-        "Minor wording slip in Lemma S4 ('R and q are distinct primes'); the intended coprimality/divisibility argument Rq | a_j is correct",
-        "Proof split across current.md and two lemma files; all cited certified facts check out"
-      ]
-    },
-    {
-      "model": "gpt-5.6-sol",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": null,
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete, correct, and elegant. The game-theoretic recasting (P-positions of the coprimality game on [A,inf)) is proved equivalent to the greedy sequence by a careful induction; the prime-stripping lemma (companion x with sigma(x)=sigma(b), all primes small, A<=x<=b, via x < pA <= sA < sq <= b) and the minimal-counterexample descent for the small-common-prime lemma are correct, including the implicit handling of the x=b case (which would force gcd(b,b')=1, absorbed by the (1)-characterization contradiction). Signature invariance then gives exact L-translation invariance of G with L = prod(primes<=A), and the block-bijection argument yields a_{n+T}=a_n+L from n=1. Only microscopic blemishes (small-common-prime applied once where the two P-positions could coincide, which is trivial).",
-      "key_issues": [
-        "Signature-invariance step applies the small-common-prime lemma to v,w that could coincide; the v=w case is trivial but unremarked"
-      ]
-    },
-    {
-      "model": "kimi-k3",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": null,
-      "score": 3,
-      "confidence": "high",
-      "justification": "Steps 1-3 are correct (sequence enumerates S_inf on [a1,inf); reduction to finiteness of the minimal elements; the minimal-support clutter C is an intersecting antichain, and self-duality is correctly proved for FINITE minimal transversals via pi(T)), and the Step-4 combinatorial theorem is internally valid as stated. But the application breaks: Claim 3.2 verifies hypothesis (iii) only for finite minimal transversals (pi(T) is undefined for infinite T), while the theorem's final step invokes (iii) on a Zorn-extracted minimal transversal T inside the infinite set I u Z_omega -- and in that scenario T is provably infinite (Case A failing at every stage means no finite subset of I u Z_omega is a transversal, so any minimal transversal there is infinite). Hence the finiteness crux is not actually closed; the missing statement 'C has no infinite minimal transversal' is essentially where the problem's difficulty lives. Substantial, genuinely inventive partial progress claimed as solved.",
-      "key_issues": [
-        "Claim 3.2 proves self-duality only for finite minimal transversals (uses pi(T), undefined for infinite T)",
-        "Step 4's final invocation of (iii) is on a minimal transversal of I u Z_omega, which is necessarily infinite in the contradiction scenario, so the verified finite case never applies",
-        "No easy patch: proving C has no infinite minimal transversal is comparable in difficulty to the original crux"
-      ]
-    },
-    {
-      "model": "claude-fable-5-lightweight",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": null,
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and rigorous; the finiteness crux is genuinely closed, not hand-waved. The proof works exclusively with FINITE transversals ('prime set' is defined as finite, and Lemma 4's exact description S = {m >= a1 : d_Q | m for some member Q} only ever applies (*) to the finite set P(m)), so the infinite-minimal-transversal trap that sank kimi-k3 and gpt-lightweight is structurally avoided. Greediness enters quantitatively via Lemma 3 (every excluded m > a1 has a SMALLER coprime witness in S). The cheap-witness Lemma 6 is correct: m = pi(Q\\{t})^e with a1 < m <= a1*pi(Q\\{t}) is a non-element, its witness s < m carries a member Q' with Q' cap Q = {t} (via the pairwise-intersection Lemma 5, itself proved by a clean fresh-prime padding argument) and d_{Q'} < a1*d_Q/t. Iterating at a fixed prime q > a1 gives the geometric descent d_{Q_i} < (a1/q)^i d_{Q_0}, contradicting d_{Q_i} >= q; the singleton-member case is handled separately. Hence all member primes are <= a1, M is finite, and the mod-M window/increasing-bijection finish gives a_{n+T} = a_n + M for EVERY n >= 1 with no transient. I independently re-simulated: for every seed 2 <= a1 <= 16, shift-invariance of S mod M and exact periodicity with the proof's T = |S cap [a1, a1+M)| hold from n = 1. The write-up even documents an explicit infinite self-blocking clutter showing pure set-system axioms are insufficient, i.e. it identified and avoided precisely the pitfall of the failed solutions.",
-      "key_issues": []
-    },
-    {
-      "model": "gpt-5.6-sol-lightweight",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": null,
-      "score": 1,
-      "confidence": "high",
-      "justification": "The central 'Finite-transversal lemma' is FALSE: pairwise intersection of finite sets does NOT imply finitely many minimal finite transversals. Explicit machine-verified counterexample: C={1,2,3}, E={1,h}, G_s={2,z_s,w_1..w_{s-1},h}, D_m={3,h,z_{m+1},w_1..w_m} is pairwise intersecting, yet T_n={1,z_1..z_n,w_n} is a minimal finite transversal for every n. Any valid proof must use more than the clique property (small-prime structure of the greedy sequence), which this solution never touches; the Konig-tree 'proof' of the false lemma is an ill-specified sketch (undefined pruning/contraction rules). Only the routine parts survive: the sequence enumerates S from a1 onward, and the CRT window finish would work IF the blocker were finite. That is worth 1 point.",
-      "key_issues": [
-        "Finite-transversal lemma is false (explicit counterexample with infinitely many minimal finite transversals of a pairwise-intersecting family, verified computationally for n=1..30)",
-        "Konig/pruning tree argument is vague and unrepairable since the target statement is false",
-        "Solution uses only pairwise intersection, provably insufficient for the crux; the number-theoretic structure is never exploited"
-      ]
-    },
-    {
-      "model": "gpt-5.6-sol-lightweight-xhigh",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": null,
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete, correct, and strikingly elegant; the default run's fatal set-system-only trap is structurally avoided. The crux identity F = G (every finite prime set hitting all term-supports IS the support of a term, via a large power of its radical squeezed into (a_n, a_{n+1}] by minimality) injects exactly the number-theoretic realizability that the false finite-transversal lemma lacked. Finiteness of U = union of minimal members: the scanning property provides, for any minimal H containing p with c(H,p) > a_1, a term y < c(H,p) whose support carries a minimal K with p in K and c(K,p) <= y/p < c(H,p) - a strictly decreasing positive-integer descent (I verified inequality (4) and the intersecting-family forcing p in K), so every relevant p sits over a core C with prod(C) <= a_1; there are finitely many such cores, and the fixed disjoint witness F_C (which exists since C is not in F, by self-blocking) absorbs every such p, giving |{p}| <= |F_C|. The empty-core case works verbatim. The finish is exact: characterization (8) of terms as {x >= a_1 : d_H | x for some H}, shift-invariance mod L = prod(U), and the window count gives a_{n+T} = a_n + L for EVERY n >= 1, no transient. I re-simulated for a_1 = 2..20 (3000 terms each): the proof's own T and L give exact periodicity from n = 1 and characterization (8) holds exactly, including the multi-support seed a_1 = 15 (|H| = 3, L = 30, T = 8). No gaps found.",
-      "key_issues": []
-    }
-  ]
+ "problem": "imo-2026-06",
+ "entries": [
+  {
+   "model": "kimi-k3",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": null,
+   "score": 3,
+   "confidence": "high",
+   "justification": "Steps 1-3 are correct (sequence enumerates S_inf on [a1,inf); reduction to finiteness of the minimal elements; the minimal-support clutter C is an intersecting antichain, and self-duality is correctly proved for FINITE minimal transversals via pi(T)), and the Step-4 combinatorial theorem is internally valid as stated. But the application breaks: Claim 3.2 verifies hypothesis (iii) only for finite minimal transversals (pi(T) is undefined for infinite T), while the theorem's final step invokes (iii) on a Zorn-extracted minimal transversal T inside the infinite set I u Z_omega -- and in that scenario T is provably infinite (Case A failing at every stage means no finite subset of I u Z_omega is a transversal, so any minimal transversal there is infinite). Hence the finiteness crux is not actually closed; the missing statement 'C has no infinite minimal transversal' is essentially where the problem's difficulty lives. Substantial, genuinely inventive partial progress claimed as solved.",
+   "key_issues": [
+    "Claim 3.2 proves self-duality only for finite minimal transversals (uses pi(T), undefined for infinite T)",
+    "Step 4's final invocation of (iii) is on a minimal transversal of I u Z_omega, which is necessarily infinite in the contradiction scenario, so the verified finite case never applies",
+    "No easy patch: proving C has no infinite minimal transversal is comparable in difficulty to the original crux"
+   ]
+  },
+  {
+   "model": "claude-fable-5",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": null,
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete and rigorous; the finiteness crux is genuinely closed, not hand-waved. The proof works exclusively with FINITE transversals ('prime set' is defined as finite, and Lemma 4's exact description S = {m >= a1 : d_Q | m for some member Q} only ever applies (*) to the finite set P(m)), so the infinite-minimal-transversal trap that sank kimi-k3 and gpt-lightweight is structurally avoided. Greediness enters quantitatively via Lemma 3 (every excluded m > a1 has a SMALLER coprime witness in S). The cheap-witness Lemma 6 is correct: m = pi(Q\\{t})^e with a1 < m <= a1*pi(Q\\{t}) is a non-element, its witness s < m carries a member Q' with Q' cap Q = {t} (via the pairwise-intersection Lemma 5, itself proved by a clean fresh-prime padding argument) and d_{Q'} < a1*d_Q/t. Iterating at a fixed prime q > a1 gives the geometric descent d_{Q_i} < (a1/q)^i d_{Q_0}, contradicting d_{Q_i} >= q; the singleton-member case is handled separately. Hence all member primes are <= a1, M is finite, and the mod-M window/increasing-bijection finish gives a_{n+T} = a_n + M for EVERY n >= 1 with no transient. I independently re-simulated: for every seed 2 <= a1 <= 16, shift-invariance of S mod M and exact periodicity with the proof's T = |S cap [a1, a1+M)| hold from n = 1. The write-up even documents an explicit infinite self-blocking clutter showing pure set-system axioms are insufficient, i.e. it identified and avoided precisely the pitfall of the failed solutions.",
+   "key_issues": []
+  },
+  {
+   "model": "gpt-5.6-sol",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": null,
+   "score": 1,
+   "confidence": "high",
+   "justification": "The central 'Finite-transversal lemma' is FALSE: pairwise intersection of finite sets does NOT imply finitely many minimal finite transversals. Explicit machine-verified counterexample: C={1,2,3}, E={1,h}, G_s={2,z_s,w_1..w_{s-1},h}, D_m={3,h,z_{m+1},w_1..w_m} is pairwise intersecting, yet T_n={1,z_1..z_n,w_n} is a minimal finite transversal for every n. Any valid proof must use more than the clique property (small-prime structure of the greedy sequence), which this solution never touches; the Konig-tree 'proof' of the false lemma is an ill-specified sketch (undefined pruning/contraction rules). Only the routine parts survive: the sequence enumerates S from a1 onward, and the CRT window finish would work IF the blocker were finite. That is worth 1 point.",
+   "key_issues": [
+    "Finite-transversal lemma is false (explicit counterexample with infinitely many minimal finite transversals of a pairwise-intersecting family, verified computationally for n=1..30)",
+    "Konig/pruning tree argument is vague and unrepairable since the target statement is false",
+    "Solution uses only pairwise intersection, provably insufficient for the crux; the number-theoretic structure is never exploited"
+   ]
+  },
+  {
+   "model": "gpt-5.6-sol-xhigh",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": null,
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete, correct, and strikingly elegant; the default run's fatal set-system-only trap is structurally avoided. The crux identity F = G (every finite prime set hitting all term-supports IS the support of a term, via a large power of its radical squeezed into (a_n, a_{n+1}] by minimality) injects exactly the number-theoretic realizability that the false finite-transversal lemma lacked. Finiteness of U = union of minimal members: the scanning property provides, for any minimal H containing p with c(H,p) > a_1, a term y < c(H,p) whose support carries a minimal K with p in K and c(K,p) <= y/p < c(H,p) - a strictly decreasing positive-integer descent (I verified inequality (4) and the intersecting-family forcing p in K), so every relevant p sits over a core C with prod(C) <= a_1; there are finitely many such cores, and the fixed disjoint witness F_C (which exists since C is not in F, by self-blocking) absorbs every such p, giving |{p}| <= |F_C|. The empty-core case works verbatim. The finish is exact: characterization (8) of terms as {x >= a_1 : d_H | x for some H}, shift-invariance mod L = prod(U), and the window count gives a_{n+T} = a_n + L for EVERY n >= 1, no transient. I re-simulated for a_1 = 2..20 (3000 terms each): the proof's own T and L give exact periodicity from n = 1 and characterization (8) holds exactly, including the multi-support seed a_1 = 15 (|H| = 3, L = 30, T = 8). No gaps found.",
+   "key_issues": []
+  }
+ ]
 }

@@ -1,92 +1,48 @@
 {
-  "problem": "imo-2026-01",
-  "entries": [
-    {
-      "model": "claude-fable-5",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and exceptionally rigorous. Termination via strict lex descent of (S,C) with both cases (gcd>1 drops S by Omega(gcd); gcd=1 keeps S and drops C by exactly 1) fully verified, plus an explicit well-foundedness lemma. The per-prime invariant g_p = gcd of valuations is proved with careful multiset-gcd conventions (all-zero column = 0, common-divisor-set argument), invariance is established unconditionally before being used to rule out the all-ones terminal board, so there is no circularity. Both parts follow cleanly with the explicit formula for M.",
-      "key_issues": []
-    },
-    {
-      "model": "claude-opus-4-5",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "M = prod_p p^{d_p}, d_p = gcd(v_p(x_1),...,v_p(x_2026))",
-      "score": 6,
-      "confidence": "high",
-      "justification": "The monovariant (T,N) lex descent (three exhaustive cases, including the mn=g^2 => m=n case) and the invariance of d_p (Lemma 3, proved unconditionally) are both correct. However, the step ruling out the all-ones terminal board is circular as written: the Terminal State Characterization derives M = prod_p p^{d_p} under the supposition that the terminal board is {M,1,...,1}, and Lemma 6 then proves N >= 1 by citing that very formula ('d_p >= 1, which implies M = prod p^{d_p} >= 2'), presupposing that M exists. The correct one-line fix (an all-ones board would have column gcd 0, contradicting the invariant d_p >= 1) uses only lemmas already proved in the paper, so the gap is small and clearly fixable, but the submitted chain is invalid at a required step of part (a).",
-      "key_issues": [
-        "Circular justification for N >= 1 at termination: Lemma 6 invokes M = prod_p p^{d_p}, which was derived assuming the terminal board is {M,1,...,1}; the all-ones case (N = 0) is never directly refuted as written."
-      ]
-    },
-    {
-      "model": "claude-opus-4-8",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "M = prod_p p^{g_p}, g_p = gcd(v_p(x_1),...,v_p(x_2026))",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Compact but complete. Termination via lex descent of Phi = (N, P) with all three cases handled and well-foundedness argued correctly. The all-ones terminal state is ruled out via the g_p invariant, with an explicit remark that Lemma 6 is proved without any termination claim, avoiding circularity. The subtractive identity (B1) covers all boundary cases (a=b, b=0, a=b=0) and the lifting (B2) handles zero exponents via stated gcd conventions. Part (b) is read off correctly.",
-      "key_issues": []
-    },
-    {
-      "model": "gpt-5.6-sol",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "M = prod_{p | a_1...a_2026} p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Elegant and complete. The single monovariant Psi = 2^k * P is shown to strictly decrease in a disjoint exhaustive case analysis (g=1; g>1 with m=n; g>1 with m!=n, where lcm/g = 1 is correctly shown to force m=n), and Psi is a positive integer, giving termination. The exponent-column gcd invariance is proved via the common-divisor-set argument covering equality and zero valuations; the all-ones terminal board is refuted non-circularly by d_p > 0, and primes outside S are excluded since (0,0) maps to (0,0). Terse in adjoining unchanged valuations to the pair identity, but the step is standard and correct.",
-      "key_issues": [
-        "Extension from the pair gcd identity to the full 2026-entry column is stated in one sentence; standard and correct, minor terseness only."
-      ]
-    },
-    {
-      "model": "kimi-k3",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete with an explicit move-count bound floor(log2 P_0) + 2026: type-B (coprime) moves are counted by the monotone number of ones z, and type-A moves at least halve the product; both monotonicity claims are correct. The 'at least one nonunit always survives' step is proved directly (each move outputs g > 1 or mn >= 4), independent of the invariant, so part (a) has no circularity. The invariance of G_p tracks the full set of common divisors including the identically-zero tuple case, and part (b) is concluded correctly with the explicit formula, backed by consistency checks.",
-      "key_issues": []
-    },
-    {
-      "model": "claude-fable-5-lightweight",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete. Termination via the additive potential Phi = T + N, shown to drop by at least 1 every move in both cases (g=1: T fixed, N drops by exactly 1; g>1: T drops by Omega(g) >= 1 and N does not increase). N >= 1 is maintained by Lemma 2 (max(g,h) > 1, with the h=1 => lcm=gcd => g=m>1 case proved), so part (a) is non-circular. The g_p invariant is proved with explicit gcd conventions and the a=b=0 edge case, and part (b) follows with the explicit formula plus a consistency check that M > 1.",
-      "key_issues": []
-    },
-    {
-      "model": "gpt-5.6-sol-lightweight",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete. Lex descent of (S,N) is correct (Omega drops by Omega(d) when d>1; when d=1 the pair becomes (1,mn) so N drops with S fixed), and the well-foundedness argument is sound since S is non-increasing. The all-ones terminal state is ruled out directly: if lcm/gcd = 1 then lcm = gcd forces m = n and the surviving output is m > 1 (the forcing step gets only one line, a minor blemish since it is a standard one-liner). The G_p invariance via gcd(a, b-a) = gcd(a,b) covers zero valuations, and part (b) concludes correctly with the finite product formula.",
-      "key_issues": [
-        "'lcm(m,n) = gcd(m,n) forces m = n' asserted with minimal justification (standard one-line fact).",
-        "A LaTeX display block around the Omega computation is malformed (missing closing delimiter); cosmetic only."
-      ]
-    },
-    {
-      "model": "gpt-5.6-sol-lightweight-xhigh",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "M = prod_p p^{gcd(v_p(x_1),...,v_p(x_2026))}",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and clean. Termination via the pair (P, K): P = board product is non-increasing (drops by factor d when d = gcd > 1), and once P stabilizes every move has d = 1 and K = #nonunits drops by exactly 1 (outputs are 1 and mn > 1), so no infinite play exists; well-foundedness is argued correctly. K >= 1 at termination is proved directly and non-circularly: every move outputs at least one entry > 1 (d if d > 1, else mn), so the terminal board has exactly one M > 1. The G_p invariant uses gcd(a, b-a) = gcd(a, b) with explicit conventions (gcd(0, r) = r, all-zero gcd = 0) covering the a = b case, and part (b) reads off M = prod p^{g_p} from the terminal board {M, 1, ..., 1} with the finiteness of the product addressed. I checked every step; no gaps.",
-      "key_issues": []
-    }
-  ]
+ "problem": "imo-2026-01",
+ "entries": [
+  {
+   "model": "kimi-k3",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete with an explicit move-count bound floor(log2 P_0) + 2026: type-B (coprime) moves are counted by the monotone number of ones z, and type-A moves at least halve the product; both monotonicity claims are correct. The 'at least one nonunit always survives' step is proved directly (each move outputs g > 1 or mn >= 4), independent of the invariant, so part (a) has no circularity. The invariance of G_p tracks the full set of common divisors including the identically-zero tuple case, and part (b) is concluded correctly with the explicit formula, backed by consistency checks.",
+   "key_issues": []
+  },
+  {
+   "model": "claude-fable-5",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete. Termination via the additive potential Phi = T + N, shown to drop by at least 1 every move in both cases (g=1: T fixed, N drops by exactly 1; g>1: T drops by Omega(g) >= 1 and N does not increase). N >= 1 is maintained by Lemma 2 (max(g,h) > 1, with the h=1 => lcm=gcd => g=m>1 case proved), so part (a) is non-circular. The g_p invariant is proved with explicit gcd conventions and the a=b=0 edge case, and part (b) follows with the explicit formula plus a consistency check that M > 1.",
+   "key_issues": []
+  },
+  {
+   "model": "gpt-5.6-sol",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete. Lex descent of (S,N) is correct (Omega drops by Omega(d) when d>1; when d=1 the pair becomes (1,mn) so N drops with S fixed), and the well-foundedness argument is sound since S is non-increasing. The all-ones terminal state is ruled out directly: if lcm/gcd = 1 then lcm = gcd forces m = n and the surviving output is m > 1 (the forcing step gets only one line, a minor blemish since it is a standard one-liner). The G_p invariance via gcd(a, b-a) = gcd(a,b) covers zero valuations, and part (b) concludes correctly with the finite product formula.",
+   "key_issues": [
+    "'lcm(m,n) = gcd(m,n) forces m = n' asserted with minimal justification (standard one-line fact).",
+    "A LaTeX display block around the Omega computation is malformed (missing closing delimiter); cosmetic only."
+   ]
+  },
+  {
+   "model": "gpt-5.6-sol-xhigh",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "M = prod_p p^{gcd(v_p(x_1),...,v_p(x_2026))}",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete and clean. Termination via the pair (P, K): P = board product is non-increasing (drops by factor d when d = gcd > 1), and once P stabilizes every move has d = 1 and K = #nonunits drops by exactly 1 (outputs are 1 and mn > 1), so no infinite play exists; well-foundedness is argued correctly. K >= 1 at termination is proved directly and non-circularly: every move outputs at least one entry > 1 (d if d > 1, else mn), so the terminal board has exactly one M > 1. The G_p invariant uses gcd(a, b-a) = gcd(a, b) with explicit conventions (gcd(0, r) = r, all-zero gcd = 0) covering the a = b case, and part (b) reads off M = prod p^{g_p} from the terminal board {M, 1, ..., 1} with the finiteness of the product addressed. I checked every step; no gaps.",
+   "key_issues": []
+  }
+ ]
 }

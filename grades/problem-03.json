@@ -1,110 +1,57 @@
 {
-  "problem": "imo-2026-03",
-  "entries": [
-    {
-      "model": "claude-fable-5",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "c(n) = 2^n/(2^{n+1}-1)",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and rigorous proof of both directions, verified line by line. Lemma 0 (game value = odd-rank sum) is proved by a correct two-sided induction; the peeling Lemmas 2-3 and the Partition Lemma (A(M) <= cost of any pair/singleton partition) are fully case-checked and correct. The lower bound is a clean multigraph argument (pair budget <= n edges on n+1 sources forces a bipartite component, whose +/-1-signed sum of distinct powers of 2 has absolute value >= 1); the upper bound uses subset-sum pigeonhole plus a correct Folding Lemma with an exact mark count (<= n), and degenerate endpoint marks are explicitly handled. No gaps found.",
-      "key_issues": []
-    },
-    {
-      "model": "claude-opus-4-5",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "c(n) = 2^n/(2^{n+1}-1)",
-      "score": 2,
-      "confidence": "high",
-      "justification": "Correct answer and a genuinely clever induction scheme, but both bounds have real holes; the claimed 'solved' status is wrong. The lower bound rests on a non-exhaustive case split (XY not marking in P_n vs. XY playing the copy strategy) and an unproven hand-waved 'copy optimality' Lemma 2. The upper-bound induction is broken in Case B: with k* defined as the MAX satisfying index, k* = m+1 does not imply p_k > 2^{k-1}*S*t_m for k < m+1, and for equal pieces with m = 4 (k* = 5, p_4 = 1/5 <= 8/31) the Step B5 chain fails numerically ((S-2p_m)t_{m-1} = 1/25 > 1/31 = S*t_m), so the cases are not exhaustive; the approach file repeats the same error. Solid content remains: complete rigorous n = 1 base case (both bounds) and a correct Case A step.",
-      "key_issues": [
-        "Upper bound Case B non-sequitur: k* = max{k : p_k <= 2^{k-1} S t_m} = m+1 does not imply all k < m+1 fail the threshold; the sandwich premises (*) can be false (e.g. all pieces equal, m >= 4), and then Steps B1/B5 collapse - confirmed by exact computation",
-        "Lower bound: 'Lemma 2 (copy strategy minimizes LB's take)' is asserted with a hand-wave, and Cases A/B do not cover all XY responses (e.g. marks both inside and outside P_n)",
-        "Greedy-optimality Lemma 1 proof is loose ('remaining game identical' is not literally true), though the fact itself is standard",
-        "P(0) needed when k* = 1 in Case A but only P(1) is established (minor)"
-      ]
-    },
-    {
-      "model": "claude-opus-4-8",
-      "present": true,
-      "claimed_status": "partial",
-      "answer_stated": "c(n) = 2^n/(2^{n+1}-1)",
-      "score": 3,
-      "confidence": "medium",
-      "justification": "Honest 'partial' status with no full proof in current.md; the answer is correct and a large body of certified lemma files backs real progress on both bounds: rigorous reduction to the odd-sum game, the geometric construction, the spare-R_n lower-bound case for every XY placement outside R_n, the confined lower-bound case (DyadicLower), upper-bound Case A for all n (Lemma H), Case-B reductions to the hard regime, full closure through q = 4, and B2-large for all n. Spot-checked lemma files (CaseB-reductions, DyadicLower-confined) read as genuine proofs, not sketches. However, both bounds have explicitly acknowledged open cores (lower: the stray a = 0 tight-face case; upper: the c2b flat residual for q >= 5), so neither direction is complete for general n.",
-      "key_issues": [
-        "No self-contained full proof; current.md is a progress tracker with essential material scattered in lemmas/",
-        "Lower bound open: a = 0 within-group flat-move on the tight face E_F = O_G (XY cuts outside R_n)",
-        "Upper bound open: flat residual slice c2b (b_1 < S/2 and b_2 < (S-b_1)/2) for q >= 5",
-        "Score relies partly on self-reported reviewer certification of lemma files (spot-checked, not exhaustively re-verified)"
-      ]
-    },
-    {
-      "model": "gpt-5.6-sol",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "c_n = 2^n/(2^{n+1}-1)",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and rigorous proof, verified in detail. The claiming-phase induction correctly establishes the game value as the odd-rank sum. The tree-component discrepancy lemma (adjacent-rank pairing multigraph, <= m-1 edges forces a tree component, bipartition gives two distinct subset sums differing by at most D) is fully correct and gives the lower bound with the dyadic construction. The upper bound via consecutive subset sums is exact and careful: consecutiveness forces every positive-support parent >= residual (claim (8)), the folding/concatenation construction is legal with a verified cut count <= m-1, and the odd-rank computation with the residual's tie group (oddsum = H + r = (1+r)/2) is correct; all m <= n cases are handled. Only trivial blemishes remain.",
-      "key_issues": [
-        "Degenerate marks at 0 or 1 (which are not 'splits') are never discussed; harmless under the natural reading but unaddressed",
-        "Minor LaTeX corruption at the display defining A and B in Section 4 (typo-level)"
-      ]
-    },
-    {
-      "model": "kimi-k3",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "c = 2^n/(2^{n+1}-1)",
-      "score": 5,
-      "confidence": "high",
-      "justification": "The architecture is complete and mostly rigorous: the matching formula D(M) = min-cost matching (via the layer-cake identity) is proved elegantly, Part A's super-increasing/tree-component lower bound is fully correct, and the realizability Lemma 4.1 plus the pigeonhole chain theorem are essentially sound. Two genuine local errors keep it from 6-7. First, Lemma 1.1's Xiang Yu direction misassigns the turn order ('moving first on M''') and derives a provably false intermediate guarantee (on {3,2,1} it claims XY can secure 3 while the true optimum is 2 - confirmed by exact minimax); the needed conclusion XY >= even(M) is true and the fix is routine, but the submitted proof of the upper bound's foundation is wrong. Second, Theorem 4.2 asserts the SORTED-order chain value v(B) is small, while its proof (via Lemma 4.1) only produces SOME ordering with small nested value; the XY strategy then processes B in sorted order, so its leftover bound is not established as written (the strategy is order-agnostic, so the fix is immediate).",
-      "key_issues": [
-        "Lemma 1.1 (XY guarantee): turn-parity slip - after LB and XY each move, LB (not XY) moves first on M''; the claimed total l + odd(M'') is false (counterexample {3,2,1}), should be l + even(M'')",
-        "Theorem 4.2 statement/proof mismatch: chain value is defined via decreasing order but the realizability lemma yields an arbitrary ordering; the strategy should process the constructed ordering",
-        "Endpoint marks at 0/1 not discussed (trivial)"
-      ]
-    },
-    {
-      "model": "claude-fable-5-lightweight",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "c = 2^n/(2^{n+1}-1)",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and rigorous proof of both directions, verified line by line and machine-tested. Lemma 2 (claiming-phase value = odd-rank sum) is proved with correct rank bookkeeping (2.1)/(2.2) for BOTH players and avoids the kimi-k3 turn-parity slip: after the opponent's first claim a_j the second player is first-to-move on A\\{a_j} and O(A\\{a_j}) >= E(A); I confirmed the exact minimax equals the odd-rank sum on 300 random rational multisets. Lower bound: the adjacent-rank pair multigraph on the n+1 geometric pieces has <= n edges, forcing a simple tree component; a proper 2-colouring turns the paired slacks into a signed sum of distinct powers of 2 with |Xi| >= u, so D >= u (isolated-vertex and unpaired-part cases check out). Upper bound: subset-sum pigeonhole gives disjoint A*, B* with 0 <= Delta <= u, and the concatenated-row cross-pairing marking (count (m-p-q)+q+(p-1) = n exactly bounded, all marks interior and distinct) makes both rows share the same grid Gamma on [0, beta_q], leaving only a leftover of mass Delta, so D <= u by the equal-pairs cancellation lemma. I re-implemented the Lemma 5 construction literally in exact rational arithmetic: on 2000 random configurations (m = 2..6) it always used <= n marks and achieved D <= u; an n=1 grid brute force reproduces c = 2/3.",
-      "key_issues": [
-        "Marks at the endpoints 0/1 are never discussed (setup silently restricts to the open interval); harmless under the natural reading and shared by the other 7-scored solutions"
-      ]
-    },
-    {
-      "model": "gpt-5.6-sol-lightweight",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "c_n = 2^n/(2^{n+1}-1)",
-      "score": 2,
-      "confidence": "high",
-      "justification": "Correct answer, correct global architecture (reduction to the alternating imbalance, the dyadic construction, and a two-part refinement lemma that is exactly the right statement), and a genuinely rigorous claiming-phase argument via matching greedy strategies. However, BOTH bounds rest entirely on the 'column sweep' proof of the refinement lemma, which is an unverifiable sketch even in the fuller lemmas/refinement.md: the upper-bound recursion's bookkeeping is asserted, not proved (why cancellation splits the remaining mass at most evenly between parities, why the 'sides' are valid sub-instances of the induction, and the initial odd segment of measure d appears to add to the recursive d rather than yielding a total of d), and the converse strip-preservation induction is a one-sentence assertion that ignores how cuts flip parity both below min and above max of the split. As submitted, neither direction is actually proved, so the 'solved' claim is a substantial overclaim.",
-      "key_issues": [
-        "Refinement lemma part (i): sweep/cancellation induction not a valid proof as written - the recursed 'arrays' are not instances of the lemma, the (2^s-1)d half-split of T-d is unjustified, and the accounting seemingly yields d (initial) + d (recursive) rather than the claimed d",
-        "Refinement lemma part (ii): the strip-survival alternative ('either a whole d-strip remains or every column was cut') is asserted, not proved; a split flips parity on [0,min) and [max,a), contradicting the claim that cuts act 'only above their level'",
-        "Both the lower and upper bounds depend entirely on this unproven lemma"
-      ]
-    },
-    {
-      "model": "gpt-5.6-sol-lightweight-xhigh",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "c = 2^n/(2^{n+1}-1)",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and rigorous proof of both directions; the default run's unproven 'column sweep' lemma is entirely gone, replaced by the sound architecture. Section 1 proves the claiming value V = D via the minimax recurrence with the explicit cancellation identity (2), which I verified by hand for both parities and machine-tested against exact minimax on 200 random multisets. Section 2's exchange argument (min pairing cost = D, odd case via an appended 0) is correct, giving the key tool (4). Section 3's common-refinement cutting fact has exact cut bookkeeping ((E-s)+(E-r)+1 <= |A|+|B|-1 with E <= r+s-1, tail case included), which I re-derived and confirmed. Lower bound: powers-of-two intervals, adjacent-pair multigraph with <= n edges on n+1 vertices forces a tree component; the bipartition of (7) gives a nonzero signed sum of distinct powers of two, so D >= d - all steps check (loops handled via doubled degree, isolated vertex allowed). Upper bound: m <= n bisection case, subset-sum pigeonhole (gap <= d among 2^{n+1} sums), symmetric-difference reduction, and the refinement construction with total cuts exactly (|A|+|B|-1)+(n+1-|A|-|B|) = n. I re-implemented the XY strategy literally in exact rationals (400 random markings: always <= n cuts and D <= d) and grid-searched XY responses to the lower-bound construction for n = 1, 2 (min D = d exactly).",
-      "key_issues": [
-        "Marks at the endpoints 0/1 never discussed (zero-length pieces); harmless under the natural reading and shared by the other 7-scored solutions"
-      ]
-    }
-  ]
+ "problem": "imo-2026-03",
+ "entries": [
+  {
+   "model": "kimi-k3",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "c = 2^n/(2^{n+1}-1)",
+   "score": 5,
+   "confidence": "high",
+   "justification": "The architecture is complete and mostly rigorous: the matching formula D(M) = min-cost matching (via the layer-cake identity) is proved elegantly, Part A's super-increasing/tree-component lower bound is fully correct, and the realizability Lemma 4.1 plus the pigeonhole chain theorem are essentially sound. Two genuine local errors keep it from 6-7. First, Lemma 1.1's Xiang Yu direction misassigns the turn order ('moving first on M''') and derives a provably false intermediate guarantee (on {3,2,1} it claims XY can secure 3 while the true optimum is 2 - confirmed by exact minimax); the needed conclusion XY >= even(M) is true and the fix is routine, but the submitted proof of the upper bound's foundation is wrong. Second, Theorem 4.2 asserts the SORTED-order chain value v(B) is small, while its proof (via Lemma 4.1) only produces SOME ordering with small nested value; the XY strategy then processes B in sorted order, so its leftover bound is not established as written (the strategy is order-agnostic, so the fix is immediate).",
+   "key_issues": [
+    "Lemma 1.1 (XY guarantee): turn-parity slip - after LB and XY each move, LB (not XY) moves first on M''; the claimed total l + odd(M'') is false (counterexample {3,2,1}), should be l + even(M'')",
+    "Theorem 4.2 statement/proof mismatch: chain value is defined via decreasing order but the realizability lemma yields an arbitrary ordering; the strategy should process the constructed ordering",
+    "Endpoint marks at 0/1 not discussed (trivial)"
+   ]
+  },
+  {
+   "model": "claude-fable-5",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "c = 2^n/(2^{n+1}-1)",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete and rigorous proof of both directions, verified line by line and machine-tested. Lemma 2 (claiming-phase value = odd-rank sum) is proved with correct rank bookkeeping (2.1)/(2.2) for BOTH players and avoids the kimi-k3 turn-parity slip: after the opponent's first claim a_j the second player is first-to-move on A\\{a_j} and O(A\\{a_j}) >= E(A); I confirmed the exact minimax equals the odd-rank sum on 300 random rational multisets. Lower bound: the adjacent-rank pair multigraph on the n+1 geometric pieces has <= n edges, forcing a simple tree component; a proper 2-colouring turns the paired slacks into a signed sum of distinct powers of 2 with |Xi| >= u, so D >= u (isolated-vertex and unpaired-part cases check out). Upper bound: subset-sum pigeonhole gives disjoint A*, B* with 0 <= Delta <= u, and the concatenated-row cross-pairing marking (count (m-p-q)+q+(p-1) = n exactly bounded, all marks interior and distinct) makes both rows share the same grid Gamma on [0, beta_q], leaving only a leftover of mass Delta, so D <= u by the equal-pairs cancellation lemma. I re-implemented the Lemma 5 construction literally in exact rational arithmetic: on 2000 random configurations (m = 2..6) it always used <= n marks and achieved D <= u; an n=1 grid brute force reproduces c = 2/3.",
+   "key_issues": [
+    "Marks at the endpoints 0/1 are never discussed (setup silently restricts to the open interval); harmless under the natural reading and shared by the other 7-scored solutions"
+   ]
+  },
+  {
+   "model": "gpt-5.6-sol",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "c_n = 2^n/(2^{n+1}-1)",
+   "score": 2,
+   "confidence": "high",
+   "justification": "Correct answer, correct global architecture (reduction to the alternating imbalance, the dyadic construction, and a two-part refinement lemma that is exactly the right statement), and a genuinely rigorous claiming-phase argument via matching greedy strategies. However, BOTH bounds rest entirely on the 'column sweep' proof of the refinement lemma, which is an unverifiable sketch even in the fuller lemmas/refinement.md: the upper-bound recursion's bookkeeping is asserted, not proved (why cancellation splits the remaining mass at most evenly between parities, why the 'sides' are valid sub-instances of the induction, and the initial odd segment of measure d appears to add to the recursive d rather than yielding a total of d), and the converse strip-preservation induction is a one-sentence assertion that ignores how cuts flip parity both below min and above max of the split. As submitted, neither direction is actually proved, so the 'solved' claim is a substantial overclaim.",
+   "key_issues": [
+    "Refinement lemma part (i): sweep/cancellation induction not a valid proof as written - the recursed 'arrays' are not instances of the lemma, the (2^s-1)d half-split of T-d is unjustified, and the accounting seemingly yields d (initial) + d (recursive) rather than the claimed d",
+    "Refinement lemma part (ii): the strip-survival alternative ('either a whole d-strip remains or every column was cut') is asserted, not proved; a split flips parity on [0,min) and [max,a), contradicting the claim that cuts act 'only above their level'",
+    "Both the lower and upper bounds depend entirely on this unproven lemma"
+   ]
+  },
+  {
+   "model": "gpt-5.6-sol-xhigh",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "c = 2^n/(2^{n+1}-1)",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete and rigorous proof of both directions; the default run's unproven 'column sweep' lemma is entirely gone, replaced by the sound architecture. Section 1 proves the claiming value V = D via the minimax recurrence with the explicit cancellation identity (2), which I verified by hand for both parities and machine-tested against exact minimax on 200 random multisets. Section 2's exchange argument (min pairing cost = D, odd case via an appended 0) is correct, giving the key tool (4). Section 3's common-refinement cutting fact has exact cut bookkeeping ((E-s)+(E-r)+1 <= |A|+|B|-1 with E <= r+s-1, tail case included), which I re-derived and confirmed. Lower bound: powers-of-two intervals, adjacent-pair multigraph with <= n edges on n+1 vertices forces a tree component; the bipartition of (7) gives a nonzero signed sum of distinct powers of two, so D >= d - all steps check (loops handled via doubled degree, isolated vertex allowed). Upper bound: m <= n bisection case, subset-sum pigeonhole (gap <= d among 2^{n+1} sums), symmetric-difference reduction, and the refinement construction with total cuts exactly (|A|+|B|-1)+(n+1-|A|-|B|) = n. I re-implemented the XY strategy literally in exact rationals (400 random markings: always <= n cuts and D <= d) and grid-searched XY responses to the lower-bound construction for n = 1, 2 (min D = d exactly).",
+   "key_issues": [
+    "Marks at the endpoints 0/1 never discussed (zero-length pieces); harmless under the natural reading and shared by the other 7-scored solutions"
+   ]
+  }
+ ]
 }

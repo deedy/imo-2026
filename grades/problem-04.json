@@ -1,94 +1,49 @@
 {
-  "problem": "imo-2026-04",
-  "entries": [
-    {
-      "model": "claude-fable-5",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "theta = 180/n for an integer n >= 2 (win within n-1 cuts)",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and unusually careful proof. The cut model (Lemma 0) is derived with full geometric justification including realizability via the Crossbar Theorem; necessity uses a clean four-case invariant in R/(theta Z) (Lemma 2A) with an explicit clean starting triangle; sufficiency proves the finishing descent (Lemma 4.2), the double-threat fork for n >= 3 (Lemma 4.3, with legality t0 < theta <= 60 <= R), and a separate one-cut fork for theta = 90 (Lemma 4.4). All case assemblies are exhaustive and every legality/positivity check is present; I verified each lemma independently and found no gaps.",
-      "key_issues": []
-    },
-    {
-      "model": "claude-opus-4-5",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "theta = 180/n for an integer n >= 2",
-      "score": 5,
-      "confidence": "high",
-      "justification": "Correct answer with the right strategy in both directions, but the write-up has several small holes. The key necessity lemma A1 (also in the cited lemmas/pair-sum-constraint.md) handles only two of the four combinations of where the multiples of theta can sit: the case (T1's multiple is t, T2's multiple is alpha - t), which forces alpha to be a multiple of theta and is a one-line contradiction, is omitted. Lemmas A2 and A3 are asserted without proof (both trivial), and the Phase 1 justification that some angle exceeds theta is garbled as written ('3theta <= 180 only for n <= 3' is false; the intended largest-angle >= 60 >= theta argument is not given). The sufficiency skeleton (n = 2 direct cut, integer-in-interval cut plus even/odd cascade) is correct, so all gaps are small and fixable.",
-      "key_issues": [
-        "Lemma A1 case analysis incomplete: the combination t = j*theta and alpha - t = k*theta (both non-P multiples) is never treated",
-        "Lemma A3 (existence of a safe initial triangle) stated with only a parenthetical, no proof",
-        "Phase 1 justification 'some angle exceeds theta' is mangled as written, though the fact is true and one line to fix",
-        "n = 2 case allows C = 90 in the cutting branch, where the game has already stopped (blemish only)"
-      ]
-    },
-    {
-      "model": "claude-opus-4-8",
-      "present": false,
-      "claimed_status": "absent",
-      "answer_stated": null,
-      "score": 0,
-      "confidence": "high",
-      "justification": "No problem-04 directory exists for this model under results/imo-2026/claude-opus-4-8; there is nothing to grade.",
-      "key_issues": ["directory absent"]
-    },
-    {
-      "model": "gpt-5.6-sol",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "theta = 180/n for an integer n >= 2",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and rigorous proof in normalized units s = 180/theta. Necessity: from the equilateral start (all coordinates s/3 nonintegral), the four-pair case analysis (sums/differences a, b, c, s) is exhaustive and correct, so Shan-Yu always keeps a fully nonintegral child. Sufficiency: the integer-crossing lemma (b < r < a+b, with the all-angles-below-1 case correctly reduced to n = 2) yields a legal cut putting integral labels r and n-r in the two children, and the floor(k/2) descent with a strictly decreasing positive integer label finishes by strong induction. I verified all legality and positivity checks; only stylistic quirks (knowledge-base name-dropping) remain.",
-      "key_issues": []
-    },
-    {
-      "model": "kimi-k3",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "theta = 180/n for an integer n >= 2 (win within n-1 moves)",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete proof, with the cut lemma fully proved in the cited lemmas/cut-geometry.md (angle chase plus IVT for realizability). Sufficiency uses the round-up distances d(x): Claim 1 (sum of d's is theta or 2theta) and Claim 2 (existence of u, v with d(u) < v, with the n = 2 equality case correctly eliminated) give a legal cut making both halves marked, then the halving lemma descends to theta within n-1 moves total. Necessity is a clean exhaustive three-case maintenance argument for the no-marked-angle invariant from an equilateral start, where the only failure mode requires 180 = (j+k)theta. I checked every case and inequality; the argument is sound, and the exact-arithmetic computational verification is a bonus.",
-      "key_issues": []
-    },
-    {
-      "model": "claude-fable-5-lightweight",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "theta = 180/n for an integer n >= 2 (win within n-1 cuts)",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete and self-contained proof. Lemma 0 gives the cut parametrization with realizability; the chain lemma and the double-threat Lemma 2 (least k with C < k*theta < 180 - B, with a separate correct n = 2 argument showing B, C < 90) prove sufficiency within n-1 cuts, and the four-case closure Lemma 4 plus an explicit safe-start construction prove necessity. I verified the strictness chain k*theta <= C + theta < C + A (using A > theta, which is properly established from A >= 60 >= theta and A not in theta*N) and found the case analyses exhaustive. No gaps of substance.",
-      "key_issues": []
-    },
-    {
-      "model": "gpt-5.6-sol-lightweight",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "theta = 180/N for an integer N >= 2",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete proof in compact form. Sufficiency: the relabeling lemma (integer k with b < k < a+b, all-below-1 case correctly forced to N = 2) gives a legal cut planting integral angles N-k and k in the two children, followed by the theta/(m-1)theta descent. Necessity: in G = R/(theta Z) with t = [180] != 0, the equilateral start is safe and the four pairings (u = v = 0; u = b + u = 0; v = c + v = 0; c + v = b + u = 0 forcing t = 0) exhaust the ways both children could be unsafe. The cut mechanics and crossbar-type legality are asserted with one-line angle-sum justifications rather than derived at length, which is acceptable; the argument is correct and both directions are fully proved.",
-      "key_issues": [
-        "Cut legality (interior ray meets opposite side) asserted rather than proved; standard fact, minor blemish"
-      ]
-    },
-    {
-      "model": "gpt-5.6-sol-lightweight-xhigh",
-      "present": true,
-      "claimed_status": "solved",
-      "answer_stated": "theta = 180/n for an integer n >= 2",
-      "score": 7,
-      "confidence": "high",
-      "justification": "Complete proof of both directions, verified step by step. The cut model (1)-(2) is correct with the legality criterion 0 < x < A. Lemma 1 (angle m*theta => win in <= m-1 cuts) is a clean induction with the theta + (m-1)theta split. Sufficiency: the relabeling Claim (integer k with b < k < a+b, where the all-below-1 case correctly forces n = 2 via a+b = 2-c > 1, and 1 <= k <= n-1 is derived from positivity and k < n-c) yields the cut x = (k-b)theta planting the integral cut-point angles k*theta and (n-k)*theta in the two children, so Lemma 1 finishes against any retention. Necessity: 'safe' invariant with an exhaustive four-case analysis (cases 1-3 contradict parent safety via A, B, C respectively; case 4 forces 180 = (p+q)theta), equilateral safe start, so Shan-Yu survives forever. All positivity/legality checks present.",
-      "key_issues": [
-        "Realizability of the cut (ray from the vertex meets the opposite side) asserted in one line, as in the default run; standard fact, cosmetic only"
-      ]
-    }
-  ]
+ "problem": "imo-2026-04",
+ "entries": [
+  {
+   "model": "kimi-k3",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "theta = 180/n for an integer n >= 2 (win within n-1 moves)",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete proof, with the cut lemma fully proved in the cited lemmas/cut-geometry.md (angle chase plus IVT for realizability). Sufficiency uses the round-up distances d(x): Claim 1 (sum of d's is theta or 2theta) and Claim 2 (existence of u, v with d(u) < v, with the n = 2 equality case correctly eliminated) give a legal cut making both halves marked, then the halving lemma descends to theta within n-1 moves total. Necessity is a clean exhaustive three-case maintenance argument for the no-marked-angle invariant from an equilateral start, where the only failure mode requires 180 = (j+k)theta. I checked every case and inequality; the argument is sound, and the exact-arithmetic computational verification is a bonus.",
+   "key_issues": []
+  },
+  {
+   "model": "claude-fable-5",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "theta = 180/n for an integer n >= 2 (win within n-1 cuts)",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete and self-contained proof. Lemma 0 gives the cut parametrization with realizability; the chain lemma and the double-threat Lemma 2 (least k with C < k*theta < 180 - B, with a separate correct n = 2 argument showing B, C < 90) prove sufficiency within n-1 cuts, and the four-case closure Lemma 4 plus an explicit safe-start construction prove necessity. I verified the strictness chain k*theta <= C + theta < C + A (using A > theta, which is properly established from A >= 60 >= theta and A not in theta*N) and found the case analyses exhaustive. No gaps of substance.",
+   "key_issues": []
+  },
+  {
+   "model": "gpt-5.6-sol",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "theta = 180/N for an integer N >= 2",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete proof in compact form. Sufficiency: the relabeling lemma (integer k with b < k < a+b, all-below-1 case correctly forced to N = 2) gives a legal cut planting integral angles N-k and k in the two children, followed by the theta/(m-1)theta descent. Necessity: in G = R/(theta Z) with t = [180] != 0, the equilateral start is safe and the four pairings (u = v = 0; u = b + u = 0; v = c + v = 0; c + v = b + u = 0 forcing t = 0) exhaust the ways both children could be unsafe. The cut mechanics and crossbar-type legality are asserted with one-line angle-sum justifications rather than derived at length, which is acceptable; the argument is correct and both directions are fully proved.",
+   "key_issues": [
+    "Cut legality (interior ray meets opposite side) asserted rather than proved; standard fact, minor blemish"
+   ]
+  },
+  {
+   "model": "gpt-5.6-sol-xhigh",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "theta = 180/n for an integer n >= 2",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete proof of both directions, verified step by step. The cut model (1)-(2) is correct with the legality criterion 0 < x < A. Lemma 1 (angle m*theta => win in <= m-1 cuts) is a clean induction with the theta + (m-1)theta split. Sufficiency: the relabeling Claim (integer k with b < k < a+b, where the all-below-1 case correctly forces n = 2 via a+b = 2-c > 1, and 1 <= k <= n-1 is derived from positivity and k < n-c) yields the cut x = (k-b)theta planting the integral cut-point angles k*theta and (n-k)*theta in the two children, so Lemma 1 finishes against any retention. Necessity: 'safe' invariant with an exhaustive four-case analysis (cases 1-3 contradict parent safety via A, B, C respectively; case 4 forces 180 = (p+q)theta), equilateral safe start, so Shan-Yu survives forever. All positivity/legality checks present.",
+   "key_issues": [
+    "Realizability of the cut (ray from the vertex meets the opposite side) asserted in one line, as in the default run; standard fact, cosmetic only"
+   ]
+  }
+ ]
 }

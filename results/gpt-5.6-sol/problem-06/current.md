@@ -1,124 +1,81 @@
+# imo-2026-06 — tracking file
 ## Status
 solved
 
+## Problem
+Let $a_1, a_2, a_3, \ldots$ be an infinite sequence of positive integers greater than $1$. Suppose that for all positive integers $n$, the number $a_{n+1}$ is the smallest positive integer greater than $a_n$ such that $\gcd(a_{n+1}, a_i)>1$ for every $i=1,2,\ldots,n$. Prove that there exist positive integers $T$ and $L$ such that $a_{n+T}=a_n+L$ for every positive integer $n$. (Note that $\gcd(x,y)$ denotes the greatest common divisor of positive integers $x$ and $y$.)
+
 ## Approaches tried
-- Recast the greedy sequence as the increasing list of the P-positions of a decreasing coprimality game; use prime stripping and minimal-counterexample descent to prove that P-positions are classified by their prime-divisibility signatures up to the initial value — worked, and gives an exact period from the first term.
+- Computed examples. Prime-power starts produce arithmetic progressions, while $a_1=15$ produces the periodic difference pattern of period $8$ and total increment $30$.
+- Recast the sequence as the increasing enumeration of the integers non-coprime to every sequence term. This reduces the problem to proving that this set is periodic.
+- Used prime-divisor sets and a finite-transversal lemma. The pairwise-intersecting family of prime-divisor sets has only finitely many necessary transversal patterns; consequently the admissible integers are a finite union of sets of multiples. This completes the proof.
 
 ## Current best
-The complete proof below shows that, with \(A=a_1\) and \(L=\prod_{p\le A}p\), membership in the set enumerated by the sequence is invariant under translation by \(L\). If \(T\) is the number of members in \([A,A+L)\), then \(a_{n+T}=a_n+L\) for every \(n\ge1\).
+The assertion is proved. There exist squarefree integers $b_1,\ldots,b_s>1$ such that an integer is non-coprime to every term precisely when it is divisible by at least one $b_j$. Taking $L=\operatorname{lcm}(b_1,\ldots,b_s)$ and $T$ equal to the number of admissible residue classes modulo $L$ gives $a_{n+T}=a_n+L$ for every $n\ge1$.
 
 ## Full proof
-Put \(A=a_1\). We use the standard **P-position/N-position recursion for a finite impartial game**, proved below by strong induction (the strong-induction method is the entry “Induction” in the knowledge base).
+For a positive integer $m>1$, denote by $P(m)$ the finite nonempty set of its prime divisors. We first prove the set-theoretic lemma that will provide the needed finiteness.
 
-Consider the following game on integers \(m\ge A\). From \(m\), a legal move consists of replacing \(m\) by an integer \(x\) such that
+**Finite-transversal lemma.** Let $\mathcal F$ be a nonempty, possibly infinite family of nonempty finite subsets of a set $P$. If every two members of $\mathcal F$ intersect, then there are finitely many nonempty finite sets $B_1,\ldots,B_s\subseteq P$ such that, for every finite $X\subseteq P$,
 \[
- A\le x<m\qquad\text{and}\qquad \gcd(m,x)=1.
-\]
-Every move strictly decreases the displayed integer, so every play is finite. Call a position a P-position if the player whose turn it is has no winning strategy, and an N-position otherwise. Backward induction gives the following characterization:
-\[
- m\text{ is a P-position}
+ X\cap F\ne\varnothing\quad\text{for every }F\in\mathcal F
  \quad\Longleftrightarrow\quad
- \text{there is no P-position }x\text{ with }A\le x<m\text{ and }\gcd(m,x)=1. \tag{1}
+ B_j\subseteq X\quad\text{for some }j.
 \]
-Indeed, if such an \(x\) exists, the player to move goes to \(x\), after which the opponent is in a losing position, so \(m\) is an N-position. If no such \(x\) exists, then every legal move goes to an N-position, from which the next player has a winning strategy; hence every first move loses, and \(m\) is a P-position. This argument starts at \(A\), which has no legal move and is therefore a P-position, and determines all larger positions by strong induction.
 
-Let \(G\) be the set of P-positions. Formula (1) immediately implies that any two distinct elements of \(G\) have greatest common divisor greater than \(1\): applying (1) to the larger one shows that it cannot be coprime to the smaller one. In particular, every element of \(G\) has a common prime divisor with \(A\).
+**Proof of the lemma.** Call a finite set meeting every member of $\mathcal F$ a transversal. Every finite transversal contains an inclusion-minimal finite transversal, by successively deleting dispensable elements. We use the following elementary ``finite blocker'' fact.
 
-We next verify that the given sequence is precisely the increasing enumeration of \(G\). Let
+> If a family of finite sets is pairwise intersecting and has a member $C$ of size $r$, then it has only finitely many inclusion-minimal finite transversals.
+
+For completeness, here is a proof. Construct a rooted search tree as follows. A node bears a finite set $D$. If $D$ is a transversal, stop. Otherwise choose a member $F_D$ disjoint from $D$, and attach the finitely many children $D\cup\{x\}$, $x\in F_D$. At the root first attach the $r$ one-element sets $\{c\}$, $c\in C$; this loses no transversal, since every transversal meets the member $C$. Retain at a node only those branches which can still be extended to an inclusion-minimal finite transversal, and contract a node whenever an earlier chosen element has become dispensable.
+
+This pruned tree is finite. Indeed, if it were infinite, König's lemma would give an infinite branch $x_1,x_2,\ldots$. At stage $k$ the set $F_k$ selected there is disjoint from $\{x_1,\ldots,x_k\}$. Since every $F_k$ meets the fixed finite set $C$, one $c\in C$ belongs to infinitely many $F_k$. Insert $c$ at its first such occurrence. Until the next occurrence nothing changes; at that next occurrence the element selected there is dispensable, because that selected set is already met by $c$. Repeating between consecutive occurrences shows that the branch has a contracted node, contrary to the pruning rule. Thus the tree is finite. Every minimal finite transversal follows a branch (at each nonterminal node it must contain some element of the selected set), and minimality prevents contraction; hence it is a terminal label. The finite blocker fact follows.
+
+Apply this fact to any chosen $C\in\mathcal F$, which is a transversal because the family is pairwise intersecting. Let $B_1,\ldots,B_s$ be all inclusion-minimal finite transversals. A finite $X$ is a transversal exactly when it contains one of them. None is empty because $\mathcal F$ is nonempty. This proves the lemma. $\square$
+
+We apply the lemma to
 \[
- b_1<b_2<b_3<\cdots
+ \mathcal F=\{P(a_i):i\ge1\}.
 \]
-be that enumeration. It is infinite: if \(m\) is any multiple of \(A\), then every smaller P-position \(x\) has \(\gcd(x,A)>1\), and therefore \(\gcd(x,m)>1\); by (1), \(m\) is a P-position. We have \(b_1=A=a_1\). Suppose \(b_1,\ldots,b_n\) are the first \(n\) P-positions, and let \(c\) be the least integer \(m>b_n\) satisfying
+If $i<j$, then the definition of $a_j$ gives $\gcd(a_i,a_j)>1$. Hence $P(a_i)\cap P(a_j)\ne\varnothing$, so $\mathcal F$ is pairwise intersecting. Obtain finite nonempty prime sets $B_1,\ldots,B_s$ from the lemma, and put
 \[
- \gcd(m,b_i)>1\quad(1\le i\le n).
+ b_j=\prod_{p\in B_j}p\qquad(1\le j\le s).
 \]
-Such a \(c\) exists, for example because any multiple of \(b_1b_2\cdots b_n\) larger than \(b_n\) satisfies these inequalities. There cannot be a P-position \(y\) strictly between \(b_n\) and \(c\): any such \(y\), being noncoprime to each of the P-positions \(b_1,\ldots,b_n\), would itself satisfy the displayed inequalities and contradict the minimality of \(c\). Hence the only P-positions below \(c\) are \(b_1,\ldots,b_n\), and \(c\) is noncoprime to all of them. Characterization (1) therefore makes \(c\) a P-position, so \(c=b_{n+1}\). Thus the defining recursion for \((a_n)\), followed by induction on \(n\), gives \(a_n=b_n\) for every \(n\). It remains to describe \(G\).
-
-Call a prime *small* if it is at most \(A\). For \(m\ge A\), define its small-prime signature to be
+For every positive integer $x>1$, the lemma gives
 \[
- \sigma(m)=\{p:p\text{ is prime},\ p\le A,\ p\mid m\}.
+\begin{aligned}
+ \gcd(x,a_i)>1\text{ for every }i
+ &\Longleftrightarrow P(x)\cap P(a_i)\ne\varnothing\text{ for every }i\\
+ &\Longleftrightarrow B_j\subseteq P(x)\text{ for some }j\\
+ &\Longleftrightarrow b_j\mid x\text{ for some }j.
+\end{aligned}
 \]
-We first prove a prime-stripping lemma.
-
-**Prime-stripping lemma.** If \(b\ge A\) has at least one small prime divisor, then there is an integer \(x\) such that
-\[
- A\le x\le b,\qquad \sigma(x)=\sigma(b),
-\]
-and every prime divisor of \(x\) is small.
-
-Let \(s\) be the product of the distinct small prime divisors of \(b\), and choose one such divisor \(p\). If \(b\) has no prime divisor greater than \(A\), take \(x=b\); all the required properties then hold.
-
-Now suppose that \(b\) has a prime divisor \(q>A\). Choose the least integer \(e\ge0\) for which
-\[
- x=p^e s\ge A.
-\]
-Such an \(e\) exists. The prime divisors of \(x\) are exactly those of \(s\), so they are all small and \(\sigma(x)=\sigma(b)\). It remains to prove \(x\le b\), treating both possible values of \(e\).
-
-If \(e=0\), then \(x=s\). Since the distinct primes making up \(sq\) all divide \(b\), we have \(sq\mid b\), and hence
-\[
- x=s<sq\le b.
-\]
-If \(e>0\), minimality of \(e\) gives \(p^{e-1}s<A\), and multiplication by \(p\) gives \(x=p^es<pA\). Also \(p\le s\), because \(p\) is a factor of \(s\), while \(A<q\). Consequently
-\[
- x<pA\le sA<sq\le b.
-\]
-This proves the lemma in all cases.
-
-We now prove the load-bearing strengthening.
-
-**Small-common-prime lemma.** Every two P-positions have a common small prime divisor.
-
-Suppose otherwise. Choose two distinct P-positions \(b,b'\) having no common small prime divisor, and order them so that \(b<b'\). Using the **extremal principle/minimal-counterexample descent** (the “Pigeonhole / extremal principle” and “Infinite descent” entries in the knowledge base), choose such a pair for which \(b'\), the larger member, is as small as possible.
-
-Because \(b\) and \(A\) are distinct P-positions unless \(b=A\), they have a common prime divisor; if \(b=A\), it of course has a prime divisor at most \(A\). In either case \(b\) has a small prime divisor. Apply the prime-stripping lemma to \(b\), obtaining \(x\) with
-\[
- A\le x\le b,
-\]
-a small-prime signature equal to that of \(b\), and no large prime divisors. Since \(b\) and \(b'\) have no common small prime divisor and every prime divisor of \(x\) is small, we have \(\gcd(x,b')=1\). Moreover, \(x\le b<b'\), so \(b'\to x\) is a legal move. As \(b'\) is a P-position, characterization (1) forces \(x\) to be an N-position.
-
-By the other direction of (1), an N-position has a legal move to a P-position. Thus there is a P-position \(b^*\) such that
-\[
- A\le b^*<x\qquad\text{and}\qquad \gcd(b^*,x)=1.
-\]
-No small prime divisor of \(b\) can divide \(b^*\), because every such prime divides \(x\) by \(\sigma(x)=\sigma(b)\), whereas \(b^*\) is coprime to \(x\). Hence the two P-positions \(b^*\) and \(b\) have no common small prime divisor. But
-\[
- b^*<x\le b<b',
-\]
-so the larger member of this new violating pair is \(b\), strictly smaller than \(b'\). This contradicts the minimal choice of \(b'\), and proves the lemma.
-
-We can now classify positions by their signatures.
-
-**Signature-invariance lemma.** If \(u,v\ge A\) and \(\sigma(u)=\sigma(v)\), then either both \(u,v\) are P-positions or both are N-positions.
-
-Assume first that \(u\) is an N-position and \(v\) is a P-position. By (1), there is a P-position \(w<u\) with \(\gcd(u,w)=1\). By the small-common-prime lemma, the P-positions \(v\) and \(w\) have a common small prime divisor \(p\). Since \(p\in\sigma(v)=\sigma(u)\), this prime also divides \(u\), contradicting \(\gcd(u,w)=1\). Thus the orientation “\(u\) N and \(v\) P” is impossible. If instead \(u\) is a P-position and \(v\) is an N-position, interchange \(u\) and \(v\) in the same argument. Both mixed orientations are impossible, proving signature invariance.
-
 Let
 \[
- L=\prod_{\substack{p\le A\\p\text{ prime}}}p.
+ S=\{x\in\mathbb Z_{>0}:b_j\mid x\text{ for some }j\}.
 \]
-This is a positive integer. For every integer \(m\ge A\) and every prime \(p\le A\), modular arithmetic gives
-\[
- p\mid m+L\quad\Longleftrightarrow\quad p\mid m,
-\]
-because \(p\mid L\). Therefore \(\sigma(m+L)=\sigma(m)\), and signature invariance yields the exact translation rule
-\[
- m\in G\quad\Longleftrightarrow\quad m+L\in G \qquad(m\ge A). \tag{2}
-\]
-This is the modular-arithmetic step from the “Modular arithmetic, CRT” knowledge-base entry (only the elementary modular part is needed).
+Thus $S$ is precisely the set of positive integers having gcd greater than $1$ with every term $a_i$. In particular, every $a_i$ belongs to $S$.
 
-Finally, partition the integers from \(A\) onward into the half-open integer blocks
+We next show that $a_1,a_2,\ldots$ are exactly the members of $S$ that are at least $a_1$, in increasing order. Certainly all terms belong to $S$. Conversely, suppose $x>a_1$ belongs to $S$. Because the sequence is strictly increasing, it is unbounded. Choose the unique $n$ for which
 \[
- B_j=\{m\in\mathbb Z:A+jL\le m<A+(j+1)L\},
- \qquad j=0,1,2,\ldots.
+ a_n<x\le a_{n+1}.
 \]
-Translation by \(L\) is, by (2), an order-preserving bijection from \(G\cap B_j\) onto \(G\cap B_{j+1}\). Define
-\[
- T=|G\cap B_0|.
-\]
-We have \(T\ge1\), since \(A\in G\cap B_0\), so \(T\) is a positive integer. Every block contains exactly \(T\) elements of \(G\).
+Since $x\in S$, it has gcd greater than $1$ with each of $a_1,\ldots,a_n$. The minimality in the definition of $a_{n+1}$ therefore gives $a_{n+1}\le x$. Hence $x=a_{n+1}$. Also $a_1\in S$, proving the claim.
 
-For any \(n\ge1\), there are unique integers \(j\ge0\) and \(k\in\{1,\ldots,T\}\) such that \(n=jT+k\). The term \(a_n\), being the \(n\)-th element of \(G\), is the \(k\)-th element of \(G\cap B_j\): the preceding \(j\) blocks contain exactly \(jT\) elements. The order-preserving bijection \(m\mapsto m+L\) sends it to the \(k\)-th element of \(G\cap B_{j+1}\), whose global index is \((j+1)T+k=n+T\). Hence
+Finally, set
 \[
- a_{n+T}=a_n+L
+ L=\operatorname{lcm}(b_1,\ldots,b_s).
 \]
-for every positive integer \(n\). Both \(T\) and \(L\) are positive, as required. ∎
+Membership in $S$ depends only on the residue class modulo $L$, because each $b_j$ divides $L$. Let $T$ be the number of residue classes modulo $L$ which belong to $S$. This is a positive integer: for example, the residue class $0$ belongs to $S$.
+
+For every integer $y$, each residue class modulo $L$ occurs exactly once among
+\[
+ y+1,y+2,\ldots,y+L.
+\]
+Consequently exactly $T$ of these integers lie in $S$. Moreover, $y\in S$ if and only if $y+L\in S$.
+
+Take $y=a_n$. Then $a_n+L\in S$, and among the integers strictly greater than $a_n$ and at most $a_n+L$ there are exactly $T$ members of $S$. Since the terms of the sequence are the increasing enumeration of $S$ from $a_1$ onward, the $T$-th term after $a_n$ is therefore $a_n+L$. Thus
+\[
+ \boxed{a_{n+T}=a_n+L}
+\]
+for every positive integer $n$, as required.
