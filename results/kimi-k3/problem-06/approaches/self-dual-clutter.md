@@ -1,24 +1,24 @@
-# Approach: permanents as a self-dual intersecting clutter (final, successful)
+# Approach: permanents as an intersecting antichain + compactness (final, successful)
 
-**Status: successful — yields complete proof.**
+**Status: successful — yields a complete proof (after one repair found in review).**
 
 ## Idea
 
-The previous session reduced the problem to showing that $S_\infty$ has finitely many minimal elements ("permanents"), i.e. that shrinkage of the minimal-transversal family $H_n$ stops. The clean bypass found this session:
-
-1. The sequence is exactly the increasing enumeration of $S_\infty\cap[a_1,\infty)$ (easy; uses pairwise non-coprimality, which is immediate from the definition).
-2. If $S_\infty$ has finitely many minimal elements $h_1,\dots,h_k$, then $S_\infty$ is the union of the multiples of the $h_i$; membership is periodic mod $L=\mathrm{lcm}(h_i)$, and the enumeration satisfies $a_{n+T}=a_n+L$ with $T=\#(S_\infty\cap[a_1,a_1+L))$.
-3. The minimal elements are squarefree; as sets of primes they form the family $\mathcal C$ of minimal transversals of $\{\mathrm{supp}(a_i)\}$. Two short arguments show:
+1. The sequence is exactly the increasing enumeration of $S_\infty\cap[a_1,\infty)$ (easy; uses pairwise non-coprimality, immediate from the definition).
+2. If $S_\infty$ has finitely many minimal elements $h_1,\dots,h_k$ ("permanents"), then $S_\infty$ is the union of their multiples; membership is periodic mod $L=\mathrm{lcm}(h_i)$, and the enumeration satisfies $a_{n+T}=a_n+L$ with $T=\#(S_\infty\cap[a_1,a_1+L))$.
+3. The permanents are squarefree; as sets of primes they form the family $\mathcal C$ of minimal transversals of $\{\mathrm{supp}(a_i)\}$. Three short arguments show:
    - $\mathcal C$ is **intersecting**: for $t\in\mathcal C$, large pure powers $\pi(t)^k$ are terms (multiples of $\pi(t)$ lie in $S_\infty$); their support is exactly $t$, so every other member meets $t$.
-   - $\mathcal C$ is **self-dual**: a minimal transversal $T$ of $\mathcal C$ meets every $\mathrm{supp}(a_i)$ (each contains a member), so $\pi(T)\in S_\infty$ contains a member $t'\subseteq T$, which is itself a transversal (by intersecting), forcing $T=t'$.
-4. **Combinatorial core theorem** (see `lemmas/self-dual-intersecting-clutter.md`): every antichain of finite sets that is intersecting and self-dual is finite. Proof by an explicit infinite-descent process: fixing $t\in\mathcal C$ and an infinite $\mathcal C_I$, either some finite $I\cup Z_s$ is a transversal (its minimal sub-transversal is a member contained in all of the infinitely many members of $\mathcal F_s$, violating the antichain property), or one builds $Z_\omega=\{z_1,z_2,\dots\}$ which is a transversal (by a least-index enumeration argument), and again a minimal sub-transversal is a finite member contained in $I\cup Z_s$ for some finite $s$, hence properly contained in members of $\mathcal F_{s+1}$ — contradiction.
+   - $\mathcal C$ is **self-dual for finite transversals**: a finite minimal transversal $U$ of $\mathcal C$ meets every $\mathrm{supp}(a_i)$ (each contains a member), so $\pi(U)\in S_\infty$ contains a member $t'\subseteq U$, itself a transversal (by intersecting), forcing $U=t'$.
+   - **killing property (K′)**: a finite prime-set $F$ with $\pi(F)>a_1$ containing no member is avoided by some member $t'$ with $\pi(t')<\pi(F)$. Proof: $\pi(F)\notin S_\infty$ (else it has a permanent divisor inside $F$); the greedy rule kills it by a term $a_i<\pi(F)$ coprime to it; any permanent dividing $a_i$ works.
+4. **Compactness Theorem** (`lemmas/compactness.md`): $\mathcal C$ has no infinite minimal transversal. From an infinite minimal transversal $T$ (explicitly constructed, private members $e_w$), (K′) gives through each $w\in T$ a member $t^*_w\ni w$ with $\pi(t^*_w)\le a_1w$ (descent: $\pi$ drops by factor $\ge2$ per K′-application). Pigeonhole on the finitely many prime-sets of product $\le a_1$: $t^*_{w_j}=P_0\cup\{w_j\}$ for infinitely many distinct $w_j$. Every member meets $P_0$ (else it contains all $w_j$), so $P_0$ is a finite transversal; a minimal $U\subseteq P_0$ is a member (finite self-duality) strictly inside $t^*_{w_1}$ — contradicting the antichain property.
+5. **Finiteness of $\mathcal C$** (`lemmas/self-dual-intersecting-clutter.md`): peeling. Fixing $t$ and an infinite $\mathcal C_I$, either some finite $I\cup Z_s$ is a transversal — its minimal sub-transversal is finite, hence a member (finite self-duality) contained in all of the infinitely many members of $\mathcal F_s$, violating antichain — or one builds $W=I\cup Z_\omega$, a transversal with NO finite sub-transversal, contradicting the Compactness Theorem.
 
-## Why this supersedes the old crux
+## The gap that was found and repaired
 
-The old approach tried to prove "shrinkage stops" via potentials (min disjoint-pair product nondecreasing, etc.). That is unnecessary: the self-duality + intersecting + antichain structure alone already forces finiteness, by pure combinatorics. The number-theoretic input is confined to Steps 1–3 (all short).
+An earlier version stated step 3's self-duality for ALL minimal transversals and applied it (via Zorn) to a minimal transversal $T\subseteq I\cup Z_\omega$. Two defects: (i) the proof of self-duality forms $\pi(U)$, requiring $U$ finite; (ii) in the relevant case $T$ is PROVABLY infinite (any finite transversal inside $I\cup Z_\omega$ lies in some $I\cup Z_s$ and would have terminated the peeling at stage $s+1$). Repair: the Compactness Theorem (step 4), proved from the killing property — the genuine number-theoretic content that pure set-system axioms lack (the star family $\{\{0,i\}\}$ satisfies antichain + intersecting but has the infinite minimal transversal $\{1,2,\dots\}$; only self-duality/(K′) rule this out).
 
 ## Verification
 
-- `code/verify_newproof.py`: for ~85 values of $a_1$ (including primorials 2310, products like 1925 with 6 permanents), verified: enumeration property; permanents form an antichain, pairwise intersecting, self-dual (blocker of permanents = permanents); and $a_{n+T}=a_n+L$ with predicted $(T,L)$. All pass.
+- `code/verify_newproof.py`: for ~85 values of $a_1$ (incl. 2310, 1925), verified: enumeration property; permanents form an antichain, pairwise intersecting, self-dual; and $a_{n+T}=a_n+L$ with predicted $(T,L)$. All pass.
 - `code/bruteforce_check.py`: independent raw-definition simulation confirms the same for small cases.
-- Blocker identity $b(b(\mathcal C))=\mathcal C$ confirmed on 300 random clutters; self-dual intersecting antichains enumerated on 4 points (12: four singletons, triangles, etc.).
+- `code/check_Kprime.py`: (K) verified for all $x\le40000$ and (K′) for ~1500 prime-sets per case, for 58 values of $a_1$ including multi-permanent cases. All pass.

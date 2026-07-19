@@ -8,17 +8,17 @@ Four runs across three models, all in the identical minimal agent harness:
 |---|--|--|--|--|--|--|--|--|--|
 | **Claude Fable 5** (default `high` effort) | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 1.8 h | $38.83 |
 | **GPT-5.6 Sol** (xhigh effort)† | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 3.8 h | ~$20.54 |
-| **Kimi K3** (default effort)† | 7 | 7 | 7 | 7 | 7 | 3* | **38/42** | 16.0 h | ~$30.03 |
+| **Kimi K3** (default effort)† | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 17.4 h | ~$31.40 |
 | **GPT-5.6 Sol** (default effort) | 7 | 4 | 2 | 7 | 7 | 1 | **28/42** | 1.0 h | ~$4.04 |
 
-*† includes repair rounds: after initial grading, these runs were shown the reviewer's specific defect findings (never other solutions) and given further sessions; every repaired score was re-verified as strictly as the original. \* P6 repair in progress. Scores are IMO-style 0–7 from independent verifier agents that re-derived key algebra symbolically, machine-tested combinatorial claims, and constructed explicit counterexamples to failed lemmas — **not** the models' self-reports. See [grades/](grades/) for per-problem verdicts with named defects.*
+*† includes repair rounds: after initial grading, these runs were shown the reviewer's specific defect findings (never other solutions) and given further sessions; every repaired score was re-verified as strictly as the original. Scores are IMO-style 0–7 from independent verifier agents that re-derived key algebra symbolically, machine-tested combinatorial claims, and constructed explicit counterexamples to failed lemmas — **not** the models' self-reports. See [grades/](grades/) for per-problem verdicts with named defects.*
 
 ## Headline findings
 
 - **Claude Fable 5: verified 42/42 — and the fastest run (1.8 h).** Full rigor with no reviewer, no orchestration, no second chances, including the only fully synthetic P2 geometry proof among all runs.
-- **Review feedback closes the loop.** Given only a reviewer's defect findings, GPT-5.6 Sol (xhigh) repaired its P2 to a verified 7 (reaching 42/42) and Kimi K3 repaired its P3 to a verified 7 — the fixes were re-graded as adversarially as the originals, including exact-minimax confirmation that the old claims were false and the new ones tight.
+- **Review feedback closes the loop.** Given only a reviewer's defect findings, GPT-5.6 Sol (xhigh) repaired its P2 and Kimi K3 repaired both its P3 and its P6 finiteness crux (inventing a new compactness theorem from the greedy killing property) — bringing all three models to verified 42/42. Every fix was re-graded as adversarially as the originals: exact minimax, independent reimplementation across dozens of seeds, and counterexample-family exclusion checks.
 - **Reasoning effort buys rigor.** GPT-5.6 Sol jumped 28 → 39/42 going from default to `xhigh` effort in the identical harness: P3 and P6 became verified 7s (a previously false lemma replaced by a correct argument), and its P2 failure became an honestly self-declared `partial` instead of a confident invalid proof. Depth improved calibration, not just correctness.
-- **Kimi K3's 36/42 is gold-medal-range work** (typical human gold cutoffs are far lower), earned over 12.7 h including three failed rounds on P3 whose in-context reasoning was lost to time caps before checkpoint-discipline countermeasures were added to the harness.
+- **Kimi K3 earned its 42/42 the hard way**: 17.4 h and multiple repair rounds, with early in-context reasoning lost to time caps before checkpoint-discipline countermeasures were added to the harness — but its final P6 compactness argument was original, load-bearing mathematics verified by independent reimplementation.
 - **Self-reports inflate.** Nearly every run claimed every attempted problem "solved"; graders confirmed only the scores above, with every deduction documented as a named, checkable defect. All stated answers to the compute-and-prove problems agree across every run.
 
 ## Repository layout
