@@ -6,9 +6,9 @@ Four runs across three models, all in the identical minimal agent harness:
 
 | Run | P1 | P2 | P3 | P4 | P5 | P6 | **Graded** | Time | Cost |
 |---|--|--|--|--|--|--|--|--|--|
-| **Claude Fable 5** | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 1.8 h | $38.83 |
+| **Claude Fable 5** (default `high` effort) | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 1.8 h | $38.83 |
 | **GPT-5.6 Sol** (xhigh effort) | 7 | 4 | 7 | 7 | 7 | 7 | **39/42** | 3.3 h | ~$11.48 |
-| **Kimi K3** | 7 | 7 | 5 | 7 | 7 | 3 | **36/42** | 12.7 h | ~$28.20 |
+| **Kimi K3** (default effort) | 7 | 7 | 5 | 7 | 7 | 3 | **36/42** | 12.7 h | ~$28.20 |
 | **GPT-5.6 Sol** (default effort) | 7 | 4 | 2 | 7 | 7 | 1 | **28/42** | 1.0 h | ~$4.04 |
 
 *Scores are IMO-style 0–7 from independent verifier agents that re-derived key algebra symbolically, machine-tested combinatorial claims, and constructed explicit counterexamples to failed lemmas — **not** the models' self-reports. See [grades/](grades/) for per-problem verdicts with named defects.*
