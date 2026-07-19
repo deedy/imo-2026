@@ -20,4 +20,4 @@ The remaining incidences $C,K$ and $B,L$ yield two formulas for $\rho$:
 The plan is to express equality of the powers of $M,N$ to $(AKL)$ in these variables and show it is a consequence of these two incidence equations.
 
 ## Status
-In progress. The parametrization and incidence equations have been derived; the key algebraic factorization remains to be established and then translated into a rigorous proof.
+Superseded. The parametrization is valid, but direct elimination in $(\rho,\alpha)$ is unnecessarily long. The completed invariant reorganization is recorded in `approaches/invariant-factorization.md` and the master proof.

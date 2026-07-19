@@ -42,15 +42,16 @@
   {
    "model": "gpt-5.6-sol-xhigh",
    "present": true,
-   "claimed_status": "partial",
+   "claimed_status": "solved",
    "answer_stated": null,
-   "score": 4,
+   "score": 7,
    "confidence": "high",
-   "justification": "Honest partial with everything present being correct. The geometric reduction is complete and sound: encodings (2)-(4) for K, L (with interiority consumed to justify ray directions and x < pi/2), the unused hypothesis packaged as Q = 0 in (5), and the determinant criterion reducing OM = ON to D = 0 (hand-verified, including the power-of-A form and the A,K,L noncollinearity use). The factorization lemma (6) is stated with the correct explicit positive factor, and the intermediate identities (10)-(11) reducing it to a four-coefficient comparison in the ray parameter r are correct (I re-derived both by hand and verified them symbolically). I also verified symbolically that the claimed final tangent identity (p+q)(p+s)D = p(p(1+q^2)r+q)Q_T is TRUE and that it converts exactly to (6). But the submission stops at 'The remaining coefficient comparison in (10)-(11) is to be inserted here': the computational crux is absent, and the cos y cos z = 0 continuity limb is only promised. As submitted this is a correct, precisely specified reduction with the central verification missing.",
+   "provenance": "repair round: continuation after self-identified gap; no external mathematical hints",
+   "justification": "The repair genuinely closes both gaps flagged at 4/7. The previously absent crux is now a fully displayed coefficient check, and every identity in it is exactly correct: I re-verified the whole chain symbolically (sympy, exact rational arithmetic) - tangent coordinates (16)-(17), invariant reductions (18)-(20), coefficient collections (25)-(28), and above all the remainder identities (31)-(32) computed exactly as prescribed (substituting only v=p(2-u)): each R_i equals the displayed product with factor e(u-1)-p, with F_1, F_2 exactly as printed, and R_3=0; relation (21) then kills them, proving (29)-(30), hence the factorization lemma (6), whose master trig form D = [sin x (t sin x + sin y)/(sin(x+y) sin(x+z))] Q I also confirmed is exactly true. The formerly promised cos y cos z = 0 limb is now a valid continuity argument over an explicit open parameter set (lambda != 0 via Im lambda < 0; I confirmed (6) to 50 digits at y=pi/2 and z=pi/2 boundary points). The reduction remains sound: ray-order/orientation derivations for (2)-(5), the determinant criterion D=0 => OM=ON (rank argument via A,K,L noncollinear from 'triangle AKL'), and the 0<x<pi/2 geometric argument all check out; end-to-end, 12 random configurations satisfying every hypothesis (interiority, ray orders, all six angle equalities) give OM=ON to 5e-50. Remaining blemish: (31)-(32) are proved 'by ordinary distributive expansion' with only the final remainders displayed - heavy but fully specified, reproducible, and correct, on par with accepted coordinate-bash write-ups (cf. the kimi-k3 entry).",
    "key_issues": [
-    "Central coefficient comparison (the proof of the factorization lemma) is explicitly not carried out; the write-up ends where the crux verification should begin",
-    "cos y cos z = 0 boundary case deferred to an unexecuted continuity argument",
-    "Unlike the default run, no invalid argument is offered: the stated lemma, factor, and intermediate identities (10)-(11) are all true (symbolically verified by grader)"
+    "Proof of (31)-(32) is a delegated multivariable expansion with only the (correct) final remainders displayed; all four verified exactly by grader",
+    "The factorization lemma's (x,y,z,t)-domain is implicit in its statement and only pinned down in the closing continuity paragraph",
+    "A few orientation justifications (e.g. direction of MK, sign conventions at C) are terse, though correct"
    ]
   }
  ]

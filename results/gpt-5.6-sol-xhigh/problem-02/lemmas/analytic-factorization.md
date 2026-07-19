@@ -13,7 +13,7 @@ and let $\lambda=((2p+q)-ipq)/(p+q)$. Define $C=2N$ by the complex-vector relati
 where $p=\tan x,s=\tan z$ and $R_{x+z}$ denotes rotation by $x+z$, then $M=(1,0)$ and $N$ have equal powers with respect to the circle through $A=(0,0),K,L$.
 
 ## Proof status
-The claim follows from a direct determinant factorization. Using the non-unit vector map
+Superseded by the fully proved, more general formulation in `lemmas/determinant-factorization.md`. In the notation below, the claim follows from that determinant factorization. Using the non-unit vector map
 \[
 T_{p,s}(u,v)=((1-ps)u-(p+s)v,(p+s)u+(1-ps)v),
 \]
@@ -32,4 +32,4 @@ a symbolic expansion and cancellation gives the compact identity
 \[
 D=\frac{p(pq^2t+pt+q)}{(p+q)(p+s)}Q.
 \]
-Thus $Q=0$ implies $D=0$. A human-verifiable derivation of this identity is still to be written here; mere reference to symbolic computation is not acceptable in the final proof.
+Thus $Q=0$ implies $D=0$. A complete human-verifiable derivation of this identity, organized by invariant quantities and coefficient comparison, is given in `lemmas/determinant-factorization.md` and reproduced in `current.md`.
