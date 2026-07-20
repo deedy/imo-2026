@@ -6,12 +6,12 @@ Four runs across three models, all in the identical minimal agent harness:
 
 | Run | P1 | P2 | P3 | P4 | P5 | P6 | **Graded** | Time | Cost |
 |---|--|--|--|--|--|--|--|--|--|
-| **Claude Fable 5** (default `high` effort) | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 1.8 h | $38.83 |
+| **Claude Fable 5** (default `high` effort) | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 2.5 h | $51.05 |
 | **GPT-5.6 Sol** (xhigh effort)† | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 3.8 h | ~$20.54 |
 | **Kimi K3** (default effort)† | 7 | 7 | 7 | 7 | 7 | 7 | **42/42** | 17.4 h | ~$31.40 |
 | **GPT-5.6 Sol** (default effort) | 7 | 4 | 2 | 7 | 7 | 1 | **28/42** | 1.0 h | ~$4.04 |
 
-*† includes repair rounds: after initial grading, these runs were shown the reviewer's specific defect findings (never other solutions) and given further sessions; every repaired score was re-verified as strictly as the original. Scores are IMO-style 0–7 from independent verifier agents that re-derived key algebra symbolically, machine-tested combinatorial claims, and constructed explicit counterexamples to failed lemmas — **not** the models' self-reports. See [grades/](grades/) for per-problem verdicts with named defects.*
+*Time and cost are totals across **all** rounds, including rounds killed by API outages and network failures — see [REPORT.md](REPORT.md) for per-problem attempts, tokens, and a clean-vs-total breakdown. † includes repair rounds: after initial grading, these runs were shown the reviewer's specific defect findings (never other solutions) and given further sessions; every repaired score was re-verified as strictly as the original. Scores are IMO-style 0–7 from independent verifier agents that re-derived key algebra symbolically, machine-tested combinatorial claims, and constructed explicit counterexamples to failed lemmas — **not** the models' self-reports. See [grades/](grades/) for per-problem verdicts with named defects.*
 
 ### First pass (before any repair round)
 
@@ -40,6 +40,7 @@ results/     one directory per run: per-problem current.md (the proof), approach
              lemmas/, code/ (the model's own verification scripts), scratch/, and
              logs.jsonl — a complete per-turn audit trail (every tool call, verbatim)
 grades/      per-problem grading verdicts (JSON): score, justification, named defects
+REPORT.md    per-problem attempts, wall-clock time, tokens, and cost
 pdfs/        typeset solution PDFs (24) + the comparison report
 harness/     the agent harnesses (Kimi K3 / GPT via OpenRouter / Claude Fable 5 via
              Anthropic SDK) — same prompt, tools, and caps across all runs
