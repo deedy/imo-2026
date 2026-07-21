@@ -4,8 +4,8 @@ All figures derived from the verbatim `logs.jsonl` audit trails in [`results/`](
 
 Two time/cost columns appear throughout:
 
-- **clean** — successful rounds only (what the work would have cost with no infrastructure failures)
-- **total** — every round, including rounds killed by API outages, billing lapses, and network timeouts, plus repair rounds
+- **clean** — productive rounds only (rounds that actually wrote to the proof file); what the work would have cost with no infrastructure failures
+- **total** — every round, including rounds killed by API outages, billing lapses, and network timeouts; repair rounds; and (for Grok) rounds that ended without writing anything
 
 ## Totals per run
 
@@ -14,20 +14,29 @@ Two time/cost columns appear throughout:
 | Claude Fable 5 | 42/42 | 1.8 h | 2.5 h | $38.83 | $51.05 | 705k |
 | GPT-5.6 Sol (xhigh) | 42/42 | 1.6 h | 3.8 h | ~$9.74 | ~$20.54 | 236k |
 | Kimi K3 | 42/42 | 6.5 h | 17.4 h | ~$14.49 | ~$31.40 | 1,545k |
+| Meta Muse Spark 1.1 | 26/42 | 2.3 h | 2.3 h | ~$4.45 | ~$4.45 | 761k |
 | GPT-5.6 Sol (default) | 28/42 | 1.0 h | 1.0 h | ~$4.04 | ~$4.04 | 80k |
+| xAI Grok 4.5 | 13/42 | 2.6 h | 3.2 h | ~$14.26 | ~$14.60 | 606k |
 
-## Attempts per problem
+## Rounds per problem
 
-An **attempt** is a substantive session on the problem — a fresh solve, a resumed solve, or a repair round. Rounds killed purely by infrastructure (billing outage, network drop) before doing new work are counted separately and are not the model's doing.
+Each cell is **rounds / productive rounds** — total sessions on the problem, and how many of those actually wrote to the proof file. The gap is infrastructure failures (billing, network), plus — for Grok — sessions that ended narrating "writing the file" without ever calling the write-tool.
 
-| Run | P1 | P2 | P3 | P4 | P5 | P6 | Substantive | Infra-killed rounds |
-|---|--|--|--|--|--|--|--|--|
-| Claude Fable 5 | 1 | 1 | 1 | 1 | 1 | 1 | **6** | 3 (billing outage) |
-| GPT-5.6 Sol (xhigh) | 1 | 2 | 1 | 1 | 1 | 1 | **7** | 4 (network) |
-| Kimi K3 | 1 | 1 | 4 | 1 | 1 | 2 | **10** | 4 (network, billing) |
-| GPT-5.6 Sol (default) | 1 | 1 | 1 | 1 | 1 | 1 | **6** | 0 |
+| Run | P1 | P2 | P3 | P4 | P5 | P6 | Total |
+|---|--|--|--|--|--|--|--|
+| Claude Fable 5 | 1/1 | 1/1 | 2/1 | 1/1 | 2/1 | 2/1 | **9/6** |
+| GPT-5.6 Sol (xhigh) | 1/1 | 4/4 | 1/1 | 1/1 | 2/1 | 2/2 | **11/10** |
+| Kimi K3 | 1/1 | 1/1 | 6/5 | 1/1 | 1/1 | 4/4 | **14/13** |
+| Meta Muse Spark 1.1 | 1/1 | 1/1 | 1/1 | 1/1 | 1/1 | 1/1 | **6/6** |
+| GPT-5.6 Sol (default) | 1/1 | 1/1 | 1/1 | 1/1 | 1/1 | 1/1 | **6/6** |
+| xAI Grok 4.5 | 1/1 | 1/1 | 1/1 | 2/1 | 3/1 | 1/1 | **9/6** |
 
-**Claude Fable 5 solved every problem in a single attempt.** GPT-5.6 Sol (xhigh) needed a second attempt only on P2. Kimi K3 needed four on P3 (two hit the 150-minute cap with the answer known but proofs unwritten) and two on P6.
+Reading the interesting rows:
+
+- **Claude Fable 5**, **Muse Spark 1.1**, and **GPT-5.6 Sol (default)** each did exactly one productive round per problem — clean single-pass runs (Fable's three extra rounds were 0–3 min billing-outage deaths that wrote nothing).
+- **GPT-5.6 Sol (xhigh)** P2 took four rounds (two network-killed, plus the initial partial and its repair); **P6 took two rounds — both productive** (a 38-min first pass interrupted by a network drop, then a checkpointed continuation that finished it).
+- **Kimi K3** P3 took six rounds (two hit the 150-min cap with the answer known but proofs unwritten, one died to a billing outage, one solved to 5/7, then a network-killed repair and the repair that reached 7/7); P6 took four.
+- **xAI Grok 4.5** P4 and P5 show the tool-adherence failure: 2 rounds / 1 productive and 3 rounds / 1 productive. The non-productive rounds each ended with Grok claiming to write `current.md` while making zero tool calls. A harness guard (refuse "done" until the file exists) was added to force a real write.
 
 ## Wall-clock minutes per problem (all rounds)
 
@@ -36,29 +45,35 @@ An **attempt** is a substantive session on the problem — a fresh solve, a resu
 | Claude Fable 5 | 5 | 27 | 73 | 8 | 10 | 26 | 150 |
 | GPT-5.6 Sol (xhigh) | 7 | 106 | 27 | 10 | 20 | 60 | 231 |
 | Kimi K3 | 20 | 85 | 491 | 40 | 28 | 381 | 1045 |
+| Meta Muse Spark 1.1 | 2 | 41 | 51 | 10 | 5 | 31 | 140 |
 | GPT-5.6 Sol (default) | 5 | 15 | 15 | 5 | 6 | 14 | 60 |
+| xAI Grok 4.5 | 8 | 37 | 77 | 21 | 48 | 4 | 195 |
 
 ## Completion (output) tokens per problem
 
-Includes billed reasoning tokens where the provider bills them as output (Kimi K3, GPT-5.6 Sol).
+Includes billed reasoning tokens where the provider bills them as output.
 
 | Run | P1 | P2 | P3 | P4 | P5 | P6 | Total |
 |---|--|--|--|--|--|--|--|
 | Claude Fable 5 | 16,826 | 141,363 | 331,025 | 39,027 | 55,114 | 121,922 | 705,277 |
 | GPT-5.6 Sol (xhigh) | 8,488 | 113,253 | 43,259 | 20,623 | 14,497 | 36,052 | 236,172 |
 | Kimi K3 | 27,657 | 171,310 | 846,626 | 70,540 | 47,550 | 381,100 | 1,544,783 |
+| Meta Muse Spark 1.1 | 17,047 | 183,399 | 224,090 | 85,835 | 46,114 | 204,340 | 760,825 |
 | GPT-5.6 Sol (default) | 6,050 | 17,860 | 16,574 | 9,084 | 9,227 | 21,420 | 80,215 |
+| xAI Grok 4.5 | 30,212 | 127,445 | 273,455 | 72,444 | 95,009 | 7,053 | 605,618 |
 
 ## Prompt tokens per problem
 
-Dominated by cache reads — each turn resends the conversation, so these scale with turn count, not with unique content.
+Dominated by cache reads — each turn resends the conversation, so these scale with turn count, not unique content. (Grok's P2/P3 are huge because it churned the full 80-turn budget on both.)
 
 | Run | P1 | P2 | P3 | P4 | P5 | P6 | Total |
 |---|--|--|--|--|--|--|--|
 | Claude Fable 5 | 65k | 2,189k | 1,939k | 194k | 302k | 763k | 5,453k |
 | GPT-5.6 Sol (xhigh) | 13k | 2,523k | 43k | 30k | 18k | 64k | 2,690k |
 | Kimi K3 | 180k | 2,916k | 7,011k | 1,336k | 180k | 5,193k | 16,817k |
+| Meta Muse Spark 1.1 | 32k | 125k | 456k | 32k | 19k | 312k | 976k |
 | GPT-5.6 Sol (default) | 15k | 157k | 79k | 20k | 12k | 45k | 326k |
+| xAI Grok 4.5 | 60k | 3,024k | 2,207k | 55k | 68k | 70k | 5,485k |
 
 ## Cost per problem (USD, all rounds)
 
@@ -67,24 +82,13 @@ Dominated by cache reads — each turn resends the conversation, so these scale 
 | Claude Fable 5 | $1.11 | $11.16 | $23.45 | $2.61 | $3.61 | $9.11 | $51.05 |
 | GPT-5.6 Sol (xhigh) | $0.32 | $16.01 | $1.51 | $0.77 | $0.52 | $1.40 | $20.54 |
 | Kimi K3 | $0.50 | $4.00 | $16.13 | $1.71 | $0.80 | $8.26 | $31.40 |
+| Meta Muse Spark 1.1 | $0.11 | $0.94 | $1.52 | $0.40 | $0.22 | $1.26 | $4.45 |
 | GPT-5.6 Sol (default) | $0.25 | $1.32 | $0.89 | $0.37 | $0.33 | $0.87 | $4.04 |
-
-## Round-by-round histories (problems needing more than one round)
-
-| Run | Problem | Rounds, chronologically |
-|---|---|---|
-| Claude Fable 5 | P3 | 39m billing outage → 34m **completed** |
-| Claude Fable 5 | P5 | 3m billing outage → 8m **completed** |
-| Claude Fable 5 | P6 | 0m billing outage → 26m **completed** |
-| GPT-5.6 Sol (xhigh) | P2 | 64m network → 7m **completed** (partial, 4/7) → 24m network (repair, checkpointed) → 11m **completed** (repair, 7/7) |
-| GPT-5.6 Sol (xhigh) | P5 | 10m network → 9m **completed** |
-| GPT-5.6 Sol (xhigh) | P6 | 38m network → 22m **completed** |
-| Kimi K3 | P3 | 116m time cap → 117m time cap → 108m billing outage → 45m **completed** (5/7) → 92m network (repair) → 14m **completed** (repair, 7/7) |
-| Kimi K3 | P6 | 131m network → 70m **completed** (3/7) → 92m network (repair) → 88m **completed** (repair, 7/7) |
+| xAI Grok 4.5 | $0.30 | $6.81 | $6.05 | $0.55 | $0.71 | $0.18 | $14.60 |
 
 ## Observations
 
-- **Problem difficulty is legible in the token counts.** P3 and P6 (the combinatorics capstone and the number-theory finale) consumed the overwhelming majority of every run's budget. P1, P4, and P5 were dispatched by every model in minutes.
-- **Efficiency and correctness are not the same axis.** GPT-5.6 Sol at default effort was the cheapest run by 5× and the worst by 14 points; at `xhigh` it reached 42/42 for ~$20. Kimi K3 spent 6.5× the output tokens of Fable to reach the same final score.
-- **P2 was GPT-5.6 Sol's expensive problem** ($16.01 of its $20.54, 106 of its 231 minutes) — the geometry crux it initially could not close. It is Claude Fable 5's second-cheapest hard problem, solved synthetically in 27 minutes.
-- **Infrastructure noise was substantial and is fully disclosed**: 11 rounds across the experiment died to billing lapses, network drops, and read timeouts. All are preserved in `scratch/` and included in the "total" columns; none contributed mathematics.
+- **Problem difficulty is legible in the token counts.** P3 (combinatorics capstone) and P6 (number-theory finale) consumed the majority of every run's budget. P1, P4, and P5 were dispatched in minutes.
+- **Effort spent ≠ correctness.** The two challenger models poured heavy reasoning into the hard problems and still couldn't close them: Grok spent $6.81 and 3M prompt tokens on P2 (scored 2/7) and $6.05 on P3 (2/7); Muse spent $1.52 on P3 and got the answer *wrong*. Meanwhile GPT-5.6 Sol at default effort spent the least of anyone and matched the challengers' ballpark.
+- **Grok's P6 is the cheapest hard-problem cell in the table** ($0.18, 7k output tokens) — not because it was easy for Grok, but because it gave up early with an explicit non-proof ("Full proof: (Not yet complete.)").
+- **Infrastructure and tool-adherence noise is fully disclosed.** Across the experiment, rounds died to billing lapses, network drops, and read timeouts; Grok additionally lost three rounds to ending without writing. All are preserved in `scratch/` and included in the "total" columns; none contributed mathematics.

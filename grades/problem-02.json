@@ -53,6 +53,38 @@
     "The factorization lemma's (x,y,z,t)-domain is implicit in its statement and only pinned down in the closing continuity paragraph",
     "A few orientation justifications (e.g. direction of MK, sign conventions at C) are terse, though correct"
    ]
+  },
+  {
+   "model": "muse-spark-1.1",
+   "present": true,
+   "claimed_status": "unsolved",
+   "answer_stated": null,
+   "score": 2,
+   "confidence": "high",
+   "justification": "Self-reported unsolved, and correctly so. The submission gives a clean, correct reduction but never touches the crux. It sets M=(-1,0), N=(1,0), A=(u,v) so B=2M-A=(-2-u,-v), C=2N-A=(2-u,-v) (verified correct), and reduces OM=ON to Ox=0 (circumcenter of AKL on the perpendicular bisector of MN) — a valid but essentially standard reformulation. It then correctly parametrizes the hypotheses (alpha=KBA=ACL, beta=LBK=LNC, gamma=BMK=LCK, with LBA=alpha+beta and ACK=alpha+gamma), and correctly observes that K is the intersection of a B-ray (angle alpha off BA) and an M-ray (angle gamma off MB), with consistency condition E1(alpha,gamma)=0, and symmetrically L via E2(alpha,beta)=0, yielding a one-parameter family in alpha. All of this is correct and matches the accepted solutions' opening. But the entire difficulty — proving Ox=0 / the equal-power identity — is left as 'we numerically suspect this holds' and 'Full proof: TBD'; no crux lemma is even formulated, and the saved code only constructs the family without a confirmed OM=ON check. A correct but light reduction with the crux entirely absent.",
+   "key_issues": [
+    "Crux completely untouched: Ox=0 is only 'numerically suspected', no lemma stated or proved",
+    "The reduction (OM=ON iff Ox=0) is standard/trivial; the one-parameter-family observation is correct but modest",
+    "No sub-triangle sine-law relations or power-of-a-point machinery developed toward the target",
+    "Numerics not actually confirmed in the writeup ('suspect'), only the construction is coded"
+   ]
+  },
+  {
+   "model": "grok-4.5",
+   "present": true,
+   "claimed_status": "partial",
+   "answer_stated": null,
+   "score": 2,
+   "confidence": "high",
+   "provenance": "run hit the 80-turn cap before completing",
+   "justification": "Self-reported partial; genuine but incomplete, stopping at the same wall as muse-spark. The written derivations (in approaches/ and scratch/) are more developed and all correct where checkable: ray orderings BA-BK-BL-BC and CA-CL-CK-CB are correctly justified; triangle BMK is shown to have angles alpha,gamma,180-alpha-gamma and CNL to have alpha,beta,180-alpha-beta (both verified, using ray BM=ray BA and ray CN=ray CA); sine-law lengths BK=(AB/2)sin(gamma)/sin(alpha+gamma), MK=(AB/2)sin(alpha)/sin(alpha+gamma), CL, NL are derived correctly; and a valid vector reduction (A=0) gives OM=ON iff O.(C-B)=(|C|^2-|B|^2)/4 together with O.K=|K|^2/2, O.L=|L|^2/2 — the correct circumcenter/perp-bisector characterization. It also correctly identifies the one-parameter family (3 angles, 2 constraints) and dispatches the isosceles case by symmetry (trivial). However, the crux is untouched: it never derives the constraint relation among alpha,beta,gamma nor connects the power-of-a-point machinery to the target, ending 'General proof still open' and 'Full proof: (not yet)'. Much of the file is scattered dead-end exploration (spiral sims, Ceva attempts) and the tracking files are garbled; the saved verification code is broken/trivial (syntax errors, a stub 'hello sympy'), so the claimed numeric verification is unconfirmed. Slightly more correct machinery than muse-spark but equally far from the solution, and messier.",
+   "key_issues": [
+    "Crux completely untouched: no constraint relation among alpha,beta,gamma derived, power-of-a-point never connected to O.(C-B) target",
+    "Correct machinery (sub-triangle sine law, vector power characterization) is developed but scattered and never consolidated into a clean reduction statement",
+    "Isosceles case is trivial (symmetry); adds little",
+    "Saved code is broken/trivial (syntax errors, 'hello sympy' stub) so claimed numeric verification is unconfirmed; run hit the 80-turn cap",
+    "Tracking/writeup files are garbled (mojibake) though the underlying math is sound"
+   ]
   }
  ]
 }

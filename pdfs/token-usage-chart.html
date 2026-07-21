@@ -1,0 +1,223 @@
+<title>IMO 2026 — Token Usage by Model & Problem</title>
+<style>
+  :root {
+    --bg: #0c0f14;
+    --panel: #10151d;
+    --panel-2: #141b25;
+    --grid: #232c39;
+    --ink: #e8eef6;
+    --muted: #7f8b9c;
+    --faint: #4a5566;
+    --hair: #1c242f;
+    --fable: #4f92ff;
+    --solx: #2fc08a;
+    --k3: #f5a623;
+    --soldf: #f0574d;
+    --muse: #b98bff;
+    --grok: #ff7ab0;
+  }
+  :root[data-theme="light"] {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --panel-2: #f0f2f5;
+    --grid: #e2e6ec;
+    --ink: #131922;
+    --muted: #5c6675;
+    --faint: #9aa4b2;
+    --hair: #e7eaef;
+    --fable: #1f6fe0;
+    --solx: #0e9c6b;
+    --k3: #c47d00;
+    --soldf: #d63a30;
+    --muse: #7b45d6;
+    --grok: #d1478a;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f6f7f9; --panel: #ffffff; --panel-2: #f0f2f5; --grid: #e2e6ec;
+      --ink: #131922; --muted: #5c6675; --faint: #9aa4b2; --hair: #e7eaef;
+      --fable: #1f6fe0; --solx: #0e9c6b; --k3: #c47d00; --soldf: #d63a30;
+      --muse: #7b45d6; --grok: #d1478a;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-monospace, "SF Mono", "JetBrains Mono", "Menlo", monospace;
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(16px, 4vw, 44px);
+    font-variant-numeric: tabular-nums;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: 26px; }
+  .eyebrow { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
+  h1 { font-size: clamp(19px, 3.2vw, 25px); font-weight: 600; letter-spacing: -.01em; line-height: 1.25; }
+  h1 .dim { color: var(--muted); font-weight: 400; }
+  .sub { color: var(--muted); font-size: 12.5px; margin-top: 8px; max-width: 60ch; line-height: 1.55; }
+  .controls { display: flex; gap: 6px; align-items: center; }
+  .seg { display: flex; border: 1px solid var(--grid); border-radius: 7px; overflow: hidden; }
+  .seg button {
+    font: inherit; font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase;
+    background: transparent; color: var(--muted); border: 0; padding: 7px 13px; cursor: pointer;
+  }
+  .seg button[aria-pressed="true"] { background: var(--panel-2); color: var(--ink); }
+  .seg button:focus-visible { outline: 2px solid var(--fable); outline-offset: -2px; }
+
+  .card { background: var(--panel); border: 1px solid var(--hair); border-radius: 14px; padding: 22px 22px 14px; }
+  .chart { width: 100%; display: block; }
+  .bar { transition: opacity .12s; cursor: default; }
+  .barwrap:hover .bar { opacity: .35; }
+  .barwrap:hover .bar.on { opacity: 1; }
+  .glabel { fill: var(--muted); font-size: 12px; letter-spacing: .06em; }
+  .gridline { stroke: var(--grid); stroke-width: 1; }
+  .gridtext { fill: var(--faint); font-size: 10px; }
+  .axis { stroke: var(--grid); stroke-width: 1; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--hair); }
+  .lg { display: flex; align-items: baseline; gap: 9px; font-size: 12px; padding: 3px 0; }
+  .sw { width: 11px; height: 11px; border-radius: 3px; flex: none; transform: translateY(1px); }
+  .lg .nm { color: var(--ink); }
+  .lg .tot { color: var(--muted); margin-left: auto; font-size: 11.5px; }
+  .lg.pending .nm, .lg.pending .tot { color: var(--faint); }
+
+  .tip {
+    position: fixed; pointer-events: none; z-index: 20; opacity: 0; transition: opacity .1s;
+    background: var(--panel-2); border: 1px solid var(--grid); border-radius: 8px;
+    padding: 9px 11px; font-size: 11.5px; box-shadow: 0 8px 26px rgba(0,0,0,.35); min-width: 150px;
+  }
+  .tip .th { color: var(--muted); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+  .tip .row { display: flex; align-items: center; gap: 8px; padding: 2px 0; }
+  .tip .row .sw { width: 9px; height: 9px; }
+  .tip .row .v { margin-left: auto; color: var(--ink); }
+  .tip .row .k { color: var(--muted); }
+  .foot { color: var(--faint); font-size: 11px; margin-top: 18px; line-height: 1.6; }
+  .foot b { color: var(--muted); font-weight: 600; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <div class="head">
+    <div>
+      <div class="eyebrow">IMO 2026 · autonomous benchmark</div>
+      <h1>Output tokens per problem <span class="dim">/ by model</span></h1>
+      <p class="sub">Completion tokens (billed reasoning included) each of the six runs spent per problem, summed across all rounds. Identical harness; grading verified. Hover a problem for the breakdown.</p>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Scale">
+        <button id="log" aria-pressed="true">Log</button>
+        <button id="lin" aria-pressed="false">Linear</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <svg id="chart" class="chart" role="img" aria-label="Grouped bar chart of output tokens per problem by model"></svg>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <p class="foot"><b>Reads:</b> P3 (combinatorics capstone) and P6 (number-theory finale) dominate every run — the easy problems (P1/P4/P5) barely register. Kimi K3 spent ~847k tokens on P3 alone; GPT-5.6 Sol at default effort stayed flat and cheap, and scored 28/42 for it. Spending big doesn't guarantee correctness: Meta Muse Spark 1.1 (26/42) and xAI Grok 4.5 (13/42) both poured heavy reasoning into P3/P6 and still couldn't close them — Grok's tiny P6 bar (7k) is where it gave up early.</p>
+</div>
+
+<div class="tip" id="tip"></div>
+
+<script>
+const PROBS = ["P1","P2","P3","P4","P5","P6"];
+const DATA = [
+  { key:"fable", name:"Claude Fable 5",        c:"var(--fable)", pending:false, v:[16826,141363,331025,39027,55114,121922] },
+  { key:"solx",  name:"GPT-5.6 Sol · xhigh",   c:"var(--solx)",  pending:false, v:[8488,113253,43259,20623,14497,36052] },
+  { key:"k3",    name:"Kimi K3",               c:"var(--k3)",    pending:false, v:[27657,171310,846626,70540,47550,381100] },
+  { key:"soldf", name:"GPT-5.6 Sol · default", c:"var(--soldf)", pending:false, v:[6050,17860,16574,9084,9227,21420] },
+  { key:"muse",  name:"Meta Muse Spark 1.1",   c:"var(--muse)",  pending:false, v:[17047,183399,224090,85835,46114,204340] },
+  { key:"grok",  name:"xAI Grok 4.5",          c:"var(--grok)",  pending:false, v:[30212,127445,273455,72444,95009,7053] },
+];
+const active = DATA.filter(d => !d.pending);
+
+const fmt = n => n >= 1000 ? (n/1000).toFixed(n >= 100000 ? 0 : 1).replace(/\.0$/,'') + "k" : String(n);
+const svg = document.getElementById("chart");
+const tip = document.getElementById("tip");
+let scale = "log";
+
+const W = 900, H = 420, ML = 52, MR = 14, MT = 14, MB = 40;
+const IW = W - ML - MR, IH = H - MT - MB;
+
+function ticks() {
+  if (scale === "log") return [1e3, 1e4, 1e5, 1e6].map(v => ({v, y: yLog(v)}));
+  const max = 900000, step = 150000, out = [];
+  for (let v = 0; v <= max; v += step) out.push({v, y: yLin(v)});
+  return out;
+}
+const LMIN = Math.log10(3000), LMAX = Math.log10(1000000);
+const yLog = v => MT + IH - (Math.log10(Math.max(v, 3000)) - LMIN) / (LMAX - LMIN) * IH;
+const yLin = v => MT + IH - (v / 900000) * IH;
+const yOf = v => scale === "log" ? yLog(v) : yLin(v);
+const y0 = () => scale === "log" ? MT + IH : yLin(0);
+
+function draw() {
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  let s = "";
+  for (const t of ticks()) {
+    s += `<line class="gridline" x1="${ML}" x2="${W-MR}" y1="${t.y.toFixed(1)}" y2="${t.y.toFixed(1)}"/>`;
+    s += `<text class="gridtext" x="${ML-8}" y="${(t.y+3).toFixed(1)}" text-anchor="end">${fmt(t.v)}</text>`;
+  }
+  s += `<line class="axis" x1="${ML}" x2="${ML}" y1="${MT}" y2="${MT+IH}"/>`;
+  const gw = IW / PROBS.length, nb = active.length, bw = Math.min(30, (gw * 0.72) / nb), gap = 3;
+  const cluster = nb * bw + (nb - 1) * gap;
+  PROBS.forEach((p, gi) => {
+    const gx = ML + gi * gw + gw / 2;
+    const startX = gx - cluster / 2;
+    s += `<g class="barwrap" data-gi="${gi}">`;
+    s += `<rect x="${(ML+gi*gw).toFixed(1)}" y="${MT}" width="${gw.toFixed(1)}" height="${IH}" fill="transparent"/>`;
+    active.forEach((d, bi) => {
+      const val = d.v[gi];
+      const x = startX + bi * (bw + gap);
+      const yt = yOf(val), yb = y0();
+      const h = Math.max(1.5, yb - yt);
+      s += `<rect class="bar on" data-gi="${gi}" x="${x.toFixed(1)}" y="${yt.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="2.5" fill="${d.c}"/>`;
+    });
+    s += `<text class="glabel" x="${gx.toFixed(1)}" y="${(MT+IH+22).toFixed(1)}" text-anchor="middle">${p}</text>`;
+    s += `</g>`;
+  });
+  svg.innerHTML = s;
+  bindHover(gw);
+}
+
+function bindHover(gw) {
+  svg.querySelectorAll(".barwrap").forEach(g => {
+    const gi = +g.dataset.gi;
+    g.addEventListener("pointermove", e => {
+      svg.querySelectorAll(".bar").forEach(b => b.classList.toggle("on", +b.dataset.gi === gi));
+      let rows = active.map(d =>
+        `<div class="row"><span class="sw" style="background:${d.c}"></span><span class="k">${d.name}</span><span class="v">${d.v[gi].toLocaleString()}</span></div>`
+      ).join("");
+      tip.innerHTML = `<div class="th">Problem ${PROBS[gi][1]} · output tokens</div>${rows}`;
+      tip.style.opacity = "1";
+      const r = tip.getBoundingClientRect();
+      let x = e.clientX + 16, y = e.clientY - r.height / 2;
+      if (x + r.width > innerWidth - 8) x = e.clientX - r.width - 16;
+      if (y < 8) y = 8; if (y + r.height > innerHeight - 8) y = innerHeight - r.height - 8;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    });
+    g.addEventListener("pointerleave", () => {
+      svg.querySelectorAll(".bar").forEach(b => b.classList.add("on"));
+      tip.style.opacity = "0";
+    });
+  });
+}
+
+const legend = document.getElementById("legend");
+legend.innerHTML = DATA.map(d => {
+  const tot = d.pending ? "running…" : d.v.reduce((a,b)=>a+b,0).toLocaleString();
+  return `<div class="lg${d.pending?' pending':''}"><span class="sw" style="background:${d.c}"></span><span class="nm">${d.name}</span><span class="tot">${tot}</span></div>`;
+}).join("");
+
+function setScale(sc) {
+  scale = sc;
+  document.getElementById("log").setAttribute("aria-pressed", sc === "log");
+  document.getElementById("lin").setAttribute("aria-pressed", sc === "lin");
+  draw();
+}
+document.getElementById("log").onclick = () => setScale("log");
+document.getElementById("lin").onclick = () => setScale("lin");
+draw();
+</script>

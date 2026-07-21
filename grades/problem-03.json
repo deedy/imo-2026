@@ -51,6 +51,36 @@
    "key_issues": [
     "Marks at the endpoints 0/1 never discussed (zero-length pieces); harmless under the natural reading and shared by the other 7-scored solutions"
    ]
+  },
+  {
+   "model": "muse-spark-1.1",
+   "present": true,
+   "claimed_status": "partial",
+   "answer_stated": "c = (n+1)/(2n+1)  [WRONG; correct is 2^n/(2^{n+1}-1)]",
+   "score": 1,
+   "confidence": "high",
+   "justification": "A stream-of-consciousness tracking file, honestly self-reported 'partial'. The conjectured answer (n+1)/(2n+1) is WRONG for all n>=2 (it coincides with the correct 2^n/(2^{n+1}-1) only at n=1, both = 2/3). Only the n=1 case is genuinely handled. The single substantive general claim - that Liu's 'even-multiples' construction (n pieces of size 2d and one of size d, d=1/(2n+1)) guarantees Liu (n+1)/(2n+1) - is FALSE, and is exactly the calibration's 'false XY-guarantee' failure mode. Its internal invariance sub-lemma (splitting each big piece once yields Liu-share (n+1)d, cancelling deltas by matched parity of positions i and 2n+2-i) is itself mathematically correct, but the fatal gap is assuming Xiang's best response is to split each big piece once while leaving the small piece 'untouched'. I machine-tested n=2 ({0.4,0.4,0.2}, Xiang 2 cuts): exact minimax (agreeing with the sum-of-odd-ranks formula) shows Xiang holds Liu to 101/200 = 0.505 by cutting the SMALL piece into slivers - far below the claimed 0.6 and even below the true optimum 4/7 ~ 0.571. There is no upper-bound argument at all; the file explicitly ends stuck ('need different Xiang strategy to upper bound', 'let's attempt to search computationally'). Correct n=1 plus a correct claiming-game value understanding keep it just above 0.",
+   "key_issues": [
+    "Final answer (n+1)/(2n+1) is wrong for every n>=2",
+    "Central lower-bound claim is false: machine-tested n=2, Xiang forces Liu to 0.505 < 0.6 by slicing the small piece (a response never considered)",
+    "No upper bound whatsoever; author explicitly stuck",
+    "The (correct) invariance lemma only covers 'split each big piece once', not the full space of Xiang responses"
+   ]
+  },
+  {
+   "model": "grok-4.5",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "c = 2^n/(2^{n+1}-1)",
+   "score": 2,
+   "confidence": "high",
+   "justification": "The 'solved' claim does NOT hold up - this is a substantial overclaim, and the run was cut off by the 80-turn cap (the file literally ends with python string-literal artifacts '\"\"\")' and 'print(\"done writing\")', i.e. it was mid-write). Genuine correct content: the correct answer; the alternating-sum functional D with V(L)=(sum+D)/2; and Lemma A (subadditivity D(X u Y)<=D(X)+D(Y) and reverse-triangle D(X u Y)>=|D(X)-D(Y)|), which IS a real non-trivial lemma correctly proved via the integral/parity representation (I verified delta_{XuY}=delta_X XOR delta_Y gives both inequalities). The power-of-two construction and the reduction (lower bound <=> Theorem B: D>=1 after <=n cuts on B_n={1,2,4,...,2^n}) are the right architecture. BUT neither bound is actually proved. Theorem B's induction: the k=0 base is fine, but the k>=1 step is garbled and hand-waved - it contains literal placeholders like '(something that forces)', multilingual gibberish, and openly substitutes 'numerical checks for n<=3' and 'checked exhaustively by hand' for the general argument. Theorem C (upper bound) is worse: multiple false starts, an admitted contradiction ('This appears contradictory unless...'), a 'the correct logic is dual' restart, and a hand-waved 'binary Greedy Egyptian fraction algorithm' whose '<=n cuts' cost is asserted, never proved. This maps almost exactly onto gpt-5.6-sol (score 2): correct answer + correct global architecture + a genuinely rigorous claiming-phase component, but BOTH bounds rest on unproved/garbled sketches, so neither direction is established.",
+   "key_issues": [
+    "Both bounds unproved: Theorem B's k>=1 induction step is garbled hand-waving; Theorem C (upper bound) never completes and contains an admitted contradiction",
+    "Run hit the 80-turn cap; output is corrupted (multilingual gibberish tokens) and cut off mid-write (trailing '\"\"\")'/'print(\"done writing\")')",
+    "Substitutes 'numerical checks for n<=3' and 'checked by hand' for the general inductive proof in both directions",
+    "Salvageable correct pieces (answer, D-functional, Lemma A proved via integral, construction) do not amount to a proof of either bound"
+   ]
   }
  ]
 }

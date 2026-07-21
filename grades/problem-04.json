@@ -44,6 +44,31 @@
    "key_issues": [
     "Realizability of the cut (ray from the vertex meets the opposite side) asserted in one line, as in the default run; standard fact, cosmetic only"
    ]
+  },
+  {
+   "model": "muse-spark-1.1",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "theta = 180/n for an integer n >= 2 (one cut for theta = 90, at most n-1 cuts otherwise)",
+   "score": 7,
+   "confidence": "high",
+   "justification": "Complete and correct proof of both directions; the answer theta = 180/n (n >= 2) is right. The cut model C1 = (p, x, q+D-x), C2 = (q, D-x, p+x) with donor D and x in (0,D) is correctly derived. Sufficiency (Section 3, n >= 3): from a triangle with no marked angle, Mulan takes p = minimal angle (<= 60), writes p = k*theta + alpha (0 < alpha < theta), and cuts the maximal angle D with x = r = theta - alpha; this plants p+r = (k+1)theta in one child and 180-p-r = (n-k-1)theta in the other. I checked r in (0,D) (since r < theta <= 60 <= D), (k+1)theta < 120 < 180, and 1 <= n-k-1 <= n-1, so both children carry a genuine multiple in {theta,...,(n-1)theta}; the theta + (k-1)theta descent lemma then forces theta within n-1 cuts against any retention. The n=2 (theta=90) case is a correct separate one-cut argument (both children get a 90). Necessity (Section 4, 180 not a multiple of theta): the safe-child invariant I = {no angle is a multiple of theta} is proved by an exhaustive 2x2 case split; the only ways both children could leave I force D, p, or q to be a multiple of theta (contradicting parent in I) or force 180 = (k1+k3)theta (contradicting 180 not divisible by theta). Shan-Yu starts in I (nonempty) and stays forever, so Mulan never gets theta. I re-verified every case, the positivity/legality conditions, and confirmed both directions by exact/random computation (0 failures across all divisors n and many non-divisor theta including theta > 90).",
+   "key_issues": [
+    "Cut legality (that P ranging over the open side realizes exactly x in (0,D)) is used but not derived; standard fact and the same minor blemish present in the reference 7s, cosmetic only",
+    "Section 1's general-theta W_1 enumeration contains a garbled line (a stray '\\?' and an incomplete 'more directly' clause), but this is a cosmetic exposition wart in an auxiliary section; the load-bearing Sections 3-4 and the n=2 argument stand on their own and are unaffected"
+   ]
+  },
+  {
+   "model": "grok-4.5",
+   "present": true,
+   "claimed_status": "unsolved",
+   "answer_stated": "",
+   "score": 0,
+   "confidence": "high",
+   "justification": "Blank submission. The on-disk current.md is a 21-line stub: Status 'unsolved', 'Approaches tried: (none yet)', 'Current best: Not yet solved. Exploring the problem structure.', 'Full proof: (proof pending)'. No answer, no strategy, no mathematical content of any kind. (The model's first attempt hallucinated writing files without doing so; this retry is genuinely empty.) Nothing to credit.",
+   "key_issues": [
+    "No solution present: no answer stated, no strategy for either direction, no proof"
+   ]
   }
  ]
 }
