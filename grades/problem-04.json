@@ -69,6 +69,21 @@
    "key_issues": [
     "No solution present: no answer stated, no strategy for either direction, no proof"
    ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "present": true,
+   "claimed_status": "partial",
+   "answer_stated": "none committed (floats '180/theta NOT an integer' and 'theta=90 only', both wrong; correct is theta=180/n for integer n>=2)",
+   "score": 1,
+   "confidence": "high",
+   "justification": "A 28-line honest 'partial' with no proof of either direction, on a problem most models fully solved. Genuine correct content: (1) the cut operation is correctly modeled - splitting angle a into p,q yields children (p,b,c+q) and (q,c,b+p); (2) a correct one-move-win argument for theta=90 (split a vertex whose two neighbours B,C are <90 into 90-B and 90-C, planting a right angle in both children - I verified this cut is always available, since at most one angle is >=90, on several triangles). But the general answer is never identified: the file explicitly conjectures the OPPOSITE of the truth ('Mulan wins iff 180/theta is NOT an integer') and alternatively 'theta=90 only', both wrong; the correct characterization is theta=180/n for integer n>=2. Its discretized search actually stumbles onto the right winning set (45,60,90,36 winning; 72,108,120,150 losing) but misreports 30 as sometimes-losing (a discretization false-negative, since 30=180/6 is winning), and the model fails to read the divisor pattern off its own data. No necessity invariant and no general sufficiency construction are given - only the single easiest case (theta=90) is resolved. The correct operation model plus the theta=90 special case earn a minimal 1; the uncommitted/backwards general answer and the total absence of proof keep it there.",
+   "key_issues": [
+    "Correct general answer (theta=180/n, integer n>=2) never identified; the file conjectures the opposite ('180/theta NOT an integer') and 'theta=90 only', both wrong",
+    "No proof of either direction: no necessity invariant, no general sufficiency construction; only theta=90 (one-move win) is resolved",
+    "Search data actually matches the truth (divisors of 180 win) but is misread; 30=180/6 mis-flagged as losing via a discretization artifact",
+    "Genuine but modest correct content: correct cut model (p,b,c+q)/(q,c,b+p) and a correct theta=90 one-move argument"
+   ]
   }
  ]
 }

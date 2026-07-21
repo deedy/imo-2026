@@ -72,6 +72,20 @@
     "No proof: the 'Full proof' section is literally '(Not yet complete.)'.",
     "Correctly conjectures the structure (finite union of APs with L = product of finitely many core primes) and honestly names the finiteness crux and its circularity, but gives no argument that only finitely many primes are essential -- the core difficulty is entirely unaddressed."
    ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "present": true,
+   "claimed_status": "partial",
+   "answer_stated": null,
+   "score": 1,
+   "confidence": "high",
+   "justification": "Self-reported 'partial -- developing rigorous proof', which is accurate: the 'Full proof' section reads '(To be written after completing the rigorous arguments.)' -- there is NO proof, only an outline. The correct content is the standard scaffolding shared with all attempts: the reduction (P(a_{n+1}) must meet every P(a_i), so a good number is one whose prime set is a transversal of F = {P(a_n)}; the sequence is exactly the sorted list of good numbers >= a1; good iff the prime set contains a minimal transversal; hence the good numbers are a finite union of APs IF the minimal-transversal family T is finite) and the correct conjecture of the periodic structure -- which I re-simulated (a1=15 -> (T,L)=(8,30) with residues matching; a1=35 -> (34,210)), consistent with the other models' runs. But THE crux -- finiteness of T -- is NOT proven. Step 6's 'proof' gestures at number theory (p = smallest prime of a1, a2 = a1+p, the first index k with p not dividing a_k) but then merely ASSERTS 'the family T stabilizes within at most one more step' and 'no prime first appearing after a_k can enter any minimal transversal (because such a prime would be redundant)'. This stabilization/redundancy claim is precisely the flawed set-system intuition the calibration flags as FALSE: pairwise-intersecting families can have minimal transversals of unboundedly growing size, so new primes CAN keep entering. The correct number-theoretic product-descent over cores C with prod(C) <= a1 (used by the scoring-7 solutions) is entirely absent. The number-theoretic gesture restates the setup but does not constitute a valid partial argument for the hard part, and the optimistic 'stabilizes in one step' claim is a mark against, not for. Comparable to grok-4.5 (score 1): correct reduction + correct conjecture + honest crux identification, no valid finiteness argument, empty proof section. Score 1.",
+   "key_issues": [
+    "No proof written: the 'Full proof' section is literally '(To be written after completing the rigorous arguments.)'; the document is an outline with no rigorously established lemmas.",
+    "The finiteness crux (T finite / minimal-transversal family stabilizes) is only ASSERTED. Step 6 claims 'T stabilizes within at most one more step' and 'no prime appearing after a_k can enter any minimal transversal (redundant)' -- this is the flawed set-system intuition (pairwise-intersecting families can have minimal transversals of unbounded size), and the correct number-theoretic product-descent over cores with product <= a1 is absent.",
+    "Only routine scaffolding is correct (good=transversal reduction, sequence=sorted good numbers, finite-union-of-APs conclusion, periodic-structure conjecture -- re-simulated and matching); the entire IMO-9 difficulty is unresolved."
+   ]
   }
  ]
 }

@@ -81,6 +81,22 @@
     "Substitutes 'numerical checks for n<=3' and 'checked by hand' for the general inductive proof in both directions",
     "Salvageable correct pieces (answer, D-functional, Lemma A proved via integral, construction) do not amount to a proof of either bound"
    ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "present": true,
+   "claimed_status": "partial",
+   "answer_stated": "c = (n+1)/(2n+1)  [WRONG; correct is 2^n/(2^{n+1}-1)]",
+   "score": 1,
+   "confidence": "high",
+   "justification": "An honest 'partial' tracking file that is essentially a conjecture with no proof. The stated answer (n+1)/(2n+1) is WRONG for every n>=2 (it equals the correct 2^n/(2^{n+1}-1) only at n=1, both 2/3); only n=1 is genuinely right. The lower-bound claim - that Liu's equally-spaced marks {1/(2n+1),...,n/(2n+1)} guarantee (n+1)/(2n+1) because 'Xiang's optimal response makes all 2n+1 pieces equal' - is exactly the calibration's flagged false-XY-guarantee. I verified in exact arithmetic (claiming value = odd-rank sum, confirmed on 200 multisets and on {3,2,1}->4): against DeepSeek's OWN n=2 construction {0.2,0.2,0.6}, Xiang holds Liu to 53/105 ~ 0.5048 by slicing the small piece, far below the claimed 0.6 and below the true optimum 4/7 ~ 0.5714 (which a powers-of-two construction {1/7,2/7,4/7} achieves, verified). Even the file's brute-force data is wrong (it reports n=2 = 3/5 = 0.6; the true value is 4/7). No upper bound is attempted ('Full proof: (To be completed)'), no rigorous lemma is present, and the claiming subgame is treated naively (first player just takes n+1 of 2n+1 equal pieces) with none of the odd-rank-sum insight. Strictly weaker than the calibrated score-1 muse-spark entry (same wrong answer, but that one also had a correct invariance lemma and correct claiming-value understanding); kept just above 0 only by the correct n=1 value, the honest self-report, and correct two-phase framing.",
+   "key_issues": [
+    "Final answer (n+1)/(2n+1) is wrong for every n>=2 (correct: 2^n/(2^{n+1}-1))",
+    "Central lower-bound claim is the flagged false-XY-guarantee: verified Xiang holds Liu to 53/105 ~ 0.505 < 0.6 against DeepSeek's own {0.2,0.2,0.6} construction for n=2",
+    "No upper bound and no proof of either direction; 'Full proof: (To be completed)'",
+    "Brute-force data itself is wrong (claims n=2 = 3/5; true value is 4/7)",
+    "Claiming subgame handled naively; no odd-rank-sum insight, no invariance lemma"
+   ]
   }
  ]
 }

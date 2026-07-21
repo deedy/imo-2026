@@ -65,6 +65,16 @@
     "Core identity f(f(y))=2f(y)-y found only implicitly on the image; no monotonicity/orbit/constancy argument built on it",
     "No sufficiency direction, no nonnegativity/constancy proof"
    ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "present": true,
+   "claimed_status": "solved",
+   "answer_stated": "f(x) = x + c for a constant c >= 0",
+   "score": 7,
+   "confidence": "high",
+   "justification": "The self-reported 'solved' claim HOLDS UP: complete and rigorous, verified line-by-line and with a CAS. Squaring the two-sided hypothesis and setting x = f(y) collapses both outer bounds to 4f(y)^2, forcing the core identity f(f(y)) = 2f(y) - y; with g = f - id this gives g(x+g(x)) = g(x), so forward orbits are APs x + n g(x), and positivity of f (orbit must stay in R_{>0}) forces g >= 0. The two fundamental identities are CAS-confirmed exactly zero: (5) A + B = 2(x - f(y))^2 and (6) A - B = -2(g(x)-g(y))(g(x)+g(y)+2x+2y), yielding via |A-B| <= A+B the confinement inequality (7) |g(x)-g(y)|(g(x)+g(y)+2x+2y) <= (x - f(y))^2. At-most-one-positive-value: two positive gaps c1 > c2 are killed by interleaving the orbits u+nc1, v+mc2 in (9) -- rational ratio gives linear-growing LHS against constant RHS, irrational ratio uses density of {nc1 - mc2} to drive RHS -> 0 while LHS -> infinity (with n_k -> infinity attainable by equidistribution); both correct. The fixed-point-coexistence a=0 case (S0 = {g=0}, Sc = {g=c}) that several models mishandled is handled correctly: (11) A(y,x) = (x-y)^2 - c^2 - 2c(x+y) >= 0 (CAS-verified) gives the separation |x-y| > c (12); Lemma 1 descends in steps of c to a seed u in (0,c] with g(u)=c; the radius-c intervals about the orbit {u+nc} subset Sc cover (0, infinity), so any x in S0 would violate (12), forcing S0 empty and g == c. Sufficiency is exactly QM-AM and AM-GM on the pair (x, y+c) since f(x)+y = x+f(y) = x+y+c; I confirmed both inequalities numerically for c in {0, 0.3, 1, 5, 100} and that f=2x and f=x^2 fail. Both directions complete; c >= 0 is forced. Only a cosmetic typo (4cx written for 4cy in A(x,y) in Step 5), which is labeled 'always true' and never used.",
+   "key_issues": []
   }
  ]
 }
