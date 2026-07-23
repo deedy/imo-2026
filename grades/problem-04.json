@@ -1,89 +1,113 @@
 {
- "problem": "imo-2026-04",
- "entries": [
-  {
-   "model": "kimi-k3",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "theta = 180/n for an integer n >= 2 (win within n-1 moves)",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete proof, with the cut lemma fully proved in the cited lemmas/cut-geometry.md (angle chase plus IVT for realizability). Sufficiency uses the round-up distances d(x): Claim 1 (sum of d's is theta or 2theta) and Claim 2 (existence of u, v with d(u) < v, with the n = 2 equality case correctly eliminated) give a legal cut making both halves marked, then the halving lemma descends to theta within n-1 moves total. Necessity is a clean exhaustive three-case maintenance argument for the no-marked-angle invariant from an equilateral start, where the only failure mode requires 180 = (j+k)theta. I checked every case and inequality; the argument is sound, and the exact-arithmetic computational verification is a bonus.",
-   "key_issues": []
-  },
-  {
-   "model": "claude-fable-5",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "theta = 180/n for an integer n >= 2 (win within n-1 cuts)",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and self-contained proof. Lemma 0 gives the cut parametrization with realizability; the chain lemma and the double-threat Lemma 2 (least k with C < k*theta < 180 - B, with a separate correct n = 2 argument showing B, C < 90) prove sufficiency within n-1 cuts, and the four-case closure Lemma 4 plus an explicit safe-start construction prove necessity. I verified the strictness chain k*theta <= C + theta < C + A (using A > theta, which is properly established from A >= 60 >= theta and A not in theta*N) and found the case analyses exhaustive. No gaps of substance.",
-   "key_issues": []
-  },
-  {
-   "model": "gpt-5.6-sol",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "theta = 180/N for an integer N >= 2",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete proof in compact form. Sufficiency: the relabeling lemma (integer k with b < k < a+b, all-below-1 case correctly forced to N = 2) gives a legal cut planting integral angles N-k and k in the two children, followed by the theta/(m-1)theta descent. Necessity: in G = R/(theta Z) with t = [180] != 0, the equilateral start is safe and the four pairings (u = v = 0; u = b + u = 0; v = c + v = 0; c + v = b + u = 0 forcing t = 0) exhaust the ways both children could be unsafe. The cut mechanics and crossbar-type legality are asserted with one-line angle-sum justifications rather than derived at length, which is acceptable; the argument is correct and both directions are fully proved.",
-   "key_issues": [
-    "Cut legality (interior ray meets opposite side) asserted rather than proved; standard fact, minor blemish"
-   ]
-  },
-  {
-   "model": "gpt-5.6-sol-xhigh",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "theta = 180/n for an integer n >= 2",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete proof of both directions, verified step by step. The cut model (1)-(2) is correct with the legality criterion 0 < x < A. Lemma 1 (angle m*theta => win in <= m-1 cuts) is a clean induction with the theta + (m-1)theta split. Sufficiency: the relabeling Claim (integer k with b < k < a+b, where the all-below-1 case correctly forces n = 2 via a+b = 2-c > 1, and 1 <= k <= n-1 is derived from positivity and k < n-c) yields the cut x = (k-b)theta planting the integral cut-point angles k*theta and (n-k)*theta in the two children, so Lemma 1 finishes against any retention. Necessity: 'safe' invariant with an exhaustive four-case analysis (cases 1-3 contradict parent safety via A, B, C respectively; case 4 forces 180 = (p+q)theta), equilateral safe start, so Shan-Yu survives forever. All positivity/legality checks present.",
-   "key_issues": [
-    "Realizability of the cut (ray from the vertex meets the opposite side) asserted in one line, as in the default run; standard fact, cosmetic only"
-   ]
-  },
-  {
-   "model": "muse-spark-1.1",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "theta = 180/n for an integer n >= 2 (one cut for theta = 90, at most n-1 cuts otherwise)",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and correct proof of both directions; the answer theta = 180/n (n >= 2) is right. The cut model C1 = (p, x, q+D-x), C2 = (q, D-x, p+x) with donor D and x in (0,D) is correctly derived. Sufficiency (Section 3, n >= 3): from a triangle with no marked angle, Mulan takes p = minimal angle (<= 60), writes p = k*theta + alpha (0 < alpha < theta), and cuts the maximal angle D with x = r = theta - alpha; this plants p+r = (k+1)theta in one child and 180-p-r = (n-k-1)theta in the other. I checked r in (0,D) (since r < theta <= 60 <= D), (k+1)theta < 120 < 180, and 1 <= n-k-1 <= n-1, so both children carry a genuine multiple in {theta,...,(n-1)theta}; the theta + (k-1)theta descent lemma then forces theta within n-1 cuts against any retention. The n=2 (theta=90) case is a correct separate one-cut argument (both children get a 90). Necessity (Section 4, 180 not a multiple of theta): the safe-child invariant I = {no angle is a multiple of theta} is proved by an exhaustive 2x2 case split; the only ways both children could leave I force D, p, or q to be a multiple of theta (contradicting parent in I) or force 180 = (k1+k3)theta (contradicting 180 not divisible by theta). Shan-Yu starts in I (nonempty) and stays forever, so Mulan never gets theta. I re-verified every case, the positivity/legality conditions, and confirmed both directions by exact/random computation (0 failures across all divisors n and many non-divisor theta including theta > 90).",
-   "key_issues": [
-    "Cut legality (that P ranging over the open side realizes exactly x in (0,D)) is used but not derived; standard fact and the same minor blemish present in the reference 7s, cosmetic only",
-    "Section 1's general-theta W_1 enumeration contains a garbled line (a stray '\\?' and an incomplete 'more directly' clause), but this is a cosmetic exposition wart in an auxiliary section; the load-bearing Sections 3-4 and the n=2 argument stand on their own and are unaffected"
-   ]
-  },
-  {
-   "model": "grok-4.5",
-   "present": true,
-   "claimed_status": "unsolved",
-   "answer_stated": "",
-   "score": 0,
-   "confidence": "high",
-   "justification": "Blank submission. The on-disk current.md is a 21-line stub: Status 'unsolved', 'Approaches tried: (none yet)', 'Current best: Not yet solved. Exploring the problem structure.', 'Full proof: (proof pending)'. No answer, no strategy, no mathematical content of any kind. (The model's first attempt hallucinated writing files without doing so; this retry is genuinely empty.) Nothing to credit.",
-   "key_issues": [
-    "No solution present: no answer stated, no strategy for either direction, no proof"
-   ]
-  },
-  {
-   "model": "deepseek-v4-pro",
-   "present": true,
-   "claimed_status": "partial",
-   "answer_stated": "none committed (floats '180/theta NOT an integer' and 'theta=90 only', both wrong; correct is theta=180/n for integer n>=2)",
-   "score": 1,
-   "confidence": "high",
-   "justification": "A 28-line honest 'partial' with no proof of either direction, on a problem most models fully solved. Genuine correct content: (1) the cut operation is correctly modeled - splitting angle a into p,q yields children (p,b,c+q) and (q,c,b+p); (2) a correct one-move-win argument for theta=90 (split a vertex whose two neighbours B,C are <90 into 90-B and 90-C, planting a right angle in both children - I verified this cut is always available, since at most one angle is >=90, on several triangles). But the general answer is never identified: the file explicitly conjectures the OPPOSITE of the truth ('Mulan wins iff 180/theta is NOT an integer') and alternatively 'theta=90 only', both wrong; the correct characterization is theta=180/n for integer n>=2. Its discretized search actually stumbles onto the right winning set (45,60,90,36 winning; 72,108,120,150 losing) but misreports 30 as sometimes-losing (a discretization false-negative, since 30=180/6 is winning), and the model fails to read the divisor pattern off its own data. No necessity invariant and no general sufficiency construction are given - only the single easiest case (theta=90) is resolved. The correct operation model plus the theta=90 special case earn a minimal 1; the uncommitted/backwards general answer and the total absence of proof keep it there.",
-   "key_issues": [
-    "Correct general answer (theta=180/n, integer n>=2) never identified; the file conjectures the opposite ('180/theta NOT an integer') and 'theta=90 only', both wrong",
-    "No proof of either direction: no necessity invariant, no general sufficiency construction; only theta=90 (one-move win) is resolved",
-    "Search data actually matches the truth (divisors of 180 win) but is misread; 30=180/6 mis-flagged as losing via a discretization artifact",
-    "Genuine but modest correct content: correct cut model (p,b,c+q)/(q,c,b+p) and a correct theta=90 one-move argument"
-   ]
-  }
- ]
+  "problem": "imo-2026-04",
+  "entries": [
+    {
+      "model": "kimi-k3",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "theta = 180/n for an integer n >= 2 (win within n-1 moves)",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete proof, with the cut lemma fully proved in the cited lemmas/cut-geometry.md (angle chase plus IVT for realizability). Sufficiency uses the round-up distances d(x): Claim 1 (sum of d's is theta or 2theta) and Claim 2 (existence of u, v with d(u) < v, with the n = 2 equality case correctly eliminated) give a legal cut making both halves marked, then the halving lemma descends to theta within n-1 moves total. Necessity is a clean exhaustive three-case maintenance argument for the no-marked-angle invariant from an equilateral start, where the only failure mode requires 180 = (j+k)theta. I checked every case and inequality; the argument is sound, and the exact-arithmetic computational verification is a bonus.",
+      "key_issues": []
+    },
+    {
+      "model": "claude-fable-5",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "theta = 180/n for an integer n >= 2 (win within n-1 cuts)",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and self-contained proof. Lemma 0 gives the cut parametrization with realizability; the chain lemma and the double-threat Lemma 2 (least k with C < k*theta < 180 - B, with a separate correct n = 2 argument showing B, C < 90) prove sufficiency within n-1 cuts, and the four-case closure Lemma 4 plus an explicit safe-start construction prove necessity. I verified the strictness chain k*theta <= C + theta < C + A (using A > theta, which is properly established from A >= 60 >= theta and A not in theta*N) and found the case analyses exhaustive. No gaps of substance.",
+      "key_issues": []
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "theta = 180/N for an integer N >= 2",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete proof in compact form. Sufficiency: the relabeling lemma (integer k with b < k < a+b, all-below-1 case correctly forced to N = 2) gives a legal cut planting integral angles N-k and k in the two children, followed by the theta/(m-1)theta descent. Necessity: in G = R/(theta Z) with t = [180] != 0, the equilateral start is safe and the four pairings (u = v = 0; u = b + u = 0; v = c + v = 0; c + v = b + u = 0 forcing t = 0) exhaust the ways both children could be unsafe. The cut mechanics and crossbar-type legality are asserted with one-line angle-sum justifications rather than derived at length, which is acceptable; the argument is correct and both directions are fully proved.",
+      "key_issues": [
+        "Cut legality (interior ray meets opposite side) asserted rather than proved; standard fact, minor blemish"
+      ]
+    },
+    {
+      "model": "gpt-5.6-sol-xhigh",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "theta = 180/n for an integer n >= 2",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete proof of both directions, verified step by step. The cut model (1)-(2) is correct with the legality criterion 0 < x < A. Lemma 1 (angle m*theta => win in <= m-1 cuts) is a clean induction with the theta + (m-1)theta split. Sufficiency: the relabeling Claim (integer k with b < k < a+b, where the all-below-1 case correctly forces n = 2 via a+b = 2-c > 1, and 1 <= k <= n-1 is derived from positivity and k < n-c) yields the cut x = (k-b)theta planting the integral cut-point angles k*theta and (n-k)*theta in the two children, so Lemma 1 finishes against any retention. Necessity: 'safe' invariant with an exhaustive four-case analysis (cases 1-3 contradict parent safety via A, B, C respectively; case 4 forces 180 = (p+q)theta), equilateral safe start, so Shan-Yu survives forever. All positivity/legality checks present.",
+      "key_issues": [
+        "Realizability of the cut (ray from the vertex meets the opposite side) asserted in one line, as in the default run; standard fact, cosmetic only"
+      ]
+    },
+    {
+      "model": "muse-spark-1.1",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "theta = 180/n for an integer n >= 2 (one cut for theta = 90, at most n-1 cuts otherwise)",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and correct proof of both directions; the answer theta = 180/n (n >= 2) is right. The cut model C1 = (p, x, q+D-x), C2 = (q, D-x, p+x) with donor D and x in (0,D) is correctly derived. Sufficiency (Section 3, n >= 3): from a triangle with no marked angle, Mulan takes p = minimal angle (<= 60), writes p = k*theta + alpha (0 < alpha < theta), and cuts the maximal angle D with x = r = theta - alpha; this plants p+r = (k+1)theta in one child and 180-p-r = (n-k-1)theta in the other. I checked r in (0,D) (since r < theta <= 60 <= D), (k+1)theta < 120 < 180, and 1 <= n-k-1 <= n-1, so both children carry a genuine multiple in {theta,...,(n-1)theta}; the theta + (k-1)theta descent lemma then forces theta within n-1 cuts against any retention. The n=2 (theta=90) case is a correct separate one-cut argument (both children get a 90). Necessity (Section 4, 180 not a multiple of theta): the safe-child invariant I = {no angle is a multiple of theta} is proved by an exhaustive 2x2 case split; the only ways both children could leave I force D, p, or q to be a multiple of theta (contradicting parent in I) or force 180 = (k1+k3)theta (contradicting 180 not divisible by theta). Shan-Yu starts in I (nonempty) and stays forever, so Mulan never gets theta. I re-verified every case, the positivity/legality conditions, and confirmed both directions by exact/random computation (0 failures across all divisors n and many non-divisor theta including theta > 90).",
+      "key_issues": [
+        "Cut legality (that P ranging over the open side realizes exactly x in (0,D)) is used but not derived; standard fact and the same minor blemish present in the reference 7s, cosmetic only",
+        "Section 1's general-theta W_1 enumeration contains a garbled line (a stray '\\?' and an incomplete 'more directly' clause), but this is a cosmetic exposition wart in an auxiliary section; the load-bearing Sections 3-4 and the n=2 argument stand on their own and are unaffected"
+      ]
+    },
+    {
+      "model": "grok-4.5",
+      "present": true,
+      "claimed_status": "unsolved",
+      "answer_stated": "",
+      "score": 0,
+      "confidence": "high",
+      "justification": "Blank submission. The on-disk current.md is a 21-line stub: Status 'unsolved', 'Approaches tried: (none yet)', 'Current best: Not yet solved. Exploring the problem structure.', 'Full proof: (proof pending)'. No answer, no strategy, no mathematical content of any kind. (The model's first attempt hallucinated writing files without doing so; this retry is genuinely empty.) Nothing to credit.",
+      "key_issues": [
+        "No solution present: no answer stated, no strategy for either direction, no proof"
+      ]
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "present": true,
+      "claimed_status": "partial",
+      "answer_stated": "none committed (floats '180/theta NOT an integer' and 'theta=90 only', both wrong; correct is theta=180/n for integer n>=2)",
+      "score": 1,
+      "confidence": "high",
+      "justification": "A 28-line honest 'partial' with no proof of either direction, on a problem most models fully solved. Genuine correct content: (1) the cut operation is correctly modeled - splitting angle a into p,q yields children (p,b,c+q) and (q,c,b+p); (2) a correct one-move-win argument for theta=90 (split a vertex whose two neighbours B,C are <90 into 90-B and 90-C, planting a right angle in both children - I verified this cut is always available, since at most one angle is >=90, on several triangles). But the general answer is never identified: the file explicitly conjectures the OPPOSITE of the truth ('Mulan wins iff 180/theta is NOT an integer') and alternatively 'theta=90 only', both wrong; the correct characterization is theta=180/n for integer n>=2. Its discretized search actually stumbles onto the right winning set (45,60,90,36 winning; 72,108,120,150 losing) but misreports 30 as sometimes-losing (a discretization false-negative, since 30=180/6 is winning), and the model fails to read the divisor pattern off its own data. No necessity invariant and no general sufficiency construction are given - only the single easiest case (theta=90) is resolved. The correct operation model plus the theta=90 special case earn a minimal 1; the uncommitted/backwards general answer and the total absence of proof keep it there.",
+      "key_issues": [
+        "Correct general answer (theta=180/n, integer n>=2) never identified; the file conjectures the opposite ('180/theta NOT an integer') and 'theta=90 only', both wrong",
+        "No proof of either direction: no necessity invariant, no general sufficiency construction; only theta=90 (one-move win) is resolved",
+        "Search data actually matches the truth (divisors of 180 win) but is misread; 30=180/6 mis-flagged as losing via a discretization artifact",
+        "Genuine but modest correct content: correct cut model (p,b,c+q)/(q,c,b+p) and a correct theta=90 one-move argument"
+      ]
+    },
+    {
+      "model": "gpt-5.6-sol-pro",
+      "present": true,
+      "score": 7,
+      "claimed_status": "solved",
+      "answer_stated": "theta = 180 deg / N for an integer N >= 2",
+      "answer_correct": true,
+      "justification": "Correct characterization with both directions rigorously proved: sufficiency via an integer-angle-forcing induction plus an exhaustive reduction lemma producing two positive integer angles, and necessity via Shan-Yu's all-nonintegral invariant seeded by an equilateral triangle and preserved by an airtight four-case argument. Independent computational checks (full game solves N=2..5, 2M exact sufficiency-labeling tests, 300k adversarial necessity cuts) confirm every load-bearing claim.",
+      "key_issues": [],
+      "confidence": "high",
+      "provenance": "single autonomous run in identical harness; independent adversarial grading (claims machine-verified)"
+    },
+    {
+      "model": "gpt-5.6-sol-max",
+      "present": true,
+      "score": 7,
+      "claimed_status": "solved",
+      "answer_stated": "theta = 180 deg / n for an integer n >= 2",
+      "answer_correct": true,
+      "justification": "The answer matches the established characterization and both directions are proved rigorously: a forcing-plus-reduction strategy wins for t=1/n within n-1 cuts, and a safe-family invariant with an exhaustive four-case analysis shows Shan-Yu (starting equilateral) survives forever for every other theta. Independently confirmed the transition formula geometrically, reproduced the p|q winning pattern via exact game solving, and found zero counterexamples across 1.38M+ grid cases and adversarial real/irrational-t searches.",
+      "key_issues": [],
+      "confidence": "high",
+      "provenance": "single autonomous run in identical harness; independent adversarial grading (claims machine-verified)"
+    }
+  ]
 }

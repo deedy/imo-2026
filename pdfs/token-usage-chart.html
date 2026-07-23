@@ -16,6 +16,8 @@
     --muse: #b98bff;
     --grok: #ff7ab0;
     --deepseek: #2fd4c8;
+    --solpro: #a9d13c;
+    --solmax: #7d80f5;
   }
   :root[data-theme="light"] {
     --bg: #f6f7f9;
@@ -33,6 +35,8 @@
     --muse: #7b45d6;
     --grok: #d1478a;
     --deepseek: #0f9e93;
+    --solpro: #6f9410;
+    --solmax: #4a4dd6;
   }
   @media (prefers-color-scheme: light) {
     :root:not([data-theme="dark"]) {
@@ -40,6 +44,7 @@
       --ink: #131922; --muted: #5c6675; --faint: #9aa4b2; --hair: #e7eaef;
       --fable: #1f6fe0; --solx: #0e9c6b; --k3: #c47d00; --soldf: #d63a30;
       --muse: #7b45d6; --grok: #d1478a; --deepseek: #0f9e93;
+      --solpro: #6f9410; --solmax: #4a4dd6;
     }
   }
   * { box-sizing: border-box; margin: 0; }
@@ -103,7 +108,7 @@
     <div>
       <div class="eyebrow">IMO 2026 · autonomous benchmark</div>
       <h1>Output tokens per problem <span class="dim">/ by model</span></h1>
-      <p class="sub">Completion tokens (billed reasoning included) each of the seven runs spent per problem, summed across all rounds. Identical harness; grading verified. Hover a problem for the breakdown.</p>
+      <p class="sub">Completion tokens (billed reasoning included) each of the nine runs spent per problem, summed across all rounds. Identical harness; grading verified. Hover a problem for the breakdown.</p>
     </div>
     <div class="controls">
       <div class="seg" role="group" aria-label="Scale">
@@ -118,7 +123,7 @@
     <div class="legend" id="legend"></div>
   </div>
 
-  <p class="foot"><b>Reads:</b> P3 (combinatorics capstone) and P6 (number-theory finale) dominate every run — the easy problems (P1/P4/P5) barely register. Kimi K3 spent ~847k tokens on P3 alone; GPT-5.6 Sol at default effort stayed flat and cheap, and scored 28/42 for it. Spending big doesn't guarantee correctness: Meta Muse Spark 1.1 (26/42) and xAI Grok 4.5 (13/42) both poured heavy reasoning into P3/P6 and still couldn't close them — Grok's tiny P6 bar (7k) is where it gave up early, while DeepSeek V4 Pro spent the MOST of any run (639k output tokens on P6 alone, 2.0M total) and still scored only 19/42.</p>
+  <p class="foot"><b>Reads:</b> P3 (combinatorics capstone) and P6 (number-theory finale) dominate every run — the easy problems (P1/P4/P5) barely register. Kimi K3 spent ~847k tokens on P3 alone; GPT-5.6 Sol at default effort stayed flat and cheap, and scored 28/42 for it. Spending big doesn't guarantee correctness: Meta Muse Spark 1.1 (26/42) and xAI Grok 4.5 (13/42) both poured heavy reasoning into P3/P6 and still couldn't close them — Grok's tiny P6 bar (7k) is where it gave up early, while DeepSeek V4 Pro spent the MOST of any run (639k output tokens on P6 alone, 2.0M total) and still scored only 19/42. The two newest runs both sink their tokens into the geometry: <b>GPT-5.6 Sol Pro</b> (xhigh, 37/42) and <b>GPT-5.6 Sol · max</b> (30/42) each poured the bulk of their output into P2 — and both closed it 7/7, the only two single-pass runs to prove the geometry. (Sol Pro's P2 bar sums four sessions; three were interrupted by an orchestration error and credit exhaustion before a clean re-run produced the verified proof.)</p>
 </div>
 
 <div class="tip" id="tip"></div>
@@ -133,6 +138,8 @@ const DATA = [
   { key:"muse",  name:"Meta Muse Spark 1.1",   c:"var(--muse)",  pending:false, v:[17047,183399,224090,85835,46114,204340] },
   { key:"grok",  name:"xAI Grok 4.5",          c:"var(--grok)",  pending:false, v:[30212,127445,273455,72444,95009,7053] },
   { key:"deepseek", name:"DeepSeek V4 Pro",    c:"var(--deepseek)", pending:false, v:[66946,295827,326465,174111,510163,639183] },
+  { key:"solpro", name:"GPT-5.6 Sol Pro · xhigh", c:"var(--solpro)", pending:false, v:[37709,320804,81729,39738,37669,102903] },
+  { key:"solmax", name:"GPT-5.6 Sol · max",       c:"var(--solmax)", pending:false, v:[16911,111653,982,38450,17154,19104] },
 ];
 const active = DATA.filter(d => !d.pending);
 

@@ -1,0 +1,7 @@
+F= C*T**2*U - 2*C*T*U*X + 2*C*U + S*T**2*X + 2*S*T*U**2 - 3*S*T + 2*S*X
+ER compare 0
+EDcompare 0
+P after b ratio factor= 0
+reduced factor= 0
+with prod rem= 0
+with side rem= 0

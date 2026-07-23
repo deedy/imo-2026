@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/debarghya/vibedev/imo-2026/results/gpt-5.6-sol-pro/problem-03/code/numerical_search.py", line 2, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'

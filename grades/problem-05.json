@@ -1,80 +1,104 @@
 {
- "problem": "imo-2026-05",
- "entries": [
-  {
-   "model": "kimi-k3",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "f(x) = x + c (x > 0) for a constant c >= 0",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and rigorous. The hypothesis is repackaged as |(f(x)+y)^2 - (x+f(y))^2| <= (x - f(y))^2, giving the functional equation and AP orbits with p = f - id >= 0. A verified descent lemma (|c-e|(4t-c+e) <= (c-e)^2 forces e = c since 4t-c+e > |c-e| when t > c) extends any c-orbit backwards to a seed r in (0, c]; if a second value d < c existed, the left inequality at (x_n, y) is Q(x_n) = (x_n - (c+y))^2 - s^2 >= 0 with s^2 = 2(c-d)(c+d+2y) (identity verified), and after enlarging y so 2s > c the c-step orbit starting at r <= c cannot jump the forbidden interval of length 2s - contradiction. Sufficiency via QM-AM-GM since f(x)+y = x+f(y). No gaps found.",
-   "key_issues": []
-  },
-  {
-   "model": "claude-fable-5",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "f(x) = x + c for a constant c >= 0",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and rigorous, via an asymptotic-sandwich route distinct from the orbit-interleaving proofs. x = f(y) collides the two squared inequalities into f(f(y)) = 2f(y) - y, so orbits are APs and g = f - id >= 0. Given g(a) = d > 0, picking the orbit point y = a + nd with |f(y) - x| <= d/2 and the two elementary estimates E1/E2 (I verified both expansions: (1+u) - (1 + u/2 - u^2/2)^2 = -(u^2/4)(u-3)(u+1) >= 0 on [-1,3], and 2x^2 + 2(x+eps)^2 = (2x+eps)^2 + eps^2) yield the two-sided pinch d - d^2/(4x) <= g(x) <= d + d^2/(16x-4d) for x >= a+d, whence all positive gaps are equal and g = d on a half-line; the downward bootstrap with x = y + d makes both squared inequalities pin f(y) = y + d exactly, and induction in steps of d covers all of R_{>0}. Sufficiency is exactly QM-AM-GM on the pair (x, y+c), and c >= 0 is automatic since c is a gap value. Every squaring/positivity step is justified (x > d, 2x + eps > 0, epsilon bounds all checked); no gaps found.",
-   "key_issues": []
-  },
-  {
-   "model": "gpt-5.6-sol",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "f(x) = x + c for all x > 0, c >= 0",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and rigorous via an analytic route distinct from the orbit-interleaving proofs. After the functional equation and g >= 0, applying the chain at (f(u), v) with f(f(u)) = 2f(u) - u yields |g(u)-g(v)| <= (sqrt(f(u)) - sqrt(f(v)))^2 (verified). This forces f strictly increasing (the Delta <= 0 cases each contradict the estimate), hence g nondecreasing via f^n(u) > f^n(v) with n -> infty, then two-sided continuity of g (jump J satisfies J <= (sqrt(A+J)-sqrt(A))^2 < J), and finally a Riemann-sum telescoping over an equipartition with sum Delta_i^2 <= max Delta_i * (f(b)-f(a)) -> 0 by uniform continuity, so g is constant. Verification is standard QM-AM-GM. Only microscopic unstated details (e.g. f(t) - J >= t > 0 in the left-limit step), well within '7 with minor blemishes'.",
-   "key_issues": []
-  },
-  {
-   "model": "gpt-5.6-sol-xhigh",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "f(x) = x + c for every x > 0, c >= 0",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and rigorous, via the orbit-interleaving + connectedness route (distinct from this model's default-effort analytic route, and closer to gpt-5.6-sol's). x = f(y) collapses both outer expressions to f(y), giving f(f(y)) = 2f(y) - y, AP orbits, and d >= 0. Two positive displacements a > b are killed by floor-alignment: m_n = floor((u+na-v-b)/b) gives 0 <= p_n - q_n < b (verified), and the first inequality at (p_n, v + m_n b) yields a - b <= (p_n - q_n)^2 / (sqrt(2(p_n^2+q_n^2)) + p_n + q_n) < b^2/(denominator -> infinity) - the algebraic identity 2(p^2+q^2) - (p+q)^2 = (p-q)^2 checks. Mixed case {0, c}: both the zero-set and c-set are shown open via the first inequality on approaching sequences (limit 2L + c <= 2L, impossible), and connectedness of R_{>0} with B nonempty forces d = c everywhere. Sufficiency is exactly RMS-AM-GM on (x, y+c), and c >= 0 is automatic from d >= 0. Every step verified; no gaps.",
-   "key_issues": []
-  },
-  {
-   "model": "muse-spark-1.1",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "f(x) = x + c for a constant c >= 0",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and rigorous; independently verified end to end (all algebraic identities checked with a CAS). Squaring the two-sided hypothesis gives alpha = (f(x)+y)^2 - 4x f(y) >= 0 and beta = 2x^2 + 2f(y)^2 - (f(x)+y)^2 >= 0 with alpha + beta = 2(x - f(y))^2. Setting x = f(y) forces alpha = beta = 0, hence the core identity f(f(y)) = 2f(y) - y and c(f(y)) = c(y) where c = f - id. Iterating yields AP orbits f^n(y) = y + n c(y); positivity of f forbids c(y) < 0, so c >= 0 and f >= id. The confinement bound |c(x) - c(y)| <= (x - P)^2 / P with P = f(y) is correctly derived from both squared inequalities via I_L = -(sqrt x - sqrt P)^2 and I_U = (x-P)^2/(sqrt(2x^2+2P^2)+x+P), each bounded by (x-P)^2/P. Interleaving two positive-gap orbits: choose B_m within q/2 of the image point P_n = a + np -> infinity, giving |p - q| <= (q/2)^2/P_n -> 0, so all positive c-values coincide. The fixed-point/positive coexistence case (the a=0-type case other models mishandled) is handled cleanly: the B-inequality at (a in Q, b in Z) gives (a-b)^2 >= p^2 + 2p(a+b) >= p^2, hence dist(Q,Z) >= p > 0, so Z and Q are both open, contradicting connectedness of (0,infinity); one is empty and c is constant. Sufficiency is exactly QM-AM-GM on (x, y+c) with the (x-y-c)^2 >= 0 identity, and c >= 0 is forced. No gaps found.",
-   "key_issues": []
-  },
-  {
-   "model": "grok-4.5",
-   "present": true,
-   "claimed_status": "partial",
-   "answer_stated": "f(x) = x (claims identity is the only solution -- incorrect/incomplete, misses the family f(x)=x+c)",
-   "score": 1,
-   "confidence": "high",
-   "justification": "Empty proof (the Full proof section reads '(empty)') and an incorrect conjectured answer. Grok did locate the genuine entry point: the substitution x = f(y) collapses both outer terms to f(y) and forces (f(x)+y)/2 = f(y), i.e. the structural identity f(f(y)) = 2f(y) - y (stated as y = 2a - f(a) on preimages). It also correctly ruled out f(x) = cx except c = 1, and constants. But it never discovered the additive family: its stated aim is 'prove f = id is the only solution', so the claimed answer f(x) = x is wrong and incomplete (missing every c > 0). None of the substantive steps are carried out -- no f >= id, no AP orbits, no nonnegativity of c, no constancy argument, no coexistence handling, and no sufficiency direction. Credit only for identifying the crux substitution and the image-level identity; otherwise no proof and a wrong final characterization.",
-   "key_issues": [
-    "Full proof section is empty",
-    "Conjectured answer f(x)=x is wrong: misses the entire family f(x)=x+c for c>0",
-    "Core identity f(f(y))=2f(y)-y found only implicitly on the image; no monotonicity/orbit/constancy argument built on it",
-    "No sufficiency direction, no nonnegativity/constancy proof"
-   ]
-  },
-  {
-   "model": "deepseek-v4-pro",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "f(x) = x + c for a constant c >= 0",
-   "score": 7,
-   "confidence": "high",
-   "justification": "The self-reported 'solved' claim HOLDS UP: complete and rigorous, verified line-by-line and with a CAS. Squaring the two-sided hypothesis and setting x = f(y) collapses both outer bounds to 4f(y)^2, forcing the core identity f(f(y)) = 2f(y) - y; with g = f - id this gives g(x+g(x)) = g(x), so forward orbits are APs x + n g(x), and positivity of f (orbit must stay in R_{>0}) forces g >= 0. The two fundamental identities are CAS-confirmed exactly zero: (5) A + B = 2(x - f(y))^2 and (6) A - B = -2(g(x)-g(y))(g(x)+g(y)+2x+2y), yielding via |A-B| <= A+B the confinement inequality (7) |g(x)-g(y)|(g(x)+g(y)+2x+2y) <= (x - f(y))^2. At-most-one-positive-value: two positive gaps c1 > c2 are killed by interleaving the orbits u+nc1, v+mc2 in (9) -- rational ratio gives linear-growing LHS against constant RHS, irrational ratio uses density of {nc1 - mc2} to drive RHS -> 0 while LHS -> infinity (with n_k -> infinity attainable by equidistribution); both correct. The fixed-point-coexistence a=0 case (S0 = {g=0}, Sc = {g=c}) that several models mishandled is handled correctly: (11) A(y,x) = (x-y)^2 - c^2 - 2c(x+y) >= 0 (CAS-verified) gives the separation |x-y| > c (12); Lemma 1 descends in steps of c to a seed u in (0,c] with g(u)=c; the radius-c intervals about the orbit {u+nc} subset Sc cover (0, infinity), so any x in S0 would violate (12), forcing S0 empty and g == c. Sufficiency is exactly QM-AM and AM-GM on the pair (x, y+c) since f(x)+y = x+f(y) = x+y+c; I confirmed both inequalities numerically for c in {0, 0.3, 1, 5, 100} and that f=2x and f=x^2 fail. Both directions complete; c >= 0 is forced. Only a cosmetic typo (4cx written for 4cy in A(x,y) in Step 5), which is labeled 'always true' and never used.",
-   "key_issues": []
-  }
- ]
+  "problem": "imo-2026-05",
+  "entries": [
+    {
+      "model": "kimi-k3",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "f(x) = x + c (x > 0) for a constant c >= 0",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and rigorous. The hypothesis is repackaged as |(f(x)+y)^2 - (x+f(y))^2| <= (x - f(y))^2, giving the functional equation and AP orbits with p = f - id >= 0. A verified descent lemma (|c-e|(4t-c+e) <= (c-e)^2 forces e = c since 4t-c+e > |c-e| when t > c) extends any c-orbit backwards to a seed r in (0, c]; if a second value d < c existed, the left inequality at (x_n, y) is Q(x_n) = (x_n - (c+y))^2 - s^2 >= 0 with s^2 = 2(c-d)(c+d+2y) (identity verified), and after enlarging y so 2s > c the c-step orbit starting at r <= c cannot jump the forbidden interval of length 2s - contradiction. Sufficiency via QM-AM-GM since f(x)+y = x+f(y). No gaps found.",
+      "key_issues": []
+    },
+    {
+      "model": "claude-fable-5",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "f(x) = x + c for a constant c >= 0",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and rigorous, via an asymptotic-sandwich route distinct from the orbit-interleaving proofs. x = f(y) collides the two squared inequalities into f(f(y)) = 2f(y) - y, so orbits are APs and g = f - id >= 0. Given g(a) = d > 0, picking the orbit point y = a + nd with |f(y) - x| <= d/2 and the two elementary estimates E1/E2 (I verified both expansions: (1+u) - (1 + u/2 - u^2/2)^2 = -(u^2/4)(u-3)(u+1) >= 0 on [-1,3], and 2x^2 + 2(x+eps)^2 = (2x+eps)^2 + eps^2) yield the two-sided pinch d - d^2/(4x) <= g(x) <= d + d^2/(16x-4d) for x >= a+d, whence all positive gaps are equal and g = d on a half-line; the downward bootstrap with x = y + d makes both squared inequalities pin f(y) = y + d exactly, and induction in steps of d covers all of R_{>0}. Sufficiency is exactly QM-AM-GM on the pair (x, y+c), and c >= 0 is automatic since c is a gap value. Every squaring/positivity step is justified (x > d, 2x + eps > 0, epsilon bounds all checked); no gaps found.",
+      "key_issues": []
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "f(x) = x + c for all x > 0, c >= 0",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and rigorous via an analytic route distinct from the orbit-interleaving proofs. After the functional equation and g >= 0, applying the chain at (f(u), v) with f(f(u)) = 2f(u) - u yields |g(u)-g(v)| <= (sqrt(f(u)) - sqrt(f(v)))^2 (verified). This forces f strictly increasing (the Delta <= 0 cases each contradict the estimate), hence g nondecreasing via f^n(u) > f^n(v) with n -> infty, then two-sided continuity of g (jump J satisfies J <= (sqrt(A+J)-sqrt(A))^2 < J), and finally a Riemann-sum telescoping over an equipartition with sum Delta_i^2 <= max Delta_i * (f(b)-f(a)) -> 0 by uniform continuity, so g is constant. Verification is standard QM-AM-GM. Only microscopic unstated details (e.g. f(t) - J >= t > 0 in the left-limit step), well within '7 with minor blemishes'.",
+      "key_issues": []
+    },
+    {
+      "model": "gpt-5.6-sol-xhigh",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "f(x) = x + c for every x > 0, c >= 0",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and rigorous, via the orbit-interleaving + connectedness route (distinct from this model's default-effort analytic route, and closer to gpt-5.6-sol's). x = f(y) collapses both outer expressions to f(y), giving f(f(y)) = 2f(y) - y, AP orbits, and d >= 0. Two positive displacements a > b are killed by floor-alignment: m_n = floor((u+na-v-b)/b) gives 0 <= p_n - q_n < b (verified), and the first inequality at (p_n, v + m_n b) yields a - b <= (p_n - q_n)^2 / (sqrt(2(p_n^2+q_n^2)) + p_n + q_n) < b^2/(denominator -> infinity) - the algebraic identity 2(p^2+q^2) - (p+q)^2 = (p-q)^2 checks. Mixed case {0, c}: both the zero-set and c-set are shown open via the first inequality on approaching sequences (limit 2L + c <= 2L, impossible), and connectedness of R_{>0} with B nonempty forces d = c everywhere. Sufficiency is exactly RMS-AM-GM on (x, y+c), and c >= 0 is automatic from d >= 0. Every step verified; no gaps.",
+      "key_issues": []
+    },
+    {
+      "model": "muse-spark-1.1",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "f(x) = x + c for a constant c >= 0",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and rigorous; independently verified end to end (all algebraic identities checked with a CAS). Squaring the two-sided hypothesis gives alpha = (f(x)+y)^2 - 4x f(y) >= 0 and beta = 2x^2 + 2f(y)^2 - (f(x)+y)^2 >= 0 with alpha + beta = 2(x - f(y))^2. Setting x = f(y) forces alpha = beta = 0, hence the core identity f(f(y)) = 2f(y) - y and c(f(y)) = c(y) where c = f - id. Iterating yields AP orbits f^n(y) = y + n c(y); positivity of f forbids c(y) < 0, so c >= 0 and f >= id. The confinement bound |c(x) - c(y)| <= (x - P)^2 / P with P = f(y) is correctly derived from both squared inequalities via I_L = -(sqrt x - sqrt P)^2 and I_U = (x-P)^2/(sqrt(2x^2+2P^2)+x+P), each bounded by (x-P)^2/P. Interleaving two positive-gap orbits: choose B_m within q/2 of the image point P_n = a + np -> infinity, giving |p - q| <= (q/2)^2/P_n -> 0, so all positive c-values coincide. The fixed-point/positive coexistence case (the a=0-type case other models mishandled) is handled cleanly: the B-inequality at (a in Q, b in Z) gives (a-b)^2 >= p^2 + 2p(a+b) >= p^2, hence dist(Q,Z) >= p > 0, so Z and Q are both open, contradicting connectedness of (0,infinity); one is empty and c is constant. Sufficiency is exactly QM-AM-GM on (x, y+c) with the (x-y-c)^2 >= 0 identity, and c >= 0 is forced. No gaps found.",
+      "key_issues": []
+    },
+    {
+      "model": "grok-4.5",
+      "present": true,
+      "claimed_status": "partial",
+      "answer_stated": "f(x) = x (claims identity is the only solution -- incorrect/incomplete, misses the family f(x)=x+c)",
+      "score": 1,
+      "confidence": "high",
+      "justification": "Empty proof (the Full proof section reads '(empty)') and an incorrect conjectured answer. Grok did locate the genuine entry point: the substitution x = f(y) collapses both outer terms to f(y) and forces (f(x)+y)/2 = f(y), i.e. the structural identity f(f(y)) = 2f(y) - y (stated as y = 2a - f(a) on preimages). It also correctly ruled out f(x) = cx except c = 1, and constants. But it never discovered the additive family: its stated aim is 'prove f = id is the only solution', so the claimed answer f(x) = x is wrong and incomplete (missing every c > 0). None of the substantive steps are carried out -- no f >= id, no AP orbits, no nonnegativity of c, no constancy argument, no coexistence handling, and no sufficiency direction. Credit only for identifying the crux substitution and the image-level identity; otherwise no proof and a wrong final characterization.",
+      "key_issues": [
+        "Full proof section is empty",
+        "Conjectured answer f(x)=x is wrong: misses the entire family f(x)=x+c for c>0",
+        "Core identity f(f(y))=2f(y)-y found only implicitly on the image; no monotonicity/orbit/constancy argument built on it",
+        "No sufficiency direction, no nonnegativity/constancy proof"
+      ]
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "f(x) = x + c for a constant c >= 0",
+      "score": 7,
+      "confidence": "high",
+      "justification": "The self-reported 'solved' claim HOLDS UP: complete and rigorous, verified line-by-line and with a CAS. Squaring the two-sided hypothesis and setting x = f(y) collapses both outer bounds to 4f(y)^2, forcing the core identity f(f(y)) = 2f(y) - y; with g = f - id this gives g(x+g(x)) = g(x), so forward orbits are APs x + n g(x), and positivity of f (orbit must stay in R_{>0}) forces g >= 0. The two fundamental identities are CAS-confirmed exactly zero: (5) A + B = 2(x - f(y))^2 and (6) A - B = -2(g(x)-g(y))(g(x)+g(y)+2x+2y), yielding via |A-B| <= A+B the confinement inequality (7) |g(x)-g(y)|(g(x)+g(y)+2x+2y) <= (x - f(y))^2. At-most-one-positive-value: two positive gaps c1 > c2 are killed by interleaving the orbits u+nc1, v+mc2 in (9) -- rational ratio gives linear-growing LHS against constant RHS, irrational ratio uses density of {nc1 - mc2} to drive RHS -> 0 while LHS -> infinity (with n_k -> infinity attainable by equidistribution); both correct. The fixed-point-coexistence a=0 case (S0 = {g=0}, Sc = {g=c}) that several models mishandled is handled correctly: (11) A(y,x) = (x-y)^2 - c^2 - 2c(x+y) >= 0 (CAS-verified) gives the separation |x-y| > c (12); Lemma 1 descends in steps of c to a seed u in (0,c] with g(u)=c; the radius-c intervals about the orbit {u+nc} subset Sc cover (0, infinity), so any x in S0 would violate (12), forcing S0 empty and g == c. Sufficiency is exactly QM-AM and AM-GM on the pair (x, y+c) since f(x)+y = x+f(y) = x+y+c; I confirmed both inequalities numerically for c in {0, 0.3, 1, 5, 100} and that f=2x and f=x^2 fail. Both directions complete; c >= 0 is forced. Only a cosmetic typo (4cx written for 4cy in A(x,y) in Step 5), which is labeled 'always true' and never used.",
+      "key_issues": []
+    },
+    {
+      "model": "gpt-5.6-sol-pro",
+      "present": true,
+      "score": 7,
+      "claimed_status": "solved",
+      "answer_stated": "f(x) = x + c for a constant c >= 0",
+      "answer_correct": true,
+      "justification": "States the correct answer and proves the full characterization in both directions. Forward direction uses x=f(y) to force f(f(y))=2f(y)-y, iterates to f^n(y)=y+n*d(y) forcing d>=0, then shows all positive displacements coincide via a synchronized-orbit limit and rules out mixed 0/c displacements via a separation+connectedness contradiction; every algebraic and limit step verified symbolically and numerically.",
+      "key_issues": [],
+      "confidence": "high",
+      "provenance": "single autonomous run in identical harness; independent adversarial grading (claims machine-verified)"
+    },
+    {
+      "model": "gpt-5.6-sol-max",
+      "present": true,
+      "score": 7,
+      "claimed_status": "solved",
+      "answer_stated": "f(x) = x + c for a constant c >= 0",
+      "answer_correct": true,
+      "justification": "Correct answer; both directions rigorously proved: sufficiency via RMS-AM/AM-GM, necessity via the x=f(y) squeeze giving f(f(y))=2f(y)-y, orbit-based nonnegativity of displacement, asymptotic orbit alignment forcing all positive displacements equal, and a connectedness/openness argument ruling out mixed values. All steps independently verified numerically; the proof correctly avoids assuming any regularity of f.",
+      "key_issues": [],
+      "confidence": "high",
+      "provenance": "single autonomous run in identical harness; independent adversarial grading (claims machine-verified)"
+    }
+  ]
 }

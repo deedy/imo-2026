@@ -1,0 +1,10 @@
+target fact initial C**3*D**2*R*U**3*b**2 - C**3*D*R**2*U**3*c**2 + C**2*D**2*R*S*U**2*X*b**2 - C**2*D**2*R*U**3*b*c - 2*C**2*D**2*S*U**2*b**2 - C**2*D*R**2*S*U**2*X*c**2 + C**2*D*R**2*U**3*b*c - C**2*D*R*S*U**2*b**2 + C**2*D*R*S*U**2*c**2 + 2*C**2*R**2*S*U**2*c**2 - C*D**2*R*S**2*U*X**2*b**2 - C*D**2*R*U**3*b**2 + C*D*R**2*S**2*U*X**2*c**2 + C*D*R**2*U**3*c**2 + 2*C*D*R*S**2*U*X*b**2 - 2*C*D*R*S**2*U*X*c**2 + 2*C*D*S**2*U*b**2 + 2*C*D*S**2*U*c**2 - 2*C*R*S**2*U*b**2 - 2*C*R*S**2*U*c**2 - D**2*R*S**3*X**3*b**2 + D**2*R*S**2*U*X**2*b*c - D**2*R*S*U**2*X*b**2 + D**2*R*U**3*b*c + 2*D**2*S**3*X**2*b**2 + 2*D**2*S*U**2*b**2 + D*R**2*S**3*X**3*c**2 - D*R**2*S**2*U*X**2*b*c + D*R**2*S*U**2*X*c**2 - D*R**2*U**3*b*c + 3*D*R*S**3*X**2*b**2 - 3*D*R*S**3*X**2*c**2 + D*R*S*U**2*b**2 - D*R*S*U**2*c**2 - 6*D*S**3*X*b**2 + 2*D*S**3*X*c**2 - 4*D*S**2*U*b*c - 2*R**2*S**3*X**2*c**2 - 2*R**2*S*U**2*c**2 - 2*R*S**3*X*b**2 + 6*R*S**3*X*c**2 + 4*R*S**2*U*b*c + 4*S**3*b**2 - 4*S**3*c**2
+numeric ER ED T rel -2.70586959039242e-17 -3.92024533358949e-17 2.65201080391481e-16 0 -0.e-128 -0.e-121
+try (R, D, b, c, C, X, U, S)
+basis 47 remzero True factor 0
+try (R, D, b, c, S, C, U, X)
+basis 49 remzero True factor 0
+try (D, R, c, b, C, X, U, S)
+basis 47 remzero True factor 0
+try (C, S, X, U, b, c, R, D)
+basis 81 remzero True factor 0

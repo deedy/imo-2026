@@ -1,91 +1,120 @@
 {
- "problem": "imo-2026-06",
- "entries": [
-  {
-   "model": "kimi-k3",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": null,
-   "score": 7,
-   "confidence": "high",
-   "provenance": "repair rounds assisted by reviewer defect finding; no external solutions",
-   "justification": "Re-graded after repair rounds. The previously fatal gap (finite-only self-duality applied to a provably infinite minimal transversal) is genuinely closed by the new Compactness Theorem (Step 4a): every transversal of C contains a finite transversal. Verified line by line: inside any transversal W, sequential deletion extracts a minimal transversal T in which every w has a private member e_w with e_w cap T = {w}; the killing property K' (a finite prime set F with pi(F) > a1 containing no member of C is avoided by a member of smaller product -- correctly derived from greedy minimality via (K) plus the minimal-divisor descent) drives a descent M_0 = e_w, M_{j+1} disjoint from M_j minus {w}, forced through w by pairwise intersection, with pi(M_{j+1}) < pi(M_j)/w, terminating at t*_w containing w with pi(t*_w) <= a1*w; pigeonhole over the finitely many prime sets of product <= a1 yields P_0 with t*_{w_j} = P_0 union {w_j} for infinitely many distinct w_j; every member must meet P_0 (else it contains all the infinitely many w_j), so P_0 is a FINITE transversal, its minimal sub-transversal U is a member by finite self-duality (3.2), and U proper-subset t*_{w_1} contradicts the antichain property. Crucially the theorem does NOT rest on pairwise intersection alone: the load-bearing inputs are K' (number theory from the greedy rule) and 3.2, and I machine-confirmed that the known pairwise-intersecting counterexample family fails 3.2 (21 of its 23 minimal transversals are non-members), so it cannot threaten the theorem within its actual axioms. The peeling argument (Step 4b) now invokes self-duality only on finite sets I union Z_s (Case A), and its runs-forever case builds W = I union Z_omega with no finite sub-transversal (least-index argument checked), contradicting Compactness. Machine checks: the cited check_Kprime.py passes (57 seeds); my fully independent implementation (own factorization, own blocker, brute-force self-duality, K and K' over wider ranges with primes up to 200 and ~3000 F-sets per seed, descent-mechanics simulation from every member/element pair) passes on 38 seeds including multi-permanent ones; the final relation a_{n+T} = a_n + L with the proof's exact T and L holds from n = 1 on every seed tested, including long-period a1 = 385 (|C| = 7, L = 43890, T = 5088) and a1 = 1925 (|C| = 6, L = 82110, T = 11898). No remaining gaps; only cosmetic blemishes (the letter T reused for the Step-4a transversal and the final period).",
-   "key_issues": []
-  },
-  {
-   "model": "claude-fable-5",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": null,
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and rigorous; the finiteness crux is genuinely closed, not hand-waved. The proof works exclusively with FINITE transversals ('prime set' is defined as finite, and Lemma 4's exact description S = {m >= a1 : d_Q | m for some member Q} only ever applies (*) to the finite set P(m)), so the infinite-minimal-transversal trap that sank kimi-k3 and gpt-lightweight is structurally avoided. Greediness enters quantitatively via Lemma 3 (every excluded m > a1 has a SMALLER coprime witness in S). The cheap-witness Lemma 6 is correct: m = pi(Q\\{t})^e with a1 < m <= a1*pi(Q\\{t}) is a non-element, its witness s < m carries a member Q' with Q' cap Q = {t} (via the pairwise-intersection Lemma 5, itself proved by a clean fresh-prime padding argument) and d_{Q'} < a1*d_Q/t. Iterating at a fixed prime q > a1 gives the geometric descent d_{Q_i} < (a1/q)^i d_{Q_0}, contradicting d_{Q_i} >= q; the singleton-member case is handled separately. Hence all member primes are <= a1, M is finite, and the mod-M window/increasing-bijection finish gives a_{n+T} = a_n + M for EVERY n >= 1 with no transient. I independently re-simulated: for every seed 2 <= a1 <= 16, shift-invariance of S mod M and exact periodicity with the proof's T = |S cap [a1, a1+M)| hold from n = 1. The write-up even documents an explicit infinite self-blocking clutter showing pure set-system axioms are insufficient, i.e. it identified and avoided precisely the pitfall of the failed solutions.",
-   "key_issues": []
-  },
-  {
-   "model": "gpt-5.6-sol",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": null,
-   "score": 1,
-   "confidence": "high",
-   "justification": "The central 'Finite-transversal lemma' is FALSE: pairwise intersection of finite sets does NOT imply finitely many minimal finite transversals. Explicit machine-verified counterexample: C={1,2,3}, E={1,h}, G_s={2,z_s,w_1..w_{s-1},h}, D_m={3,h,z_{m+1},w_1..w_m} is pairwise intersecting, yet T_n={1,z_1..z_n,w_n} is a minimal finite transversal for every n. Any valid proof must use more than the clique property (small-prime structure of the greedy sequence), which this solution never touches; the Konig-tree 'proof' of the false lemma is an ill-specified sketch (undefined pruning/contraction rules). Only the routine parts survive: the sequence enumerates S from a1 onward, and the CRT window finish would work IF the blocker were finite. That is worth 1 point.",
-   "key_issues": [
-    "Finite-transversal lemma is false (explicit counterexample with infinitely many minimal finite transversals of a pairwise-intersecting family, verified computationally for n=1..30)",
-    "Konig/pruning tree argument is vague and unrepairable since the target statement is false",
-    "Solution uses only pairwise intersection, provably insufficient for the crux; the number-theoretic structure is never exploited"
-   ]
-  },
-  {
-   "model": "gpt-5.6-sol-xhigh",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": null,
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete, correct, and strikingly elegant; the default run's fatal set-system-only trap is structurally avoided. The crux identity F = G (every finite prime set hitting all term-supports IS the support of a term, via a large power of its radical squeezed into (a_n, a_{n+1}] by minimality) injects exactly the number-theoretic realizability that the false finite-transversal lemma lacked. Finiteness of U = union of minimal members: the scanning property provides, for any minimal H containing p with c(H,p) > a_1, a term y < c(H,p) whose support carries a minimal K with p in K and c(K,p) <= y/p < c(H,p) - a strictly decreasing positive-integer descent (I verified inequality (4) and the intersecting-family forcing p in K), so every relevant p sits over a core C with prod(C) <= a_1; there are finitely many such cores, and the fixed disjoint witness F_C (which exists since C is not in F, by self-blocking) absorbs every such p, giving |{p}| <= |F_C|. The empty-core case works verbatim. The finish is exact: characterization (8) of terms as {x >= a_1 : d_H | x for some H}, shift-invariance mod L = prod(U), and the window count gives a_{n+T} = a_n + L for EVERY n >= 1, no transient. I re-simulated for a_1 = 2..20 (3000 terms each): the proof's own T and L give exact periodicity from n = 1 and characterization (8) holds exactly, including the multi-support seed a_1 = 15 (|H| = 3, L = 30, T = 8). No gaps found.",
-   "key_issues": []
-  },
-  {
-   "model": "muse-spark-1.1",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": null,
-   "score": 2,
-   "confidence": "high",
-   "justification": "The self-reported 'solved' claim does NOT hold up: the notorious finiteness crux is unproven and openly hand-waved. What is correct is only the scaffolding shared with the failed attempts: the blocker/transversal formalism (Section 1), the stability characterization M = b(M) (Lemma A, Section 2, valid set-system reasoning), fixed-ground termination via pure multiples (Sections 3-4, which correctly injects the one piece of number theory that works locally: for a FIXED finite ground G, pure powers prod_{p in H} p^{e_p} are admissible so every bad H subset G is eventually added, and there are finitely many subsets of G), and the periodicity finish (Section 6), which correctly yields a_{n+T} = a_n + L from n = 1. The CRUX -- that the ground U M_n (set of primes ever entering the minimal family) stays finite / that M_n stabilizes -- is NOT proven. Section 5 is a stream-of-consciousness scratchpad with literal unresolved question marks ('may still be finite?', '|T_0| = r? Not guaranteed.', 'Not.'), a FALSE step ('removing p reduces covering number to tau-1'), and an invalid induction on r = |S_1|: it deletes p from the class M_n^{(p)} and asserts 'by induction its ground is finite', but the deleted sub-family {T\\{p\\}} is not a greedy-generated sequence, so the induction hypothesis simply does not apply. The section culminates at line 220 in 'Given time, we accept finiteness of final ground' -- an explicit admission that the crux is assumed, not proved. Structurally, Muse's instinct is to bound the ground via the covering number tau <= |S_1| (a pure set-system route); I machine-verified this route is doomed: a pairwise-intersecting antichain with tau = 2 (the gpt-5.6-sol counterexample family) has minimal transversals of size n+2 growing WITHOUT bound, so bounded tau does not bound the ground. The correct proofs (kimi-k3, fable, gpt-xhigh) instead use a number-theoretic product-descent over cores C with prod(C) <= a_1; Muse has no such descent. I re-simulated the conclusion: a_{n+T} = a_n + L holds from n = 1 on all seeds, including a_1 = 15 -> (T,L)=(8,30), a_1 = 35 -> (34,210), a_1 = 385 -> (5088,43890), a_1 = 1925 -> (11898,82110), and grounds are finite -- so the theorem is true and the finish is sound, but the essential step to reach it is missing. Score 2 (not 1): more genuinely-correct machinery than gpt-5.6-sol -- which asserted a FALSE lemma with a fake proof -- and it is honest about the gap rather than asserting a falsehood; but with the entire difficulty of this IMO-9 problem unresolved and mis-attempted via a provably-insufficient set-system route, it cannot rise above low partial credit.",
-   "key_issues": [
-    "Finiteness/stabilization of the minimal-support ground (THE crux) is not proven: Section 5 ends by declaring 'Given time, we accept finiteness of final ground'; the induction on |S_1| is invalid because the deleted sub-family {T\\{p}} is not greedy-generated, so the induction hypothesis does not apply, and the step 'removing p reduces the covering number to tau-1' is false.",
-    "The finiteness attempt is a pure set-system route (bound the ground via covering number tau <= |S_1|); machine-verified that a pairwise-intersecting antichain with tau = 2 has minimal transversals of unbounded size, so this route cannot bound the ground. The number-theoretic product-descent that the correct solutions use is entirely absent.",
-    "Self-reported 'solved' is false. Correct content (blocker formalism, Lemma A stability = self-duality, fixed-ground termination via pure multiples, periodicity finish from n=1) is the routine scaffolding; re-simulation confirms the CONCLUSION on many seeds but not the missing crux."
-   ]
-  },
-  {
-   "model": "grok-4.5",
-   "present": true,
-   "claimed_status": "partial",
-   "answer_stated": null,
-   "score": 1,
-   "confidence": "high",
-   "justification": "Honestly self-reported 'partial'; the 'Full proof' section explicitly reads '(Not yet complete.)' -- there is no proof. The submission is a computational exploration plus a conjecture. Its observations are correct and I re-verified them by independent simulation: prime-power seeds give T=1, L=p; even seeds collapse to T=1, L=2; a_1 = 15 gives T=8, L=30 with residues {0,6,10,12,15,18,20,24} mod 30; a_1 = 35 gives T=34, L=210. It correctly conjectures the answer structure (the admissible set becomes a finite union of arithmetic progressions of common difference L = product of finitely many 'core' primes, and the sequence enumerates them in order) and, to its credit, explicitly identifies the finiteness crux ('need a rigorous proof that only finitely many primes can ever be forced as new restrictions') and even the circularity trap ('that's circular because A depends on the sequence'). But it provides zero argument that only finitely many primes are essential -- the entire difficulty is left open. Worth 1 point for a correct problem reduction, a correct conjecture of the periodic structure, and honest identification of the crux, with no proof.",
-   "key_issues": [
-    "No proof: the 'Full proof' section is literally '(Not yet complete.)'.",
-    "Correctly conjectures the structure (finite union of APs with L = product of finitely many core primes) and honestly names the finiteness crux and its circularity, but gives no argument that only finitely many primes are essential -- the core difficulty is entirely unaddressed."
-   ]
-  },
-  {
-   "model": "deepseek-v4-pro",
-   "present": true,
-   "claimed_status": "partial",
-   "answer_stated": null,
-   "score": 1,
-   "confidence": "high",
-   "justification": "Self-reported 'partial -- developing rigorous proof', which is accurate: the 'Full proof' section reads '(To be written after completing the rigorous arguments.)' -- there is NO proof, only an outline. The correct content is the standard scaffolding shared with all attempts: the reduction (P(a_{n+1}) must meet every P(a_i), so a good number is one whose prime set is a transversal of F = {P(a_n)}; the sequence is exactly the sorted list of good numbers >= a1; good iff the prime set contains a minimal transversal; hence the good numbers are a finite union of APs IF the minimal-transversal family T is finite) and the correct conjecture of the periodic structure -- which I re-simulated (a1=15 -> (T,L)=(8,30) with residues matching; a1=35 -> (34,210)), consistent with the other models' runs. But THE crux -- finiteness of T -- is NOT proven. Step 6's 'proof' gestures at number theory (p = smallest prime of a1, a2 = a1+p, the first index k with p not dividing a_k) but then merely ASSERTS 'the family T stabilizes within at most one more step' and 'no prime first appearing after a_k can enter any minimal transversal (because such a prime would be redundant)'. This stabilization/redundancy claim is precisely the flawed set-system intuition the calibration flags as FALSE: pairwise-intersecting families can have minimal transversals of unboundedly growing size, so new primes CAN keep entering. The correct number-theoretic product-descent over cores C with prod(C) <= a1 (used by the scoring-7 solutions) is entirely absent. The number-theoretic gesture restates the setup but does not constitute a valid partial argument for the hard part, and the optimistic 'stabilizes in one step' claim is a mark against, not for. Comparable to grok-4.5 (score 1): correct reduction + correct conjecture + honest crux identification, no valid finiteness argument, empty proof section. Score 1.",
-   "key_issues": [
-    "No proof written: the 'Full proof' section is literally '(To be written after completing the rigorous arguments.)'; the document is an outline with no rigorously established lemmas.",
-    "The finiteness crux (T finite / minimal-transversal family stabilizes) is only ASSERTED. Step 6 claims 'T stabilizes within at most one more step' and 'no prime appearing after a_k can enter any minimal transversal (redundant)' -- this is the flawed set-system intuition (pairwise-intersecting families can have minimal transversals of unbounded size), and the correct number-theoretic product-descent over cores with product <= a1 is absent.",
-    "Only routine scaffolding is correct (good=transversal reduction, sequence=sorted good numbers, finite-union-of-APs conclusion, periodic-structure conjecture -- re-simulated and matching); the entire IMO-9 difficulty is unresolved."
-   ]
-  }
- ]
+  "problem": "imo-2026-06",
+  "entries": [
+    {
+      "model": "kimi-k3",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 7,
+      "confidence": "high",
+      "provenance": "repair rounds assisted by reviewer defect finding; no external solutions",
+      "justification": "Re-graded after repair rounds. The previously fatal gap (finite-only self-duality applied to a provably infinite minimal transversal) is genuinely closed by the new Compactness Theorem (Step 4a): every transversal of C contains a finite transversal. Verified line by line: inside any transversal W, sequential deletion extracts a minimal transversal T in which every w has a private member e_w with e_w cap T = {w}; the killing property K' (a finite prime set F with pi(F) > a1 containing no member of C is avoided by a member of smaller product -- correctly derived from greedy minimality via (K) plus the minimal-divisor descent) drives a descent M_0 = e_w, M_{j+1} disjoint from M_j minus {w}, forced through w by pairwise intersection, with pi(M_{j+1}) < pi(M_j)/w, terminating at t*_w containing w with pi(t*_w) <= a1*w; pigeonhole over the finitely many prime sets of product <= a1 yields P_0 with t*_{w_j} = P_0 union {w_j} for infinitely many distinct w_j; every member must meet P_0 (else it contains all the infinitely many w_j), so P_0 is a FINITE transversal, its minimal sub-transversal U is a member by finite self-duality (3.2), and U proper-subset t*_{w_1} contradicts the antichain property. Crucially the theorem does NOT rest on pairwise intersection alone: the load-bearing inputs are K' (number theory from the greedy rule) and 3.2, and I machine-confirmed that the known pairwise-intersecting counterexample family fails 3.2 (21 of its 23 minimal transversals are non-members), so it cannot threaten the theorem within its actual axioms. The peeling argument (Step 4b) now invokes self-duality only on finite sets I union Z_s (Case A), and its runs-forever case builds W = I union Z_omega with no finite sub-transversal (least-index argument checked), contradicting Compactness. Machine checks: the cited check_Kprime.py passes (57 seeds); my fully independent implementation (own factorization, own blocker, brute-force self-duality, K and K' over wider ranges with primes up to 200 and ~3000 F-sets per seed, descent-mechanics simulation from every member/element pair) passes on 38 seeds including multi-permanent ones; the final relation a_{n+T} = a_n + L with the proof's exact T and L holds from n = 1 on every seed tested, including long-period a1 = 385 (|C| = 7, L = 43890, T = 5088) and a1 = 1925 (|C| = 6, L = 82110, T = 11898). No remaining gaps; only cosmetic blemishes (the letter T reused for the Step-4a transversal and the final period).",
+      "key_issues": []
+    },
+    {
+      "model": "claude-fable-5",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and rigorous; the finiteness crux is genuinely closed, not hand-waved. The proof works exclusively with FINITE transversals ('prime set' is defined as finite, and Lemma 4's exact description S = {m >= a1 : d_Q | m for some member Q} only ever applies (*) to the finite set P(m)), so the infinite-minimal-transversal trap that sank kimi-k3 and gpt-lightweight is structurally avoided. Greediness enters quantitatively via Lemma 3 (every excluded m > a1 has a SMALLER coprime witness in S). The cheap-witness Lemma 6 is correct: m = pi(Q\\{t})^e with a1 < m <= a1*pi(Q\\{t}) is a non-element, its witness s < m carries a member Q' with Q' cap Q = {t} (via the pairwise-intersection Lemma 5, itself proved by a clean fresh-prime padding argument) and d_{Q'} < a1*d_Q/t. Iterating at a fixed prime q > a1 gives the geometric descent d_{Q_i} < (a1/q)^i d_{Q_0}, contradicting d_{Q_i} >= q; the singleton-member case is handled separately. Hence all member primes are <= a1, M is finite, and the mod-M window/increasing-bijection finish gives a_{n+T} = a_n + M for EVERY n >= 1 with no transient. I independently re-simulated: for every seed 2 <= a1 <= 16, shift-invariance of S mod M and exact periodicity with the proof's T = |S cap [a1, a1+M)| hold from n = 1. The write-up even documents an explicit infinite self-blocking clutter showing pure set-system axioms are insufficient, i.e. it identified and avoided precisely the pitfall of the failed solutions.",
+      "key_issues": []
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 1,
+      "confidence": "high",
+      "justification": "The central 'Finite-transversal lemma' is FALSE: pairwise intersection of finite sets does NOT imply finitely many minimal finite transversals. Explicit machine-verified counterexample: C={1,2,3}, E={1,h}, G_s={2,z_s,w_1..w_{s-1},h}, D_m={3,h,z_{m+1},w_1..w_m} is pairwise intersecting, yet T_n={1,z_1..z_n,w_n} is a minimal finite transversal for every n. Any valid proof must use more than the clique property (small-prime structure of the greedy sequence), which this solution never touches; the Konig-tree 'proof' of the false lemma is an ill-specified sketch (undefined pruning/contraction rules). Only the routine parts survive: the sequence enumerates S from a1 onward, and the CRT window finish would work IF the blocker were finite. That is worth 1 point.",
+      "key_issues": [
+        "Finite-transversal lemma is false (explicit counterexample with infinitely many minimal finite transversals of a pairwise-intersecting family, verified computationally for n=1..30)",
+        "Konig/pruning tree argument is vague and unrepairable since the target statement is false",
+        "Solution uses only pairwise intersection, provably insufficient for the crux; the number-theoretic structure is never exploited"
+      ]
+    },
+    {
+      "model": "gpt-5.6-sol-xhigh",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete, correct, and strikingly elegant; the default run's fatal set-system-only trap is structurally avoided. The crux identity F = G (every finite prime set hitting all term-supports IS the support of a term, via a large power of its radical squeezed into (a_n, a_{n+1}] by minimality) injects exactly the number-theoretic realizability that the false finite-transversal lemma lacked. Finiteness of U = union of minimal members: the scanning property provides, for any minimal H containing p with c(H,p) > a_1, a term y < c(H,p) whose support carries a minimal K with p in K and c(K,p) <= y/p < c(H,p) - a strictly decreasing positive-integer descent (I verified inequality (4) and the intersecting-family forcing p in K), so every relevant p sits over a core C with prod(C) <= a_1; there are finitely many such cores, and the fixed disjoint witness F_C (which exists since C is not in F, by self-blocking) absorbs every such p, giving |{p}| <= |F_C|. The empty-core case works verbatim. The finish is exact: characterization (8) of terms as {x >= a_1 : d_H | x for some H}, shift-invariance mod L = prod(U), and the window count gives a_{n+T} = a_n + L for EVERY n >= 1, no transient. I re-simulated for a_1 = 2..20 (3000 terms each): the proof's own T and L give exact periodicity from n = 1 and characterization (8) holds exactly, including the multi-support seed a_1 = 15 (|H| = 3, L = 30, T = 8). No gaps found.",
+      "key_issues": []
+    },
+    {
+      "model": "muse-spark-1.1",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 2,
+      "confidence": "high",
+      "justification": "The self-reported 'solved' claim does NOT hold up: the notorious finiteness crux is unproven and openly hand-waved. What is correct is only the scaffolding shared with the failed attempts: the blocker/transversal formalism (Section 1), the stability characterization M = b(M) (Lemma A, Section 2, valid set-system reasoning), fixed-ground termination via pure multiples (Sections 3-4, which correctly injects the one piece of number theory that works locally: for a FIXED finite ground G, pure powers prod_{p in H} p^{e_p} are admissible so every bad H subset G is eventually added, and there are finitely many subsets of G), and the periodicity finish (Section 6), which correctly yields a_{n+T} = a_n + L from n = 1. The CRUX -- that the ground U M_n (set of primes ever entering the minimal family) stays finite / that M_n stabilizes -- is NOT proven. Section 5 is a stream-of-consciousness scratchpad with literal unresolved question marks ('may still be finite?', '|T_0| = r? Not guaranteed.', 'Not.'), a FALSE step ('removing p reduces covering number to tau-1'), and an invalid induction on r = |S_1|: it deletes p from the class M_n^{(p)} and asserts 'by induction its ground is finite', but the deleted sub-family {T\\{p\\}} is not a greedy-generated sequence, so the induction hypothesis simply does not apply. The section culminates at line 220 in 'Given time, we accept finiteness of final ground' -- an explicit admission that the crux is assumed, not proved. Structurally, Muse's instinct is to bound the ground via the covering number tau <= |S_1| (a pure set-system route); I machine-verified this route is doomed: a pairwise-intersecting antichain with tau = 2 (the gpt-5.6-sol counterexample family) has minimal transversals of size n+2 growing WITHOUT bound, so bounded tau does not bound the ground. The correct proofs (kimi-k3, fable, gpt-xhigh) instead use a number-theoretic product-descent over cores C with prod(C) <= a_1; Muse has no such descent. I re-simulated the conclusion: a_{n+T} = a_n + L holds from n = 1 on all seeds, including a_1 = 15 -> (T,L)=(8,30), a_1 = 35 -> (34,210), a_1 = 385 -> (5088,43890), a_1 = 1925 -> (11898,82110), and grounds are finite -- so the theorem is true and the finish is sound, but the essential step to reach it is missing. Score 2 (not 1): more genuinely-correct machinery than gpt-5.6-sol -- which asserted a FALSE lemma with a fake proof -- and it is honest about the gap rather than asserting a falsehood; but with the entire difficulty of this IMO-9 problem unresolved and mis-attempted via a provably-insufficient set-system route, it cannot rise above low partial credit.",
+      "key_issues": [
+        "Finiteness/stabilization of the minimal-support ground (THE crux) is not proven: Section 5 ends by declaring 'Given time, we accept finiteness of final ground'; the induction on |S_1| is invalid because the deleted sub-family {T\\{p}} is not greedy-generated, so the induction hypothesis does not apply, and the step 'removing p reduces the covering number to tau-1' is false.",
+        "The finiteness attempt is a pure set-system route (bound the ground via covering number tau <= |S_1|); machine-verified that a pairwise-intersecting antichain with tau = 2 has minimal transversals of unbounded size, so this route cannot bound the ground. The number-theoretic product-descent that the correct solutions use is entirely absent.",
+        "Self-reported 'solved' is false. Correct content (blocker formalism, Lemma A stability = self-duality, fixed-ground termination via pure multiples, periodicity finish from n=1) is the routine scaffolding; re-simulation confirms the CONCLUSION on many seeds but not the missing crux."
+      ]
+    },
+    {
+      "model": "grok-4.5",
+      "present": true,
+      "claimed_status": "partial",
+      "answer_stated": null,
+      "score": 1,
+      "confidence": "high",
+      "justification": "Honestly self-reported 'partial'; the 'Full proof' section explicitly reads '(Not yet complete.)' -- there is no proof. The submission is a computational exploration plus a conjecture. Its observations are correct and I re-verified them by independent simulation: prime-power seeds give T=1, L=p; even seeds collapse to T=1, L=2; a_1 = 15 gives T=8, L=30 with residues {0,6,10,12,15,18,20,24} mod 30; a_1 = 35 gives T=34, L=210. It correctly conjectures the answer structure (the admissible set becomes a finite union of arithmetic progressions of common difference L = product of finitely many 'core' primes, and the sequence enumerates them in order) and, to its credit, explicitly identifies the finiteness crux ('need a rigorous proof that only finitely many primes can ever be forced as new restrictions') and even the circularity trap ('that's circular because A depends on the sequence'). But it provides zero argument that only finitely many primes are essential -- the entire difficulty is left open. Worth 1 point for a correct problem reduction, a correct conjecture of the periodic structure, and honest identification of the crux, with no proof.",
+      "key_issues": [
+        "No proof: the 'Full proof' section is literally '(Not yet complete.)'.",
+        "Correctly conjectures the structure (finite union of APs with L = product of finitely many core primes) and honestly names the finiteness crux and its circularity, but gives no argument that only finitely many primes are essential -- the core difficulty is entirely unaddressed."
+      ]
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "present": true,
+      "claimed_status": "partial",
+      "answer_stated": null,
+      "score": 1,
+      "confidence": "high",
+      "justification": "Self-reported 'partial -- developing rigorous proof', which is accurate: the 'Full proof' section reads '(To be written after completing the rigorous arguments.)' -- there is NO proof, only an outline. The correct content is the standard scaffolding shared with all attempts: the reduction (P(a_{n+1}) must meet every P(a_i), so a good number is one whose prime set is a transversal of F = {P(a_n)}; the sequence is exactly the sorted list of good numbers >= a1; good iff the prime set contains a minimal transversal; hence the good numbers are a finite union of APs IF the minimal-transversal family T is finite) and the correct conjecture of the periodic structure -- which I re-simulated (a1=15 -> (T,L)=(8,30) with residues matching; a1=35 -> (34,210)), consistent with the other models' runs. But THE crux -- finiteness of T -- is NOT proven. Step 6's 'proof' gestures at number theory (p = smallest prime of a1, a2 = a1+p, the first index k with p not dividing a_k) but then merely ASSERTS 'the family T stabilizes within at most one more step' and 'no prime first appearing after a_k can enter any minimal transversal (because such a prime would be redundant)'. This stabilization/redundancy claim is precisely the flawed set-system intuition the calibration flags as FALSE: pairwise-intersecting families can have minimal transversals of unboundedly growing size, so new primes CAN keep entering. The correct number-theoretic product-descent over cores C with prod(C) <= a1 (used by the scoring-7 solutions) is entirely absent. The number-theoretic gesture restates the setup but does not constitute a valid partial argument for the hard part, and the optimistic 'stabilizes in one step' claim is a mark against, not for. Comparable to grok-4.5 (score 1): correct reduction + correct conjecture + honest crux identification, no valid finiteness argument, empty proof section. Score 1.",
+      "key_issues": [
+        "No proof written: the 'Full proof' section is literally '(To be written after completing the rigorous arguments.)'; the document is an outline with no rigorously established lemmas.",
+        "The finiteness crux (T finite / minimal-transversal family stabilizes) is only ASSERTED. Step 6 claims 'T stabilizes within at most one more step' and 'no prime appearing after a_k can enter any minimal transversal (redundant)' -- this is the flawed set-system intuition (pairwise-intersecting families can have minimal transversals of unbounded size), and the correct number-theoretic product-descent over cores with product <= a1 is absent.",
+        "Only routine scaffolding is correct (good=transversal reduction, sequence=sorted good numbers, finite-union-of-APs conclusion, periodic-structure conjecture -- re-simulated and matching); the entire IMO-9 difficulty is unresolved."
+      ]
+    },
+    {
+      "model": "gpt-5.6-sol-pro",
+      "present": true,
+      "score": 7,
+      "claimed_status": "solved",
+      "answer_stated": "With C the finite family of inclusion-minimal accepted prime-supports and P their union, L=prod_{p in P} p and T=#accepted residue classes mod L satisfy a_{n+T}=a_n+L for every n>=1",
+      "answer_correct": null,
+      "justification": "A complete, rigorous proof: the crux that only finitely many primes ever matter (C finite) is genuinely established via an infinite sunflower lemma plus self-duality and a multiplicative-weight descent to bounded-size terminal supports -- not hand-waved. The final residue-class/interval counting derives exact periodicity for every n from n=1, and computational checks across 20+ starting values (a1=35,143,209,1001,...) confirm the exact (T,L) formula with no failures.",
+      "key_issues": [],
+      "confidence": "high",
+      "provenance": "single autonomous run in identical harness; independent adversarial grading (claims machine-verified)"
+    },
+    {
+      "model": "gpt-5.6-sol-max",
+      "present": true,
+      "score": 1,
+      "claimed_status": "partial",
+      "answer_stated": "Reduces problem to finite stabilization of descending admissible sets S_n; states sufficient criterion (S_N pairwise non-coprime => stabilization) but does not prove such N exists",
+      "answer_correct": null,
+      "justification": "The prime-support recast, the bounded-gap lemma (1<=a_{n+1}-a_n<=a_1), the sufficient stabilization criterion, and the a_1=15 worked example ((T,L)=(8,30), stable set = numbers divisible by >=2 of {2,3,5}) are all correct and were verified computationally. But the actual crux -- proving a stabilizing index N exists -- is entirely unproved, offered only as 'a likely route', and the n=1 indexing is merely sketched. Correct preliminary reductions with the central difficulty untouched.",
+      "key_issues": [
+        "Finite-stabilization crux (existence of N) not proved, only heuristically gestured at",
+        "Only the easy sufficient direction of the criterion is established",
+        "Exact periodicity from n=1 not made rigorous",
+        "Present pieces are the standard first-step observations for this problem"
+      ],
+      "confidence": "high",
+      "provenance": "single autonomous run in identical harness; independent adversarial grading (claims machine-verified)"
+    }
+  ]
 }

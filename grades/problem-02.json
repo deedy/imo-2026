@@ -1,106 +1,137 @@
 {
- "problem": "imo-2026-02",
- "entries": [
-  {
-   "model": "kimi-k3",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": null,
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete power-of-a-point proof: OM=ON iff pow(B)-pow(C)=(c^2-b^2)/2; the hypotheses force the quadratics ConsP=ConsQ=0 in p=BK, q=CL (elimination hand-checked, including the cos-gamma=0 edge case, and I verified the cross-multiplied form equals -ConsP exactly); identities (4)-(5) then pin pow(B), pow(C) to closed forms whose difference is (c^2-b^2)/2. I symbolically verified identities (4) and (5) exactly and confirmed all constraints and the closed-form powers numerically on five configurations. Minor blemish: seven routine coefficient matches in Step 5 are asserted to 'agree immediately' rather than displayed (only the nontrivial pq-coefficient E=0 is worked out, correctly), with a code check cited as backup; this is standard routine expansion and does not affect correctness.",
-   "key_issues": [
-    "Step 5 defers the seven easy monomial coefficient comparisons ('agree immediately'); acceptable but terse",
-    "Configuration facts (0<phi<B, additivity ranges) stated briskly, though correctly"
-   ]
-  },
-  {
-   "model": "claude-fable-5",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": null,
-   "score": 7,
-   "confidence": "high",
-   "justification": "A complete synthetic solution. With X = ray CL cap AB and Y = ray BK cap AC, the three angle hypotheses (via carefully proven directed-angle translations) yield three concyclicities: (B,X,Y,C), X on (CMK), Y on (BNL), with the tangency degenerations X=M and Y=N handled by a proven tangent-chord lemma. The affine function pow(.,omega)-pow(.,omega_K)-pow(.,omega_L)+pow(.,omega_1) vanishes at A, K, L hence identically; evaluating at B and C with cx=by gives OM=ON via the median formula. All supporting lemmas (inscribed-angle criterion, tangent-chord, crossbar/position facts, sign conventions) are proven from first principles; I verified every concyclicity, power formula, and the final computation numerically on five configurations. Noncollinearity of A,K,L is taken from the problem's 'triangle AKL' and explicitly flagged (acceptable).",
-   "key_issues": []
-  },
-  {
-   "model": "gpt-5.6-sol",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": null,
-   "score": 4,
-   "confidence": "high",
-   "justification": "The geometric reduction is correct and verified: coordinates (1)-(2) for K, L, the ray-direction translations, and the reality constraints (8)-(9) all hold on numerically solved configurations, and the invoked equal-power lemma is true (I confirmed H=0 on 260 sampled points of the constraint variety across all branches). But the lemma's proof - the mathematical heart of the submission - is defective: carrying out its prescribed substitution (rewrite p=2n-(2n-p), q=2+(q-2), apply (6)-(7)) leaves an E,F-free remainder that is NOT identically zero (verified symbolically and numerically at non-variety points), the claimed 'four pairs' cancellation cannot be matched to the actual terms (e.g. the listed pair (pq*, -qp*) sums to Delta, which is nonzero by the noncollinearity hypothesis), and no multipliers U, V with numerator = UE+VF are exhibited. The crux identity is therefore asserted, not proven.",
-   "key_issues": [
-    "Core cancellation claim in the equal-power lemma fails under its own prescribed substitution: the terms 'not containing E or F' do not cancel identically (nonzero remainder verified symbolically and numerically)",
-    "The 'four conjugate pairs' bookkeeping is unreproducible; one listed pair sums to Delta != 0",
-    "Ideal-membership form numerator = UE + VF is claimed but U, V are never exhibited",
-    "Lemma statement itself is true (numerically verified on the full variety), so the gap is fixable in principle but the submitted proof of the crux step is invalid"
-   ]
-  },
-  {
-   "model": "gpt-5.6-sol-xhigh",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": null,
-   "score": 7,
-   "confidence": "high",
-   "provenance": "repair round: continuation after self-identified gap; no external mathematical hints",
-   "justification": "The repair genuinely closes both gaps flagged at 4/7. The previously absent crux is now a fully displayed coefficient check, and every identity in it is exactly correct: I re-verified the whole chain symbolically (sympy, exact rational arithmetic) - tangent coordinates (16)-(17), invariant reductions (18)-(20), coefficient collections (25)-(28), and above all the remainder identities (31)-(32) computed exactly as prescribed (substituting only v=p(2-u)): each R_i equals the displayed product with factor e(u-1)-p, with F_1, F_2 exactly as printed, and R_3=0; relation (21) then kills them, proving (29)-(30), hence the factorization lemma (6), whose master trig form D = [sin x (t sin x + sin y)/(sin(x+y) sin(x+z))] Q I also confirmed is exactly true. The formerly promised cos y cos z = 0 limb is now a valid continuity argument over an explicit open parameter set (lambda != 0 via Im lambda < 0; I confirmed (6) to 50 digits at y=pi/2 and z=pi/2 boundary points). The reduction remains sound: ray-order/orientation derivations for (2)-(5), the determinant criterion D=0 => OM=ON (rank argument via A,K,L noncollinear from 'triangle AKL'), and the 0<x<pi/2 geometric argument all check out; end-to-end, 12 random configurations satisfying every hypothesis (interiority, ray orders, all six angle equalities) give OM=ON to 5e-50. Remaining blemish: (31)-(32) are proved 'by ordinary distributive expansion' with only the final remainders displayed - heavy but fully specified, reproducible, and correct, on par with accepted coordinate-bash write-ups (cf. the kimi-k3 entry).",
-   "key_issues": [
-    "Proof of (31)-(32) is a delegated multivariable expansion with only the (correct) final remainders displayed; all four verified exactly by grader",
-    "The factorization lemma's (x,y,z,t)-domain is implicit in its statement and only pinned down in the closing continuity paragraph",
-    "A few orientation justifications (e.g. direction of MK, sign conventions at C) are terse, though correct"
-   ]
-  },
-  {
-   "model": "muse-spark-1.1",
-   "present": true,
-   "claimed_status": "unsolved",
-   "answer_stated": null,
-   "score": 2,
-   "confidence": "high",
-   "justification": "Self-reported unsolved, and correctly so. The submission gives a clean, correct reduction but never touches the crux. It sets M=(-1,0), N=(1,0), A=(u,v) so B=2M-A=(-2-u,-v), C=2N-A=(2-u,-v) (verified correct), and reduces OM=ON to Ox=0 (circumcenter of AKL on the perpendicular bisector of MN) — a valid but essentially standard reformulation. It then correctly parametrizes the hypotheses (alpha=KBA=ACL, beta=LBK=LNC, gamma=BMK=LCK, with LBA=alpha+beta and ACK=alpha+gamma), and correctly observes that K is the intersection of a B-ray (angle alpha off BA) and an M-ray (angle gamma off MB), with consistency condition E1(alpha,gamma)=0, and symmetrically L via E2(alpha,beta)=0, yielding a one-parameter family in alpha. All of this is correct and matches the accepted solutions' opening. But the entire difficulty — proving Ox=0 / the equal-power identity — is left as 'we numerically suspect this holds' and 'Full proof: TBD'; no crux lemma is even formulated, and the saved code only constructs the family without a confirmed OM=ON check. A correct but light reduction with the crux entirely absent.",
-   "key_issues": [
-    "Crux completely untouched: Ox=0 is only 'numerically suspected', no lemma stated or proved",
-    "The reduction (OM=ON iff Ox=0) is standard/trivial; the one-parameter-family observation is correct but modest",
-    "No sub-triangle sine-law relations or power-of-a-point machinery developed toward the target",
-    "Numerics not actually confirmed in the writeup ('suspect'), only the construction is coded"
-   ]
-  },
-  {
-   "model": "grok-4.5",
-   "present": true,
-   "claimed_status": "partial",
-   "answer_stated": null,
-   "score": 2,
-   "confidence": "high",
-   "provenance": "run hit the 80-turn cap before completing",
-   "justification": "Self-reported partial; genuine but incomplete, stopping at the same wall as muse-spark. The written derivations (in approaches/ and scratch/) are more developed and all correct where checkable: ray orderings BA-BK-BL-BC and CA-CL-CK-CB are correctly justified; triangle BMK is shown to have angles alpha,gamma,180-alpha-gamma and CNL to have alpha,beta,180-alpha-beta (both verified, using ray BM=ray BA and ray CN=ray CA); sine-law lengths BK=(AB/2)sin(gamma)/sin(alpha+gamma), MK=(AB/2)sin(alpha)/sin(alpha+gamma), CL, NL are derived correctly; and a valid vector reduction (A=0) gives OM=ON iff O.(C-B)=(|C|^2-|B|^2)/4 together with O.K=|K|^2/2, O.L=|L|^2/2 — the correct circumcenter/perp-bisector characterization. It also correctly identifies the one-parameter family (3 angles, 2 constraints) and dispatches the isosceles case by symmetry (trivial). However, the crux is untouched: it never derives the constraint relation among alpha,beta,gamma nor connects the power-of-a-point machinery to the target, ending 'General proof still open' and 'Full proof: (not yet)'. Much of the file is scattered dead-end exploration (spiral sims, Ceva attempts) and the tracking files are garbled; the saved verification code is broken/trivial (syntax errors, a stub 'hello sympy'), so the claimed numeric verification is unconfirmed. Slightly more correct machinery than muse-spark but equally far from the solution, and messier.",
-   "key_issues": [
-    "Crux completely untouched: no constraint relation among alpha,beta,gamma derived, power-of-a-point never connected to O.(C-B) target",
-    "Correct machinery (sub-triangle sine law, vector power characterization) is developed but scattered and never consolidated into a clean reduction statement",
-    "Isosceles case is trivial (symmetry); adds little",
-    "Saved code is broken/trivial (syntax errors, 'hello sympy' stub) so claimed numeric verification is unconfirmed; run hit the 80-turn cap",
-    "Tracking/writeup files are garbled (mojibake) though the underlying math is sound"
-   ]
-  },
-  {
-   "model": "deepseek-v4-pro",
-   "present": true,
-   "claimed_status": "partial",
-   "answer_stated": null,
-   "score": 2,
-   "confidence": "high",
-   "provenance": "run hit the 80-turn cap before completing",
-   "justification": "Self-reported partial; run hit the 80-turn cap. The submission gives a correct but standard reduction and never reaches the crux. With M=0, N=1, B=-A, C=2-A it correctly reduces OM=ON to 2*Re(O)=1, i.e. numerator P=0 (P displayed as a degree-3 polynomial in the coordinates; the |O|^2=|O-1|^2 => Re(O)=1/2 step is trivially correct), and correctly translates the three angle hypotheses into polynomial conditions R1=R2=R3=0. I ran its own solver: K,L satisfying the three equations to error 3e-15 give Re(O)=0.50000 and OM=ON to gradient-descent precision, confirming the reduction and the angle-to-polynomial translation are sound. It also solves the right-isosceles special case A=(0,0),B=(2,0),C=(0,2) exactly, finding two branches (one with x1=y2, one via a linear factor) that both force OM=ON. But the general crux -- proving P lies in the ideal generated by R1,R2,R3, i.e. that the angle constraints force P=0 for an arbitrary triangle -- is entirely absent: current.md ends 'Full proof: (TODO)'. No crux lemma is stated or proved. This is the same wall reached by muse-spark-1.1 and grok-4.5 (correct reduction, crux untouched), so it sits at the same level.",
-   "key_issues": [
-    "Crux completely untouched: proving P in Ideal(R1,R2,R3) is left as 'Full proof: (TODO)'; no crux lemma stated or proved",
-    "The reduction OM=ON <=> 2*Re(O)=1 <=> P=0 is correct but standard/coordinate-bash; the angle-condition-to-polynomial translation is right (numerically confirmed) but modest",
-    "Only the right-isosceles special case is solved exactly (both branches shown to force OM=ON); the general triangle is left unproven",
-    "Run hit the 80-turn cap before the crux was attempted; saved code is a numeric solver plus special-case algebra, no general argument"
-   ]
-  }
- ]
+  "problem": "imo-2026-02",
+  "entries": [
+    {
+      "model": "kimi-k3",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete power-of-a-point proof: OM=ON iff pow(B)-pow(C)=(c^2-b^2)/2; the hypotheses force the quadratics ConsP=ConsQ=0 in p=BK, q=CL (elimination hand-checked, including the cos-gamma=0 edge case, and I verified the cross-multiplied form equals -ConsP exactly); identities (4)-(5) then pin pow(B), pow(C) to closed forms whose difference is (c^2-b^2)/2. I symbolically verified identities (4) and (5) exactly and confirmed all constraints and the closed-form powers numerically on five configurations. Minor blemish: seven routine coefficient matches in Step 5 are asserted to 'agree immediately' rather than displayed (only the nontrivial pq-coefficient E=0 is worked out, correctly), with a code check cited as backup; this is standard routine expansion and does not affect correctness.",
+      "key_issues": [
+        "Step 5 defers the seven easy monomial coefficient comparisons ('agree immediately'); acceptable but terse",
+        "Configuration facts (0<phi<B, additivity ranges) stated briskly, though correctly"
+      ]
+    },
+    {
+      "model": "claude-fable-5",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 7,
+      "confidence": "high",
+      "justification": "A complete synthetic solution. With X = ray CL cap AB and Y = ray BK cap AC, the three angle hypotheses (via carefully proven directed-angle translations) yield three concyclicities: (B,X,Y,C), X on (CMK), Y on (BNL), with the tangency degenerations X=M and Y=N handled by a proven tangent-chord lemma. The affine function pow(.,omega)-pow(.,omega_K)-pow(.,omega_L)+pow(.,omega_1) vanishes at A, K, L hence identically; evaluating at B and C with cx=by gives OM=ON via the median formula. All supporting lemmas (inscribed-angle criterion, tangent-chord, crossbar/position facts, sign conventions) are proven from first principles; I verified every concyclicity, power formula, and the final computation numerically on five configurations. Noncollinearity of A,K,L is taken from the problem's 'triangle AKL' and explicitly flagged (acceptable).",
+      "key_issues": []
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 4,
+      "confidence": "high",
+      "justification": "The geometric reduction is correct and verified: coordinates (1)-(2) for K, L, the ray-direction translations, and the reality constraints (8)-(9) all hold on numerically solved configurations, and the invoked equal-power lemma is true (I confirmed H=0 on 260 sampled points of the constraint variety across all branches). But the lemma's proof - the mathematical heart of the submission - is defective: carrying out its prescribed substitution (rewrite p=2n-(2n-p), q=2+(q-2), apply (6)-(7)) leaves an E,F-free remainder that is NOT identically zero (verified symbolically and numerically at non-variety points), the claimed 'four pairs' cancellation cannot be matched to the actual terms (e.g. the listed pair (pq*, -qp*) sums to Delta, which is nonzero by the noncollinearity hypothesis), and no multipliers U, V with numerator = UE+VF are exhibited. The crux identity is therefore asserted, not proven.",
+      "key_issues": [
+        "Core cancellation claim in the equal-power lemma fails under its own prescribed substitution: the terms 'not containing E or F' do not cancel identically (nonzero remainder verified symbolically and numerically)",
+        "The 'four conjugate pairs' bookkeeping is unreproducible; one listed pair sums to Delta != 0",
+        "Ideal-membership form numerator = UE + VF is claimed but U, V are never exhibited",
+        "Lemma statement itself is true (numerically verified on the full variety), so the gap is fixable in principle but the submitted proof of the crux step is invalid"
+      ]
+    },
+    {
+      "model": "gpt-5.6-sol-xhigh",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": null,
+      "score": 7,
+      "confidence": "high",
+      "provenance": "repair round: continuation after self-identified gap; no external mathematical hints",
+      "justification": "The repair genuinely closes both gaps flagged at 4/7. The previously absent crux is now a fully displayed coefficient check, and every identity in it is exactly correct: I re-verified the whole chain symbolically (sympy, exact rational arithmetic) - tangent coordinates (16)-(17), invariant reductions (18)-(20), coefficient collections (25)-(28), and above all the remainder identities (31)-(32) computed exactly as prescribed (substituting only v=p(2-u)): each R_i equals the displayed product with factor e(u-1)-p, with F_1, F_2 exactly as printed, and R_3=0; relation (21) then kills them, proving (29)-(30), hence the factorization lemma (6), whose master trig form D = [sin x (t sin x + sin y)/(sin(x+y) sin(x+z))] Q I also confirmed is exactly true. The formerly promised cos y cos z = 0 limb is now a valid continuity argument over an explicit open parameter set (lambda != 0 via Im lambda < 0; I confirmed (6) to 50 digits at y=pi/2 and z=pi/2 boundary points). The reduction remains sound: ray-order/orientation derivations for (2)-(5), the determinant criterion D=0 => OM=ON (rank argument via A,K,L noncollinear from 'triangle AKL'), and the 0<x<pi/2 geometric argument all check out; end-to-end, 12 random configurations satisfying every hypothesis (interiority, ray orders, all six angle equalities) give OM=ON to 5e-50. Remaining blemish: (31)-(32) are proved 'by ordinary distributive expansion' with only the final remainders displayed - heavy but fully specified, reproducible, and correct, on par with accepted coordinate-bash write-ups (cf. the kimi-k3 entry).",
+      "key_issues": [
+        "Proof of (31)-(32) is a delegated multivariable expansion with only the (correct) final remainders displayed; all four verified exactly by grader",
+        "The factorization lemma's (x,y,z,t)-domain is implicit in its statement and only pinned down in the closing continuity paragraph",
+        "A few orientation justifications (e.g. direction of MK, sign conventions at C) are terse, though correct"
+      ]
+    },
+    {
+      "model": "muse-spark-1.1",
+      "present": true,
+      "claimed_status": "unsolved",
+      "answer_stated": null,
+      "score": 2,
+      "confidence": "high",
+      "justification": "Self-reported unsolved, and correctly so. The submission gives a clean, correct reduction but never touches the crux. It sets M=(-1,0), N=(1,0), A=(u,v) so B=2M-A=(-2-u,-v), C=2N-A=(2-u,-v) (verified correct), and reduces OM=ON to Ox=0 (circumcenter of AKL on the perpendicular bisector of MN) \u2014 a valid but essentially standard reformulation. It then correctly parametrizes the hypotheses (alpha=KBA=ACL, beta=LBK=LNC, gamma=BMK=LCK, with LBA=alpha+beta and ACK=alpha+gamma), and correctly observes that K is the intersection of a B-ray (angle alpha off BA) and an M-ray (angle gamma off MB), with consistency condition E1(alpha,gamma)=0, and symmetrically L via E2(alpha,beta)=0, yielding a one-parameter family in alpha. All of this is correct and matches the accepted solutions' opening. But the entire difficulty \u2014 proving Ox=0 / the equal-power identity \u2014 is left as 'we numerically suspect this holds' and 'Full proof: TBD'; no crux lemma is even formulated, and the saved code only constructs the family without a confirmed OM=ON check. A correct but light reduction with the crux entirely absent.",
+      "key_issues": [
+        "Crux completely untouched: Ox=0 is only 'numerically suspected', no lemma stated or proved",
+        "The reduction (OM=ON iff Ox=0) is standard/trivial; the one-parameter-family observation is correct but modest",
+        "No sub-triangle sine-law relations or power-of-a-point machinery developed toward the target",
+        "Numerics not actually confirmed in the writeup ('suspect'), only the construction is coded"
+      ]
+    },
+    {
+      "model": "grok-4.5",
+      "present": true,
+      "claimed_status": "partial",
+      "answer_stated": null,
+      "score": 2,
+      "confidence": "high",
+      "provenance": "run hit the 80-turn cap before completing",
+      "justification": "Self-reported partial; genuine but incomplete, stopping at the same wall as muse-spark. The written derivations (in approaches/ and scratch/) are more developed and all correct where checkable: ray orderings BA-BK-BL-BC and CA-CL-CK-CB are correctly justified; triangle BMK is shown to have angles alpha,gamma,180-alpha-gamma and CNL to have alpha,beta,180-alpha-beta (both verified, using ray BM=ray BA and ray CN=ray CA); sine-law lengths BK=(AB/2)sin(gamma)/sin(alpha+gamma), MK=(AB/2)sin(alpha)/sin(alpha+gamma), CL, NL are derived correctly; and a valid vector reduction (A=0) gives OM=ON iff O.(C-B)=(|C|^2-|B|^2)/4 together with O.K=|K|^2/2, O.L=|L|^2/2 \u2014 the correct circumcenter/perp-bisector characterization. It also correctly identifies the one-parameter family (3 angles, 2 constraints) and dispatches the isosceles case by symmetry (trivial). However, the crux is untouched: it never derives the constraint relation among alpha,beta,gamma nor connects the power-of-a-point machinery to the target, ending 'General proof still open' and 'Full proof: (not yet)'. Much of the file is scattered dead-end exploration (spiral sims, Ceva attempts) and the tracking files are garbled; the saved verification code is broken/trivial (syntax errors, a stub 'hello sympy'), so the claimed numeric verification is unconfirmed. Slightly more correct machinery than muse-spark but equally far from the solution, and messier.",
+      "key_issues": [
+        "Crux completely untouched: no constraint relation among alpha,beta,gamma derived, power-of-a-point never connected to O.(C-B) target",
+        "Correct machinery (sub-triangle sine law, vector power characterization) is developed but scattered and never consolidated into a clean reduction statement",
+        "Isosceles case is trivial (symmetry); adds little",
+        "Saved code is broken/trivial (syntax errors, 'hello sympy' stub) so claimed numeric verification is unconfirmed; run hit the 80-turn cap",
+        "Tracking/writeup files are garbled (mojibake) though the underlying math is sound"
+      ]
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "present": true,
+      "claimed_status": "partial",
+      "answer_stated": null,
+      "score": 2,
+      "confidence": "high",
+      "provenance": "run hit the 80-turn cap before completing",
+      "justification": "Self-reported partial; run hit the 80-turn cap. The submission gives a correct but standard reduction and never reaches the crux. With M=0, N=1, B=-A, C=2-A it correctly reduces OM=ON to 2*Re(O)=1, i.e. numerator P=0 (P displayed as a degree-3 polynomial in the coordinates; the |O|^2=|O-1|^2 => Re(O)=1/2 step is trivially correct), and correctly translates the three angle hypotheses into polynomial conditions R1=R2=R3=0. I ran its own solver: K,L satisfying the three equations to error 3e-15 give Re(O)=0.50000 and OM=ON to gradient-descent precision, confirming the reduction and the angle-to-polynomial translation are sound. It also solves the right-isosceles special case A=(0,0),B=(2,0),C=(0,2) exactly, finding two branches (one with x1=y2, one via a linear factor) that both force OM=ON. But the general crux -- proving P lies in the ideal generated by R1,R2,R3, i.e. that the angle constraints force P=0 for an arbitrary triangle -- is entirely absent: current.md ends 'Full proof: (TODO)'. No crux lemma is stated or proved. This is the same wall reached by muse-spark-1.1 and grok-4.5 (correct reduction, crux untouched), so it sits at the same level.",
+      "key_issues": [
+        "Crux completely untouched: proving P in Ideal(R1,R2,R3) is left as 'Full proof: (TODO)'; no crux lemma stated or proved",
+        "The reduction OM=ON <=> 2*Re(O)=1 <=> P=0 is correct but standard/coordinate-bash; the angle-condition-to-polynomial translation is right (numerically confirmed) but modest",
+        "Only the right-isosceles special case is solved exactly (both branches shown to force OM=ON); the general triangle is left unproven",
+        "Run hit the 80-turn cap before the crux was attempted; saved code is a numeric solver plus special-case algebra, no general argument"
+      ]
+    },
+    {
+      "model": "gpt-5.6-sol-pro",
+      "present": true,
+      "score": 7,
+      "claimed_status": "solved",
+      "answer_stated": "OM=ON reduces to T=0, closed via the factorization T=sin(x-y)*(PQ*sinU*sinV - sin(p+r)*sin(p+q)) with the bracket =0 by the compatibility eq (4)",
+      "answer_correct": null,
+      "justification": "A complete, rigorous proof (fair re-run; the model's first session on this problem was truncated by an orchestration error before it could close the identity). All three angle hypotheses enter genuinely (H1,H3 in (1); H1,H2 in (2); all three in the compatibility eq (4)); the ray order AB,AK,AL,AC is rigorously justified; and the crux trig identity is genuinely closed SYMBOLICALLY -- it expands to exactly 0 under the two cotangent constraints, as do every auxiliary identity in the lemma proof. An independent from-scratch construction of 4+ real triangles satisfying all hypotheses confirmed OM=ON to ~1e-12.",
+      "key_issues": [
+        "Lemma-proof presentation is terse (asserts term-by-term cancellations without full expansion, though all verified correct)",
+        "Non-degeneracy / nonzero-denominator and sin(delta)!=0 conditions only lightly noted (not a logical gap)"
+      ],
+      "confidence": "high",
+      "provenance": "single autonomous run; P2 was truncated at turn 50/80 by an orchestration error (and two follow-up attempts by credit exhaustion), then fairly re-run to completion (215-line solved proof); independent adversarial grading, crux identity machine-verified to expand to exactly 0"
+    },
+    {
+      "model": "gpt-5.6-sol-max",
+      "present": true,
+      "score": 7,
+      "claimed_status": "solved",
+      "answer_stated": "Reduces OM=ON to the polynomial identity 4V*T = A0*E_R + B0*E_D + (C^2+S^2-1)*G0 + (X^2+U^2-1)*H0 with E_R=2Ub-cF(R), E_D=2Uc-bF(D); the angle hypotheses force E_R=E_D=0, giving OM^2-ON^2=0",
+      "answer_correct": null,
+      "justification": "A complete, rigorous analytic proof: all three angle hypotheses are faithfully encoded (two as E_R=0, E_D=0 via equating sine-rule expressions for BK and CL; the third built into the shared angle x), configuration/orientation justified, and every crux step closes symbolically. Independently confirmed the trig identity is exactly 0, the crux polynomial identity is exactly 0 both via the stated certificate AND via Groebner ideal-membership of the un-simplified target, and built real triangles satisfying all hypotheses where OM=ON holds to ~1e-16 -- the identity is derived/closed, not merely numerically checked.",
+      "key_issues": [
+        "Uses unit-reduced |K|^2 silently assuming X^2+U^2=1 (geometrically exact; certificate/ideal-check handle it, no real gap)",
+        "Large identity presented as 'verified by direct expansion' via an explicit checkable code certificate rather than fully hand-expanded",
+        "Steps (10)-(13) terse but fully derivable"
+      ],
+      "confidence": "high",
+      "provenance": "single autonomous run in identical harness; independent adversarial grading (claims machine-verified)"
+    }
+  ]
 }

@@ -1,0 +1,30 @@
+Try derive target E in terms c,k,D with l=cD.
+Use complex doubled bracket B(a,b)=abar b-a bbar (pure imaginary).
+E = 2(|k|² B(c-1,cD)+|cD|² B(k,c-1))-(|c|²-1)B(k,cD).
+Let C=c, K=k, S=D; bars C',K',S'. Expand manually symbolic collecting C monomials.
+B(c-1,cD)=(c'-1)cD-(c-1)c'D' = |c|²(D-D') - cD + c'D'.
+B(k,c-1)=k'(c-1)-k(c'-1)=k'c-kc'+k-k'.
+B(k,cD)=k'cD-kc'D'.
+E=
+2 KK' [CC'(D-D')-cD+c'D']
++2 CC'DD'[k'c-kc'+k-k']
+-(CC'-1)[k'cD-kc'D'].
+Collect perhaps terms in c,cbar,ccbar and degree cubic.
+Compatibility B(b,cD-1)=0 => b' (cD-1)-b(c'D'-1)=0. Since unit b, b'=1/b:
+cD-1 = b²(c'D'-1). Let t=b². Thus cD - t c'D' = 1-t. Linear relation between U=cD and Ubar.
+Set U=l=cD directly; c=U/D. CK compatibility k=c(1-vd), v real gives relation of c with k:
+(k/c -1)/d real, equivalently k/c-1 =? -v d. Or k=c(1-vd). Let h=1-vd=k/c.
+Maybe rewrite E in U=l and c. BL compatibility makes U=1-rb, so U lies fixed line. CK makes k/c=1-vd.
+Target perhaps abstract lemma about k,D and line directions.
+
+Use ratios h=k/c. Then c=k/h; l=kD/h. Circle A,k,kD/h. M=.5,N=k/(2h). Target may become algebra in h, k,D. h=1-vd lies line from 1 direction -d. l compatibility kD/h=1-rb.
+Could circle scaling by k? Divide all coordinates by k: A=0,K=1,L=D/h; M=1/(2k),N=1/(2h). Target under similarity divide k: distances O'-1/(2k), O'-1/(2h). Need circumcircle through 0,1,s=D/h. Circumcenter has Re O'=1/2. Then equality to points 1/(2k),1/(2h) perhaps easier.
+
+For circle through 0,1,s, center o'=1/2+iT (in frame where k complex division rotates/scales). Target equality in normalized coordinates:
+|o'-1/(2k)|=|o'-1/(2h)|.
+Circle equation gives T from s=D/h:
+|s|²=2 Re(o' bar s)=Re(bar s)+2Re(iT bar s)=Re s + 2T Im s? bar s=a-ib, iT bar s=Tb+iTa Re=Tb. So T=(|s|²-Re s)/(2 Im s).
+Target expand can perhaps factor compatibility.
+Directions b,d in transformed frame become /k.
+
+Maybe identify points 1/k and 1/h relation. h=1-vd. s=D/h. compatibility s*k? original l=kD/h =1-rb => s=(1-rb)/k. Thus normalized L=s lies intersection relations.

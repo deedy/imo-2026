@@ -1,78 +1,102 @@
 {
- "problem": "imo-2026-01",
- "entries": [
-  {
-   "model": "kimi-k3",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete with an explicit move-count bound floor(log2 P_0) + 2026: type-B (coprime) moves are counted by the monotone number of ones z, and type-A moves at least halve the product; both monotonicity claims are correct. The 'at least one nonunit always survives' step is proved directly (each move outputs g > 1 or mn >= 4), independent of the invariant, so part (a) has no circularity. The invariance of G_p tracks the full set of common divisors including the identically-zero tuple case, and part (b) is concluded correctly with the explicit formula, backed by consistency checks.",
-   "key_issues": []
-  },
-  {
-   "model": "claude-fable-5",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete. Termination via the additive potential Phi = T + N, shown to drop by at least 1 every move in both cases (g=1: T fixed, N drops by exactly 1; g>1: T drops by Omega(g) >= 1 and N does not increase). N >= 1 is maintained by Lemma 2 (max(g,h) > 1, with the h=1 => lcm=gcd => g=m>1 case proved), so part (a) is non-circular. The g_p invariant is proved with explicit gcd conventions and the a=b=0 edge case, and part (b) follows with the explicit formula plus a consistency check that M > 1.",
-   "key_issues": []
-  },
-  {
-   "model": "gpt-5.6-sol",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete. Lex descent of (S,N) is correct (Omega drops by Omega(d) when d>1; when d=1 the pair becomes (1,mn) so N drops with S fixed), and the well-foundedness argument is sound since S is non-increasing. The all-ones terminal state is ruled out directly: if lcm/gcd = 1 then lcm = gcd forces m = n and the surviving output is m > 1 (the forcing step gets only one line, a minor blemish since it is a standard one-liner). The G_p invariance via gcd(a, b-a) = gcd(a,b) covers zero valuations, and part (b) concludes correctly with the finite product formula.",
-   "key_issues": [
-    "'lcm(m,n) = gcd(m,n) forces m = n' asserted with minimal justification (standard one-line fact).",
-    "A LaTeX display block around the Omega computation is malformed (missing closing delimiter); cosmetic only."
-   ]
-  },
-  {
-   "model": "gpt-5.6-sol-xhigh",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "M = prod_p p^{gcd(v_p(x_1),...,v_p(x_2026))}",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and clean. Termination via the pair (P, K): P = board product is non-increasing (drops by factor d when d = gcd > 1), and once P stabilizes every move has d = 1 and K = #nonunits drops by exactly 1 (outputs are 1 and mn > 1), so no infinite play exists; well-foundedness is argued correctly. K >= 1 at termination is proved directly and non-circularly: every move outputs at least one entry > 1 (d if d > 1, else mn), so the terminal board has exactly one M > 1. The G_p invariant uses gcd(a, b-a) = gcd(a, b) with explicit conventions (gcd(0, r) = r, all-zero gcd = 0) covering the a = b case, and part (b) reads off M = prod p^{g_p} from the terminal board {M, 1, ..., 1} with the finiteness of the product addressed. I checked every step; no gaps.",
-   "key_issues": []
-  },
-  {
-   "model": "muse-spark-1.1",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and correct. Part (a) termination is an infinite-descent argument: P = product satisfies P_{t+1} = P_t/g and k = #{>1} is non-increasing and bounded below by 1, so if a run were infinite k would stabilize; but a stable k >= 2 forces every later move to be the third type (g > 1, m != n), making P strictly decrease forever — impossible. The k >= 1 floor is established non-circularly (the explicit lemma shows the two outputs g, lcm/gcd are never both 1, since g = 1 => lcm/gcd = mn > 1; each move keeps at least one nonunit), so the all-ones terminal state is ruled out independently of the invariant, and termination gives exactly k = 1. Part (b): G_p = gcd of the N valuations is invariant via gcd(a,b) = gcd(min(a,b),|a-b|), and the terminal gcd(0,...,v_p(M),...,0) = v_p(M) yields M = prod_p p^{gcd_i v_p(a_i)} with an M > 1 consistency check. Structurally equivalent to the other 7-scoring write-ups; the three-case classification lemma is worded a bit loosely but the mathematics is sound.",
-   "key_issues": []
-  },
-  {
-   "model": "grok-4.5",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and clean. Part (a) uses the lexicographic potential (k, P) on N x N_{>0}, shown to strictly decrease every move: case 1 (both outputs > 1) keeps k fixed and forces g >= 2 (else g = 1 => lcm/gcd = mn > 1, only one nonunit) so P = P/g drops; case 2 (exactly one output > 1) drops k by exactly 1; case 3 (neither > 1) is impossible since g*lcm/gcd = lcm > 1. Well-foundedness of the lex order is argued correctly, and k = 0 is excluded non-circularly (k drops only by exactly 1 from k = N >= 2, and every move outputs at least one nonunit), giving terminal k = 1. Part (b): Lemma 1 (valuation formulas), Lemma 2 (gcd of a multiset invariant under (a,b) -> (min,|a-b|)) and Corollary 3 with explicit gcd(0,a)=a / gcd(empty)=0 conventions establish g_p invariance; the terminal read-off gives M = prod_p p^{g_p}. Lemma 2's converse phrases the argument via 'sum = max and difference = |a-b|' slightly loosely, but the conclusion (any common divisor of the outputs divides both a and b) is correct. No gaps.",
-   "key_issues": []
-  },
-  {
-   "model": "deepseek-v4-pro",
-   "present": true,
-   "claimed_status": "solved",
-   "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
-   "score": 7,
-   "confidence": "high",
-   "justification": "Complete and correct. Termination uses the additive monovariant Phi = K + S (K = #{entries > 1}, S = sum of Omega(x_i)), shown to strictly decrease by at least 1 each move via a clean three-case split: g=1 yields the pair (1, mn) so K drops by 1 with S fixed (Omega additive since gcd=1); g>1 with m=n yields (g,1) so K drops by 1 and S drops by Omega(m) >= 1; g>1 with m!=n keeps K fixed and drops S by exactly Omega(g) >= 1. Phi is a non-negative integer, forcing termination. The all-ones terminal state is excluded non-circularly (independent of the gcd invariant): every move outputs at least one nonunit (g=1 => lcm/gcd = mn > 1, else g > 1), so K falls by at most 1 per move and, starting from K=N>=2, cannot jump past K=1 where play necessarily halts; hence it terminates at exactly K=1. Part (b): the move acts on each prime's valuation multiset as (alpha,beta) -> (min(alpha,beta), |alpha-beta|), and the multiset gcd is invariant (lemma proved in both directions, with gcd(v,0,...,0)=v and the all-zero=0 convention); reading off the terminal board {M,1,...,1} gives v_p(M)=d_p and M = prod_p p^{gcd_i v_p(a_i)}, which depends only on the initial numbers. I verified the formula and choice-independence numerically over 2000+ random configurations across many move orders. Matches the reference answer for both parts; on par with the other complete write-ups.",
-   "key_issues": []
-  }
- ]
+  "problem": "imo-2026-01",
+  "entries": [
+    {
+      "model": "kimi-k3",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete with an explicit move-count bound floor(log2 P_0) + 2026: type-B (coprime) moves are counted by the monotone number of ones z, and type-A moves at least halve the product; both monotonicity claims are correct. The 'at least one nonunit always survives' step is proved directly (each move outputs g > 1 or mn >= 4), independent of the invariant, so part (a) has no circularity. The invariance of G_p tracks the full set of common divisors including the identically-zero tuple case, and part (b) is concluded correctly with the explicit formula, backed by consistency checks.",
+      "key_issues": []
+    },
+    {
+      "model": "claude-fable-5",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete. Termination via the additive potential Phi = T + N, shown to drop by at least 1 every move in both cases (g=1: T fixed, N drops by exactly 1; g>1: T drops by Omega(g) >= 1 and N does not increase). N >= 1 is maintained by Lemma 2 (max(g,h) > 1, with the h=1 => lcm=gcd => g=m>1 case proved), so part (a) is non-circular. The g_p invariant is proved with explicit gcd conventions and the a=b=0 edge case, and part (b) follows with the explicit formula plus a consistency check that M > 1.",
+      "key_issues": []
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete. Lex descent of (S,N) is correct (Omega drops by Omega(d) when d>1; when d=1 the pair becomes (1,mn) so N drops with S fixed), and the well-foundedness argument is sound since S is non-increasing. The all-ones terminal state is ruled out directly: if lcm/gcd = 1 then lcm = gcd forces m = n and the surviving output is m > 1 (the forcing step gets only one line, a minor blemish since it is a standard one-liner). The G_p invariance via gcd(a, b-a) = gcd(a,b) covers zero valuations, and part (b) concludes correctly with the finite product formula.",
+      "key_issues": [
+        "'lcm(m,n) = gcd(m,n) forces m = n' asserted with minimal justification (standard one-line fact).",
+        "A LaTeX display block around the Omega computation is malformed (missing closing delimiter); cosmetic only."
+      ]
+    },
+    {
+      "model": "gpt-5.6-sol-xhigh",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "M = prod_p p^{gcd(v_p(x_1),...,v_p(x_2026))}",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and clean. Termination via the pair (P, K): P = board product is non-increasing (drops by factor d when d = gcd > 1), and once P stabilizes every move has d = 1 and K = #nonunits drops by exactly 1 (outputs are 1 and mn > 1), so no infinite play exists; well-foundedness is argued correctly. K >= 1 at termination is proved directly and non-circularly: every move outputs at least one entry > 1 (d if d > 1, else mn), so the terminal board has exactly one M > 1. The G_p invariant uses gcd(a, b-a) = gcd(a, b) with explicit conventions (gcd(0, r) = r, all-zero gcd = 0) covering the a = b case, and part (b) reads off M = prod p^{g_p} from the terminal board {M, 1, ..., 1} with the finiteness of the product addressed. I checked every step; no gaps.",
+      "key_issues": []
+    },
+    {
+      "model": "muse-spark-1.1",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and correct. Part (a) termination is an infinite-descent argument: P = product satisfies P_{t+1} = P_t/g and k = #{>1} is non-increasing and bounded below by 1, so if a run were infinite k would stabilize; but a stable k >= 2 forces every later move to be the third type (g > 1, m != n), making P strictly decrease forever \u2014 impossible. The k >= 1 floor is established non-circularly (the explicit lemma shows the two outputs g, lcm/gcd are never both 1, since g = 1 => lcm/gcd = mn > 1; each move keeps at least one nonunit), so the all-ones terminal state is ruled out independently of the invariant, and termination gives exactly k = 1. Part (b): G_p = gcd of the N valuations is invariant via gcd(a,b) = gcd(min(a,b),|a-b|), and the terminal gcd(0,...,v_p(M),...,0) = v_p(M) yields M = prod_p p^{gcd_i v_p(a_i)} with an M > 1 consistency check. Structurally equivalent to the other 7-scoring write-ups; the three-case classification lemma is worded a bit loosely but the mathematics is sound.",
+      "key_issues": []
+    },
+    {
+      "model": "grok-4.5",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and clean. Part (a) uses the lexicographic potential (k, P) on N x N_{>0}, shown to strictly decrease every move: case 1 (both outputs > 1) keeps k fixed and forces g >= 2 (else g = 1 => lcm/gcd = mn > 1, only one nonunit) so P = P/g drops; case 2 (exactly one output > 1) drops k by exactly 1; case 3 (neither > 1) is impossible since g*lcm/gcd = lcm > 1. Well-foundedness of the lex order is argued correctly, and k = 0 is excluded non-circularly (k drops only by exactly 1 from k = N >= 2, and every move outputs at least one nonunit), giving terminal k = 1. Part (b): Lemma 1 (valuation formulas), Lemma 2 (gcd of a multiset invariant under (a,b) -> (min,|a-b|)) and Corollary 3 with explicit gcd(0,a)=a / gcd(empty)=0 conventions establish g_p invariance; the terminal read-off gives M = prod_p p^{g_p}. Lemma 2's converse phrases the argument via 'sum = max and difference = |a-b|' slightly loosely, but the conclusion (any common divisor of the outputs divides both a and b) is correct. No gaps.",
+      "key_issues": []
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "present": true,
+      "claimed_status": "solved",
+      "answer_stated": "M = prod_p p^{gcd(v_p(a_1),...,v_p(a_2026))}",
+      "score": 7,
+      "confidence": "high",
+      "justification": "Complete and correct. Termination uses the additive monovariant Phi = K + S (K = #{entries > 1}, S = sum of Omega(x_i)), shown to strictly decrease by at least 1 each move via a clean three-case split: g=1 yields the pair (1, mn) so K drops by 1 with S fixed (Omega additive since gcd=1); g>1 with m=n yields (g,1) so K drops by 1 and S drops by Omega(m) >= 1; g>1 with m!=n keeps K fixed and drops S by exactly Omega(g) >= 1. Phi is a non-negative integer, forcing termination. The all-ones terminal state is excluded non-circularly (independent of the gcd invariant): every move outputs at least one nonunit (g=1 => lcm/gcd = mn > 1, else g > 1), so K falls by at most 1 per move and, starting from K=N>=2, cannot jump past K=1 where play necessarily halts; hence it terminates at exactly K=1. Part (b): the move acts on each prime's valuation multiset as (alpha,beta) -> (min(alpha,beta), |alpha-beta|), and the multiset gcd is invariant (lemma proved in both directions, with gcd(v,0,...,0)=v and the all-zero=0 convention); reading off the terminal board {M,1,...,1} gives v_p(M)=d_p and M = prod_p p^{gcd_i v_p(a_i)}, which depends only on the initial numbers. I verified the formula and choice-independence numerically over 2000+ random configurations across many move orders. Matches the reference answer for both parts; on par with the other complete write-ups.",
+      "key_issues": []
+    },
+    {
+      "model": "gpt-5.6-sol-pro",
+      "present": true,
+      "score": 7,
+      "claimed_status": "solved",
+      "answer_stated": "M = prod_p p^{gcd(v_p(A_1),...,v_p(A_2026))}",
+      "answer_correct": true,
+      "justification": "Proves part (a) via a strictly-decreasing positive-integer potential (product plus nonunit count) with a correct gcd=1 / gcd>1 case split and an 'always >=1 nonunit' argument giving exactly one M>1; part (b) uses the valuation map (a,b)->(min(a,b),|a-b|) and gcd(min,|diff|)=gcd to show the per-prime valuation-gcd is invariant, matching the consensus answer. Every checkable claim confirmed by exhaustive/random simulation with zero counterexamples.",
+      "key_issues": [],
+      "confidence": "high",
+      "provenance": "single autonomous run in identical harness; independent adversarial grading (claims machine-verified)"
+    },
+    {
+      "model": "gpt-5.6-sol-max",
+      "present": true,
+      "score": 7,
+      "claimed_status": "solved",
+      "answer_stated": "M = prod_p p^{gcd(v_p(x_1),...,v_p(x_2026))}",
+      "answer_correct": true,
+      "justification": "Reaches the correct answer and proves both parts rigorously: a strictly-decreasing positive-integer potential Phi=P*2^r (both gcd cases handled) gives termination and the single-nonunit conclusion, and the prime-wise gcd-of-valuations invariant pins M and gives choice-independence. Independent exhaustive and randomized computation confirmed strict descent, single-nonunit termination, the formula, and order-independence with no counterexample.",
+      "key_issues": [],
+      "confidence": "high",
+      "provenance": "single autonomous run in identical harness; independent adversarial grading (claims machine-verified)"
+    }
+  ]
 }

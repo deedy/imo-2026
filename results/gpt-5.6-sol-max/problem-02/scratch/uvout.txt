@@ -1,0 +1,6 @@
+Rk= 2*C*S*U*c*r - 2*C*U*V*r**2 + S**2*c**2 - 2*S*V*c*r + U**2*r**2 + V**2*r**2
+Rl= 2*C*S*U*b*d - 2*C*U*V*d**2 + S**2*b**2 - 2*S*V*b*d + U**2*d**2 + V**2*d**2
+D= S**2*b*c - S*V*b*r - S*V*c*d - U**2*d*r + V**2*d*r
+T= -4*C*S**2*U*b**2*c*d + 4*C*S**2*U*b*c**2*r + 4*C*S*U*V*b**2*d*r + 4*C*S*U*V*b*c*d**2 - 4*C*S*U*V*b*c*r**2 - 4*C*S*U*V*c**2*d*r - 4*C*U**2*V*b*d*r**2 + 4*C*U**2*V*c*d**2*r - 4*C*U*V**2*b*d**2*r + 4*C*U*V**2*c*d*r**2 - S**3*b**3*c + S**3*b*c**3 - 2*S**2*U*b**2*c*r + 2*S**2*U*b*c**2*d + S**2*V*b**3*r + 3*S**2*V*b**2*c*d - 3*S**2*V*b*c**2*r - S**2*V*c**3*d - S*U**2*b**2*d*r - 2*S*U**2*b*c*d**2 + 2*S*U**2*b*c*r**2 + S*U**2*c**2*d*r - 3*S*V**2*b**2*d*r - 2*S*V**2*b*c*d**2 + 2*S*V**2*b*c*r**2 + 3*S*V**2*c**2*d*r + 2*U**3*b*d*r**2 - 2*U**3*c*d**2*r + 2*U**2*V*b*d**2*r - 2*U**2*V*c*d*r**2 + 2*U*V**2*b*d*r**2 - 2*U*V**2*c*d**2*r + 2*V**3*b*d**2*r - 2*V**3*c*d*r**2
+compute rem
+S**2*(-2*C*U*X*b**2*d*r + 2*C*U*X*c**2*d*r + C*U*b**3*r - C*U*b**2*c*d + C*U*b*c**2*r + 2*C*U*b*d**2*r - C*U*c**3*d - 2*C*U*c*d*r**2 + 2*S*U**2*b**2*d*r - 2*S*U**2*c**2*d*r + S*X*b**3*r + 3*S*X*b**2*c*d - 3*S*X*b*c**2*r + 2*S*X*b*d**2*r - S*X*c**3*d - 2*S*X*c*d*r**2 - S*b**3*c - 3*S*b**2*d*r + S*b*c**3 - 2*S*b*c*d**2 + 2*S*b*c*r**2 + 3*S*c**2*d*r - 2*U*b**2*c*r + 2*U*b*c**2*d + 2*U*b*d*r**2 - 2*U*c*d**2*r)

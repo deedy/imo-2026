@@ -1,0 +1,9 @@
+mid= -cos(x)*cos(A + 2*x) + cos(A - x) expand -((2*cos(x)**2 - 1)*cos(A) - 2*sin(A)*sin(x)*cos(x))*cos(x) + sin(A)*sin(x) + cos(A)*cos(x)
+(-cos(x)*cos(A + 2*x) + cos(A - x))/sin(x)
+midalg reduced U*(2*C*U*X - 2*S*U**2 + 3*S)
+mid factor trig sin(A - x + pi/2) - cos(x)*cos(A + 2*x)
+ER= U*(2*C*R*U*X*c - 2*C*U*c - R**2*V*c - 2*R*S*U**2*c + 3*R*S*c - 2*S*X*c + 2*U*b)
+degrees T 11
+groebner...
+basis len 47
+remainder= C*D**2*R*S**2*U*b**2 - C*D*R**2*S**2*U*c**2 - 2*C*D*R*S**2*U*X*b**2 + 2*C*D*R*S**2*U*X*c**2 - 2*C*D*S**2*U*b**2 - 2*C*D*S**2*U*c**2 + C*D*S**2*U - C*D*U*b**2 - C*D*U*c**2 + 2*C*R*S**2*U*b**2 + 2*C*R*S**2*U*c**2 - C*R*S**2*U + C*R*U*b**2 + C*R*U*c**2 + D**2*R*S**3*X*b**2 - 2*D**2*S**3*b**2 + 2*D**2*S*U**2*b**2 - D*R**2*S**3*X*c**2 + 2*D*R*S**3*U**2*b**2 - 2*D*R*S**3*U**2*c**2 - 3*D*R*S**3*b**2 + 3*D*R*S**3*c**2 + 6*D*S**3*X*b**2 - 2*D*S**3*X*c**2 - 4*D*S*U**2*X*b**2 + 2*D*U*b*c + 2*R**2*S**3*c**2 - 2*R**2*S*U**2*c**2 + 2*R*S**3*X*b**2 - 6*R*S**3*X*c**2 + 4*R*S*U**2*X*c**2 - 2*R*U*b*c - 4*S**3*b**2 + 4*S**3*c**2 + 4*S*U**2*b**2 - 4*S*U**2*c**2
